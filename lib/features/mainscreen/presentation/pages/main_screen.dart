@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:reminder_app/core/di/injection.dart';
 import 'package:reminder_app/features/mainscreen/presentation/cubit/mainscreen_cubit.dart';
 import 'package:reminder_app/features/mainscreen/presentation/widget/navigation/main_navigation.dart';
 import 'package:reminder_app/features/mainscreen/presentation/widget/navigation/main_navigation_enum.dart';
 import 'package:reminder_app/features/mainscreen/presentation/widget/navigation/main_navigation_extension.dart';
 import 'package:reminder_app/features/mainscreen/presentation/widget/navigation/main_navigation_item.dart';
+import 'package:reminder_app/routes/route_names.dart';
 import 'package:reminder_app/theme/color_theme.dart';
 
 class MainScreen extends StatelessWidget {
@@ -81,7 +83,9 @@ class _MainViewState extends State<MainView> {
               elevation: 0,
               backgroundColor: Colors.transparent,
               clipBehavior: Clip.antiAlias,
-              onPressed: () async {},
+              onPressed: () async {
+                context.push(RouteNames.addReminder);
+              },
               child: SvgPicture.asset(
                 MainNavigationEnum.addreminder.icon,
                 width: 32.w,
