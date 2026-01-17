@@ -12,37 +12,68 @@ part of 'mainscreen_cubit.dart';
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
-mixin _$MainscreenState {
+mixin _$MainScreenState {
 
-
+ MainNavigationEnum get selectedNavItem;
+/// Create a copy of MainScreenState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$MainScreenStateCopyWith<MainScreenState> get copyWith => _$MainScreenStateCopyWithImpl<MainScreenState>(this as MainScreenState, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MainscreenState);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MainScreenState&&(identical(other.selectedNavItem, selectedNavItem) || other.selectedNavItem == selectedNavItem));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,selectedNavItem);
 
 @override
 String toString() {
-  return 'MainscreenState()';
+  return 'MainScreenState(selectedNavItem: $selectedNavItem)';
 }
 
 
 }
 
 /// @nodoc
-class $MainscreenStateCopyWith<$Res>  {
-$MainscreenStateCopyWith(MainscreenState _, $Res Function(MainscreenState) __);
+abstract mixin class $MainScreenStateCopyWith<$Res>  {
+  factory $MainScreenStateCopyWith(MainScreenState value, $Res Function(MainScreenState) _then) = _$MainScreenStateCopyWithImpl;
+@useResult
+$Res call({
+ MainNavigationEnum selectedNavItem
+});
+
+
+
+
+}
+/// @nodoc
+class _$MainScreenStateCopyWithImpl<$Res>
+    implements $MainScreenStateCopyWith<$Res> {
+  _$MainScreenStateCopyWithImpl(this._self, this._then);
+
+  final MainScreenState _self;
+  final $Res Function(MainScreenState) _then;
+
+/// Create a copy of MainScreenState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? selectedNavItem = null,}) {
+  return _then(_self.copyWith(
+selectedNavItem: null == selectedNavItem ? _self.selectedNavItem : selectedNavItem // ignore: cast_nullable_to_non_nullable
+as MainNavigationEnum,
+  ));
+}
+
 }
 
 
-/// Adds pattern-matching-related methods to [MainscreenState].
-extension MainscreenStatePatterns on MainscreenState {
+/// Adds pattern-matching-related methods to [MainScreenState].
+extension MainScreenStatePatterns on MainScreenState {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -55,11 +86,11 @@ extension MainscreenStatePatterns on MainscreenState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _MainScreenState value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _Initial() when initial != null:
-return initial(_that);case _:
+case _MainScreenState() when $default != null:
+return $default(_that);case _:
   return orElse();
 
 }
@@ -77,11 +108,11 @@ return initial(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,}){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _MainScreenState value)  $default,){
 final _that = this;
 switch (_that) {
-case _Initial():
-return initial(_that);case _:
+case _MainScreenState():
+return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -98,11 +129,11 @@ return initial(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _MainScreenState value)?  $default,){
 final _that = this;
 switch (_that) {
-case _Initial() when initial != null:
-return initial(_that);case _:
+case _MainScreenState() when $default != null:
+return $default(_that);case _:
   return null;
 
 }
@@ -119,10 +150,10 @@ return initial(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( MainNavigationEnum selectedNavItem)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _Initial() when initial != null:
-return initial();case _:
+case _MainScreenState() when $default != null:
+return $default(_that.selectedNavItem);case _:
   return orElse();
 
 }
@@ -140,10 +171,10 @@ return initial();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( MainNavigationEnum selectedNavItem)  $default,) {final _that = this;
 switch (_that) {
-case _Initial():
-return initial();case _:
+case _MainScreenState():
+return $default(_that.selectedNavItem);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -160,10 +191,10 @@ return initial();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( MainNavigationEnum selectedNavItem)?  $default,) {final _that = this;
 switch (_that) {
-case _Initial() when initial != null:
-return initial();case _:
+case _MainScreenState() when $default != null:
+return $default(_that.selectedNavItem);case _:
   return null;
 
 }
@@ -174,33 +205,67 @@ return initial();case _:
 /// @nodoc
 
 
-class _Initial implements MainscreenState {
-  const _Initial();
+class _MainScreenState implements MainScreenState {
+  const _MainScreenState({this.selectedNavItem = MainNavigationEnum.reminder});
   
 
+@override@JsonKey() final  MainNavigationEnum selectedNavItem;
 
-
+/// Create a copy of MainScreenState
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$MainScreenStateCopyWith<_MainScreenState> get copyWith => __$MainScreenStateCopyWithImpl<_MainScreenState>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Initial);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MainScreenState&&(identical(other.selectedNavItem, selectedNavItem) || other.selectedNavItem == selectedNavItem));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,selectedNavItem);
 
 @override
 String toString() {
-  return 'MainscreenState.initial()';
+  return 'MainScreenState(selectedNavItem: $selectedNavItem)';
 }
 
 
 }
 
+/// @nodoc
+abstract mixin class _$MainScreenStateCopyWith<$Res> implements $MainScreenStateCopyWith<$Res> {
+  factory _$MainScreenStateCopyWith(_MainScreenState value, $Res Function(_MainScreenState) _then) = __$MainScreenStateCopyWithImpl;
+@override @useResult
+$Res call({
+ MainNavigationEnum selectedNavItem
+});
 
 
+
+
+}
+/// @nodoc
+class __$MainScreenStateCopyWithImpl<$Res>
+    implements _$MainScreenStateCopyWith<$Res> {
+  __$MainScreenStateCopyWithImpl(this._self, this._then);
+
+  final _MainScreenState _self;
+  final $Res Function(_MainScreenState) _then;
+
+/// Create a copy of MainScreenState
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? selectedNavItem = null,}) {
+  return _then(_MainScreenState(
+selectedNavItem: null == selectedNavItem ? _self.selectedNavItem : selectedNavItem // ignore: cast_nullable_to_non_nullable
+as MainNavigationEnum,
+  ));
+}
+
+
+}
 
 // dart format on

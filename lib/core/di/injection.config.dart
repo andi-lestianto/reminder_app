@@ -1,0 +1,58 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// dart format width=80
+
+// **************************************************************************
+// InjectableConfigGenerator
+// **************************************************************************
+
+// ignore_for_file: type=lint
+// coverage:ignore-file
+
+// ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:get_it/get_it.dart' as _i174;
+import 'package:injectable/injectable.dart' as _i526;
+import 'package:reminder_app/features/mainscreen/presentation/cubit/mainscreen_cubit.dart'
+    as _i1013;
+import 'package:reminder_app/features/reminder/data/repository/reminder_repository_impl.dart'
+    as _i470;
+import 'package:reminder_app/features/reminder/domain/repository/reminder_repository.dart'
+    as _i418;
+import 'package:reminder_app/features/reminder/domain/usecase/get_reminders_usecase.dart'
+    as _i828;
+import 'package:reminder_app/features/reminder/domain/usecase/get_upcoming_reminder_usecase.dart'
+    as _i547;
+import 'package:reminder_app/features/reminder/domain/usecase/get_week_dates_usecase.dart'
+    as _i664;
+import 'package:reminder_app/features/reminder/presentation/bloc/reminder_bloc.dart'
+    as _i437;
+
+extension GetItInjectableX on _i174.GetIt {
+  // initializes the registration of main-scope dependencies inside of GetIt
+  _i174.GetIt init({
+    String? environment,
+    _i526.EnvironmentFilter? environmentFilter,
+  }) {
+    final gh = _i526.GetItHelper(this, environment, environmentFilter);
+    gh.factory<_i1013.MainScreenCubit>(() => _i1013.MainScreenCubit());
+    gh.lazySingleton<_i547.GetUpcomingReminderUsecase>(
+      () => _i547.GetUpcomingReminderUsecase(),
+    );
+    gh.lazySingleton<_i664.GetWeekDatesUsecase>(
+      () => _i664.GetWeekDatesUsecase(),
+    );
+    gh.lazySingleton<_i418.ReminderRepository>(
+      () => _i470.ReminderRepositoryImpl(),
+    );
+    gh.lazySingleton<_i828.GetRemindersUsecase>(
+      () => _i828.GetRemindersUsecase(gh<_i418.ReminderRepository>()),
+    );
+    gh.factory<_i437.ReminderBloc>(
+      () => _i437.ReminderBloc(
+        gh<_i664.GetWeekDatesUsecase>(),
+        gh<_i828.GetRemindersUsecase>(),
+        gh<_i547.GetUpcomingReminderUsecase>(),
+      ),
+    );
+    return this;
+  }
+}
