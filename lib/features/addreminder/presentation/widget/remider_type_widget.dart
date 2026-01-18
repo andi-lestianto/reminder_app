@@ -35,12 +35,13 @@ class _ReminderTypeWidgetState extends State<ReminderTypeWidget> {
   }
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      setSelectedReminderType(widget.selectedType);
-    });
+  void didUpdateWidget(covariant ReminderTypeWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.selectedType != widget.selectedType) {
+      setState(() {
+        selectedReminderType = widget.selectedType;
+      });
+    }
   }
 
   @override

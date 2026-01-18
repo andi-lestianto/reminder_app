@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:reminder_app/theme/color_theme.dart';
-import 'dart:developer';
 
 import 'package:reminder_app/theme/font_theme.dart';
 
@@ -22,11 +21,13 @@ class _CustomWheelDatepickerState extends State<CustomWheelDatepicker> {
   final FixedExtentScrollController hourController = .new();
   final FixedExtentScrollController minuteController = .new();
 
+  bool isInitialSyncDone = false;
+
   int selectedHour = 0;
   int selectedMinute = 0;
 
   void _onSelectedItemChanged({required int index, required bool isHour}) {
-    final now = DateTime.now();
+    final base = widget.initialDateTime;
     setState(() {
       if (isHour) {
         selectedHour = index;
@@ -36,30 +37,48 @@ class _CustomWheelDatepickerState extends State<CustomWheelDatepicker> {
     });
 
     final selectedDateTime = DateTime(
-      now.year,
-      now.month,
-      now.day,
+      base.year,
+      base.month,
+      base.day,
       selectedHour,
       selectedMinute,
     );
 
-    widget.onTimeChanged(selectedDateTime);
-
-    log('Selected Time: $selectedDateTime');
+    if (isInitialSyncDone) {
+      widget.onTimeChanged(selectedDateTime);
+    }
   }
 
+  void _syncFromWidget(DateTime dt) async {
+    selectedHour = dt.hour;
+    selectedMinute = dt.minute;
+
+    hourController.jumpToItem(selectedHour);
+    minuteController.jumpToItem(selectedMinute);
+  }
+
+  // @override
+  // void initState() {
+  //   super.initState();
+
+  //   WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+  //     _syncFromWidget(widget.initialDateTime);
+  //     isInitialSyncDone = true;
+  //   });
+  // }
+
   @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      selectedHour = widget.initialDateTime.hour;
-      selectedMinute = widget.initialDateTime.minute;
+  void didUpdateWidget(covariant CustomWheelDatepicker oldWidget) {
+    super.didUpdateWidget(oldWidget);
 
-      widget.onTimeChanged(widget.initialDateTime);
-
-      hourController.jumpToItem(selectedHour);
-      minuteController.jumpToItem(selectedMinute);
-    });
+    if (oldWidget.initialDateTime != widget.initialDateTime) {
+      isInitialSyncDone = false;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) return;
+        _syncFromWidget(widget.initialDateTime);
+        isInitialSyncDone = true;
+      });
+    }
   }
 
   @override

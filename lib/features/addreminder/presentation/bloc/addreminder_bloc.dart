@@ -86,7 +86,7 @@ class AddReminderBloc extends Bloc<AddReminderEvent, AddReminderState> {
     if (reminder != null) {
       log('Filling form with reminder: ${reminder.toString()}');
       emit(
-        AddReminderState(
+        state.copyWith(
           dateTime: reminder.dateTime,
           title: reminder.title,
           note: reminder.note,

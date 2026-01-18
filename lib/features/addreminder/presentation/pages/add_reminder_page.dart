@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -90,6 +92,13 @@ class _AddReminderViewState extends State<AddReminderView> {
             .last;
         isRepeatEveryDay = state.isRepeatEveryDay;
 
+        log('Reminder type changed to: ${state.reminderType}');
+        log('DateTime changed to: ${state.dateTime}');
+
+        if (widget.reminder != null) {
+          validateForm();
+        }
+
         state.actionStatus.maybeWhen(
           orElse: () {},
           failure: (message) {
@@ -154,7 +163,6 @@ class _AddReminderViewState extends State<AddReminderView> {
                 padding: EdgeInsets.symmetric(horizontal: 40.w),
                 child: Form(
                   key: formKey,
-                  // autovalidateMode: AutovalidateMode.,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     spacing: 24.w,
@@ -165,6 +173,7 @@ class _AddReminderViewState extends State<AddReminderView> {
                           color: ColorTheme.black,
                         ),
                       ),
+
                       CustomWheelDatepicker(
                         initialDateTime: state.dateTime ?? DateTime.now(),
                         onTimeChanged: (value) {
@@ -197,6 +206,7 @@ class _AddReminderViewState extends State<AddReminderView> {
                           );
                         },
                       ),
+
                       ReminderTypeWidget(
                         onChanged: (value) {
                           context.read<AddReminderBloc>().add(
