@@ -90,6 +90,7 @@ class RemindersWidget extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () {
                           showModalBottomSheet(
+                            backgroundColor: Colors.transparent,
                             context: context,
                             builder: (BuildContext context) {
                               return ReminderActionWidget(reminder: reminder);
