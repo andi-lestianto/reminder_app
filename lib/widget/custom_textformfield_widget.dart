@@ -86,7 +86,6 @@ class _CustomTextFormFieldWidgetState extends State<CustomTextFormFieldWidget> {
                       color: ColorTheme.darkGray,
                     ),
                     hintText: widget.hintText,
-
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(16.r),
                     ),

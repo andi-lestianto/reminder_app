@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:reminder_app/core/presentation/states/section_state.dart';
 import 'package:reminder_app/core/utils/datetime_utils.dart';
 import 'package:reminder_app/features/reminder/presentation/bloc/reminder_bloc.dart';
+import 'package:reminder_app/routes/route_names.dart';
 import 'package:reminder_app/theme/color_theme.dart';
 import 'package:reminder_app/theme/font_theme.dart';
 
@@ -137,13 +139,27 @@ class RemindersWidget extends StatelessWidget {
                             ),
                             if (reminder.imagePath != null) ...[
                               12.verticalSpace,
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(20.r),
-                                child: Image.asset(
-                                  reminder.imagePath!,
-                                  width: double.infinity,
-                                  height: 200.w,
-                                  fit: BoxFit.cover,
+                              InkWell(
+                                onTap: () {
+                                  context.pushNamed(
+                                    RouteNames.imageDetails,
+                                    // pathParameters: ,
+                                    queryParameters: {
+                                      'imagePath': reminder.imagePath!,
+                                    },
+                                  );
+                                },
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(20.r),
+                                  child: Hero(
+                                    tag: 'reminder_image',
+                                    child: Image.asset(
+                                      reminder.imagePath!,
+                                      width: double.infinity,
+                                      height: 200.w,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ],
