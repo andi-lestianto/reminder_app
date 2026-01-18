@@ -1,0 +1,1 @@
+enum ReminderTypeEnum { notification, alarm }

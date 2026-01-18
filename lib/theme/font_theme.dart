@@ -28,6 +28,13 @@ class FontTheme {
     letterSpacing: 0.15,
   );
 
+  static TextStyle get regular24 => _baseStyle(
+    fontSize: 24,
+    fontWeight: FontWeight.w400,
+    height: 1.5,
+    letterSpacing: 0.15,
+  );
+
   static TextStyle get regular20 => _baseStyle(
     fontSize: 20,
     fontWeight: FontWeight.w400,

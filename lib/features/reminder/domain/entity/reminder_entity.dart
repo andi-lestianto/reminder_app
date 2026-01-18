@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:reminder_app/core/enum/reminder_type_enum.dart';
 import 'package:reminder_app/gen/assets.gen.dart';
 
 part 'reminder_entity.freezed.dart';
@@ -10,8 +11,10 @@ abstract class ReminderEntity with _$ReminderEntity {
   const factory ReminderEntity({
     required int id,
     required String title,
-    required String description,
+    required String note,
     required DateTime dateTime,
+    required bool isRepeatEveryDay,
+    required ReminderTypeEnum reminderType,
     String? imagePath,
   }) = _ReminderEntity;
 
@@ -20,32 +23,39 @@ abstract class ReminderEntity with _$ReminderEntity {
       ReminderEntity(
         id: 1,
         title: 'Doctor Appointment',
-        description:
+        note:
             'Sit eu Lorem adipisicing esse esse eu qui adipisicing nulla ipsum.',
         dateTime: DateTime.now().subtract(Duration(minutes: 10)),
+        isRepeatEveryDay: false,
+        reminderType: ReminderTypeEnum.notification,
         imagePath: null,
       ),
       ReminderEntity(
         id: 2,
         title: 'Meeting with Team',
-        description:
+        note:
             'Eiusmod dolore enim eu anim excepteur fugiat et consequat laborum sit nulla nisi deserunt adipisicing.',
         dateTime: DateTime.now().add(Duration(minutes: 10)),
+        isRepeatEveryDay: false,
+        reminderType: ReminderTypeEnum.alarm,
         imagePath: Assets.images.dummyRecipe.path,
       ),
       ReminderEntity(
         id: 3,
         title: 'Grocery Shopping',
-        description:
-            'Id exercitation labore eu amet ad dolor nostrud fugiat non est.',
+        note: 'Id exercitation labore eu amet ad dolor nostrud fugiat non est.',
         dateTime: DateTime.now().add(Duration(minutes: 20)),
+        isRepeatEveryDay: false,
+        reminderType: ReminderTypeEnum.notification,
         imagePath: null,
       ),
       ReminderEntity(
         id: 4,
         title: 'Workout Session',
-        description: 'Aute officia pariatur minim veniam commodo consequat.',
+        note: 'Aute officia pariatur minim veniam commodo consequat.',
         dateTime: DateTime.now().add(Duration(minutes: 30)),
+        isRepeatEveryDay: true,
+        reminderType: ReminderTypeEnum.notification,
         imagePath: null,
       ),
     ];

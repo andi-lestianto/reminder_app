@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:reminder_app/core/presentation/states/section_state.dart';
 import 'package:reminder_app/core/utils/datetime_utils.dart';
 import 'package:reminder_app/features/reminder/presentation/bloc/reminder_bloc.dart';
+import 'package:reminder_app/features/reminder/presentation/widget/reminder_action_widget.dart';
 import 'package:reminder_app/routes/route_names.dart';
 import 'package:reminder_app/theme/color_theme.dart';
 import 'package:reminder_app/theme/font_theme.dart';
@@ -84,86 +85,97 @@ class RemindersWidget extends StatelessWidget {
                     ),
                     24.horizontalSpace,
                     Expanded(
-                      child: Container(
-                        margin: EdgeInsets.only(bottom: 16.w),
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 24.w,
-                          vertical: 16.w,
-                        ),
-                        decoration: BoxDecoration(
-                          color: isUpcoming
-                              ? ColorTheme.blue
-                              : ColorTheme.lightBlue,
-                          borderRadius: BorderRadius.circular(30.w),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              spacing: 16.w,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    reminder.title,
-                                    style: FontTheme.semiBold20.copyWith(
+                      child: InkWell(
+                        onTap: () {
+                          showModalBottomSheet(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return ReminderActionWidget(reminder: reminder);
+                            },
+                          );
+                        },
+                        child: Container(
+                          margin: EdgeInsets.only(bottom: 16.w),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 24.w,
+                            vertical: 16.w,
+                          ),
+                          decoration: BoxDecoration(
+                            color: isUpcoming
+                                ? ColorTheme.blue
+                                : ColorTheme.lightBlue,
+                            borderRadius: BorderRadius.circular(30.w),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                spacing: 16.w,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      reminder.title,
+                                      style: FontTheme.semiBold20.copyWith(
+                                        color: isUpcoming
+                                            ? ColorTheme.white
+                                            : ColorTheme.black,
+                                      ),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                  Text(
+                                    DateTimeUtils.getTimeFromDateTime(
+                                      reminder.dateTime,
+                                    ),
+                                    style: FontTheme.medium20.copyWith(
                                       color: isUpcoming
                                           ? ColorTheme.white
-                                          : ColorTheme.black,
+                                          : ColorTheme.gray,
                                     ),
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
                                   ),
+                                ],
+                              ),
+                              8.verticalSpace,
+                              Text(
+                                reminder.note,
+                                style: FontTheme.medium18.copyWith(
+                                  color: isUpcoming
+                                      ? ColorTheme.white
+                                      : ColorTheme.gray,
                                 ),
-                                Text(
-                                  DateTimeUtils.getTimeFromDateTime(
-                                    reminder.dateTime,
-                                  ),
-                                  style: FontTheme.medium20.copyWith(
-                                    color: isUpcoming
-                                        ? ColorTheme.white
-                                        : ColorTheme.gray,
+                                textAlign: TextAlign.justify,
+                              ),
+                              if (reminder.imagePath != null) ...[
+                                12.verticalSpace,
+                                InkWell(
+                                  onTap: () {
+                                    context.pushNamed(
+                                      RouteNames.imageDetails,
+                                      // pathParameters: ,
+                                      queryParameters: {
+                                        'imagePath': reminder.imagePath!,
+                                      },
+                                    );
+                                  },
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(20.r),
+                                    child: Hero(
+                                      tag: 'reminder_image',
+                                      child: Image.asset(
+                                        reminder.imagePath!,
+                                        width: double.infinity,
+                                        height: 200.w,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ],
-                            ),
-                            8.verticalSpace,
-                            Text(
-                              reminder.description,
-                              style: FontTheme.medium18.copyWith(
-                                color: isUpcoming
-                                    ? ColorTheme.white
-                                    : ColorTheme.gray,
-                              ),
-                              textAlign: TextAlign.justify,
-                            ),
-                            if (reminder.imagePath != null) ...[
-                              12.verticalSpace,
-                              InkWell(
-                                onTap: () {
-                                  context.pushNamed(
-                                    RouteNames.imageDetails,
-                                    // pathParameters: ,
-                                    queryParameters: {
-                                      'imagePath': reminder.imagePath!,
-                                    },
-                                  );
-                                },
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(20.r),
-                                  child: Hero(
-                                    tag: 'reminder_image',
-                                    child: Image.asset(
-                                      reminder.imagePath!,
-                                      width: double.infinity,
-                                      height: 200.w,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
-                              ),
                             ],
-                          ],
+                          ),
                         ),
                       ),
                     ),
