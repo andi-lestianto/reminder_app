@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 
@@ -20,7 +22,7 @@ class ImageDetailsView extends StatelessWidget {
     return PhotoView(
       heroAttributes: const PhotoViewHeroAttributes(tag: 'reminder_image'),
       backgroundDecoration: BoxDecoration(color: Colors.white),
-      imageProvider: AssetImage(imagePath),
+      imageProvider: FileImage(File(imagePath)),
     );
   }
 }

@@ -22,3 +22,7 @@ class UnauthorizedFailure extends Failure {
 class UnknownFailure extends Failure {
   const UnknownFailure() : super('Something went wrong');
 }
+
+class DatabaseFailure extends Failure {
+  const DatabaseFailure(super.message);
+}

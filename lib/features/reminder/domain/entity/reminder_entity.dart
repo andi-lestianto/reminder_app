@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:reminder_app/features/addreminder/presentation/widget/reminder_type_enum.dart';
+import 'package:reminder_app/features/reminder/data/model/reminder_model.dart';
 import 'package:reminder_app/gen/assets.gen.dart';
 
 part 'reminder_entity.freezed.dart';
@@ -11,12 +12,23 @@ abstract class ReminderEntity with _$ReminderEntity {
   const factory ReminderEntity({
     required int id,
     required String title,
-    required String note,
+    String? note,
     required DateTime dateTime,
     required bool isRepeatEveryDay,
     required ReminderTypeEnum reminderType,
     String? imagePath,
   }) = _ReminderEntity;
+
+  ReminderModel toModel() {
+    return ReminderModel(
+      title: title,
+      note: note,
+      dateTimeEpoch: dateTime.millisecondsSinceEpoch,
+      isRepeatEveryDay: isRepeatEveryDay ? 1 : 0,
+      reminderType: reminderType.toString(),
+      imagePath: imagePath,
+    );
+  }
 
   static List<ReminderEntity> get sampleReminders {
     return [

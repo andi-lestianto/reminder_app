@@ -8,7 +8,7 @@ class GetWeekDatesUsecase {
     try {
       final now = DateTime.now();
       final today = DateTime(now.year, now.month, now.day);
-      final startOfWeek = today.subtract(Duration(days: today.weekday));
+      final startOfWeek = today.subtract(Duration(days: today.weekday - 1));
       final weekDates = List<DateTime>.generate(
         7,
         (index) => startOfWeek.add(Duration(days: index)),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:reminder_app/core/di/injection.dart';
 import 'package:reminder_app/features/reminder/presentation/bloc/reminder_bloc.dart';
 import 'package:reminder_app/features/reminder/presentation/widget/current_date_widget.dart';
 import 'package:reminder_app/features/reminder/presentation/widget/reminders_widget.dart';
@@ -13,16 +12,24 @@ class ReminderPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) =>
-          getIt<ReminderBloc>()..add(const ReminderEvent.fetchAllData()),
-      child: const ReminderView(),
-    );
+    return const ReminderView();
   }
 }
 
-class ReminderView extends StatelessWidget {
+class ReminderView extends StatefulWidget {
   const ReminderView({super.key});
+
+  @override
+  State<ReminderView> createState() => _ReminderViewState();
+}
+
+class _ReminderViewState extends State<ReminderView> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    context.read<ReminderBloc>().add(const ReminderEvent.fetchAllData());
+  }
 
   @override
   Widget build(BuildContext context) {

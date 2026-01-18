@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -85,7 +87,7 @@ class RemindersWidget extends StatelessWidget {
                     ),
                     24.horizontalSpace,
                     Expanded(
-                      child: InkWell(
+                      child: GestureDetector(
                         onTap: () {
                           showModalBottomSheet(
                             context: context,
@@ -139,15 +141,16 @@ class RemindersWidget extends StatelessWidget {
                                 ],
                               ),
                               8.verticalSpace,
-                              Text(
-                                reminder.note,
-                                style: FontTheme.medium18.copyWith(
-                                  color: isUpcoming
-                                      ? ColorTheme.white
-                                      : ColorTheme.gray,
+                              if (reminder.note != null)
+                                Text(
+                                  reminder.note.toString(),
+                                  style: FontTheme.medium18.copyWith(
+                                    color: isUpcoming
+                                        ? ColorTheme.white
+                                        : ColorTheme.gray,
+                                  ),
+                                  textAlign: TextAlign.justify,
                                 ),
-                                textAlign: TextAlign.justify,
-                              ),
                               if (reminder.imagePath != null) ...[
                                 12.verticalSpace,
                                 InkWell(
@@ -164,8 +167,8 @@ class RemindersWidget extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(20.r),
                                     child: Hero(
                                       tag: 'reminder_image',
-                                      child: Image.asset(
-                                        reminder.imagePath!,
+                                      child: Image.file(
+                                        File(reminder.imagePath!),
                                         width: double.infinity,
                                         height: 200.w,
                                         fit: BoxFit.cover,

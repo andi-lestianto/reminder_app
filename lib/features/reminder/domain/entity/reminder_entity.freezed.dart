@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ReminderEntity {
 
- int get id; String get title; String get note; DateTime get dateTime; bool get isRepeatEveryDay; ReminderTypeEnum get reminderType; String? get imagePath;
+ int get id; String get title; String? get note; DateTime get dateTime; bool get isRepeatEveryDay; ReminderTypeEnum get reminderType; String? get imagePath;
 /// Create a copy of ReminderEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -45,7 +45,7 @@ abstract mixin class $ReminderEntityCopyWith<$Res>  {
   factory $ReminderEntityCopyWith(ReminderEntity value, $Res Function(ReminderEntity) _then) = _$ReminderEntityCopyWithImpl;
 @useResult
 $Res call({
- int id, String title, String note, DateTime dateTime, bool isRepeatEveryDay, ReminderTypeEnum reminderType, String? imagePath
+ int id, String title, String? note, DateTime dateTime, bool isRepeatEveryDay, ReminderTypeEnum reminderType, String? imagePath
 });
 
 
@@ -62,12 +62,12 @@ class _$ReminderEntityCopyWithImpl<$Res>
 
 /// Create a copy of ReminderEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? title = null,Object? note = null,Object? dateTime = null,Object? isRepeatEveryDay = null,Object? reminderType = null,Object? imagePath = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? title = null,Object? note = freezed,Object? dateTime = null,Object? isRepeatEveryDay = null,Object? reminderType = null,Object? imagePath = freezed,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
-as String,note: null == note ? _self.note : note // ignore: cast_nullable_to_non_nullable
-as String,dateTime: null == dateTime ? _self.dateTime : dateTime // ignore: cast_nullable_to_non_nullable
+as String,note: freezed == note ? _self.note : note // ignore: cast_nullable_to_non_nullable
+as String?,dateTime: null == dateTime ? _self.dateTime : dateTime // ignore: cast_nullable_to_non_nullable
 as DateTime,isRepeatEveryDay: null == isRepeatEveryDay ? _self.isRepeatEveryDay : isRepeatEveryDay // ignore: cast_nullable_to_non_nullable
 as bool,reminderType: null == reminderType ? _self.reminderType : reminderType // ignore: cast_nullable_to_non_nullable
 as ReminderTypeEnum,imagePath: freezed == imagePath ? _self.imagePath : imagePath // ignore: cast_nullable_to_non_nullable
@@ -156,7 +156,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String title,  String note,  DateTime dateTime,  bool isRepeatEveryDay,  ReminderTypeEnum reminderType,  String? imagePath)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String title,  String? note,  DateTime dateTime,  bool isRepeatEveryDay,  ReminderTypeEnum reminderType,  String? imagePath)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ReminderEntity() when $default != null:
 return $default(_that.id,_that.title,_that.note,_that.dateTime,_that.isRepeatEveryDay,_that.reminderType,_that.imagePath);case _:
@@ -177,7 +177,7 @@ return $default(_that.id,_that.title,_that.note,_that.dateTime,_that.isRepeatEve
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String title,  String note,  DateTime dateTime,  bool isRepeatEveryDay,  ReminderTypeEnum reminderType,  String? imagePath)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String title,  String? note,  DateTime dateTime,  bool isRepeatEveryDay,  ReminderTypeEnum reminderType,  String? imagePath)  $default,) {final _that = this;
 switch (_that) {
 case _ReminderEntity():
 return $default(_that.id,_that.title,_that.note,_that.dateTime,_that.isRepeatEveryDay,_that.reminderType,_that.imagePath);case _:
@@ -197,7 +197,7 @@ return $default(_that.id,_that.title,_that.note,_that.dateTime,_that.isRepeatEve
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String title,  String note,  DateTime dateTime,  bool isRepeatEveryDay,  ReminderTypeEnum reminderType,  String? imagePath)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String title,  String? note,  DateTime dateTime,  bool isRepeatEveryDay,  ReminderTypeEnum reminderType,  String? imagePath)?  $default,) {final _that = this;
 switch (_that) {
 case _ReminderEntity() when $default != null:
 return $default(_that.id,_that.title,_that.note,_that.dateTime,_that.isRepeatEveryDay,_that.reminderType,_that.imagePath);case _:
@@ -212,12 +212,12 @@ return $default(_that.id,_that.title,_that.note,_that.dateTime,_that.isRepeatEve
 
 
 class _ReminderEntity extends ReminderEntity {
-  const _ReminderEntity({required this.id, required this.title, required this.note, required this.dateTime, required this.isRepeatEveryDay, required this.reminderType, this.imagePath}): super._();
+  const _ReminderEntity({required this.id, required this.title, this.note, required this.dateTime, required this.isRepeatEveryDay, required this.reminderType, this.imagePath}): super._();
   
 
 @override final  int id;
 @override final  String title;
-@override final  String note;
+@override final  String? note;
 @override final  DateTime dateTime;
 @override final  bool isRepeatEveryDay;
 @override final  ReminderTypeEnum reminderType;
@@ -253,7 +253,7 @@ abstract mixin class _$ReminderEntityCopyWith<$Res> implements $ReminderEntityCo
   factory _$ReminderEntityCopyWith(_ReminderEntity value, $Res Function(_ReminderEntity) _then) = __$ReminderEntityCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String title, String note, DateTime dateTime, bool isRepeatEveryDay, ReminderTypeEnum reminderType, String? imagePath
+ int id, String title, String? note, DateTime dateTime, bool isRepeatEveryDay, ReminderTypeEnum reminderType, String? imagePath
 });
 
 
@@ -270,12 +270,12 @@ class __$ReminderEntityCopyWithImpl<$Res>
 
 /// Create a copy of ReminderEntity
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? title = null,Object? note = null,Object? dateTime = null,Object? isRepeatEveryDay = null,Object? reminderType = null,Object? imagePath = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? title = null,Object? note = freezed,Object? dateTime = null,Object? isRepeatEveryDay = null,Object? reminderType = null,Object? imagePath = freezed,}) {
   return _then(_ReminderEntity(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
-as String,note: null == note ? _self.note : note // ignore: cast_nullable_to_non_nullable
-as String,dateTime: null == dateTime ? _self.dateTime : dateTime // ignore: cast_nullable_to_non_nullable
+as String,note: freezed == note ? _self.note : note // ignore: cast_nullable_to_non_nullable
+as String?,dateTime: null == dateTime ? _self.dateTime : dateTime // ignore: cast_nullable_to_non_nullable
 as DateTime,isRepeatEveryDay: null == isRepeatEveryDay ? _self.isRepeatEveryDay : isRepeatEveryDay // ignore: cast_nullable_to_non_nullable
 as bool,reminderType: null == reminderType ? _self.reminderType : reminderType // ignore: cast_nullable_to_non_nullable
 as ReminderTypeEnum,imagePath: freezed == imagePath ? _self.imagePath : imagePath // ignore: cast_nullable_to_non_nullable

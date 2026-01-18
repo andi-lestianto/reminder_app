@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:injectable/injectable.dart';
 import 'package:reminder_app/core/di/injection.dart';
+import 'package:reminder_app/features/mainscreen/presentation/cubit/mainscreen_cubit.dart';
+import 'package:reminder_app/features/reminder/presentation/bloc/reminder_bloc.dart';
 import 'package:reminder_app/routes/app_router.dart';
 
 Future<void> main() async {
@@ -17,10 +20,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(552, 1227),
-      child: MaterialApp.router(
-        title: 'Flutter Demo',
-        theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
-        routerConfig: appRouter,
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (context) => getIt<MainScreenCubit>()),
+          BlocProvider(create: (context) => getIt<ReminderBloc>()),
+        ],
+        child: MaterialApp.router(
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            colorScheme: .fromSeed(seedColor: Colors.deepPurple),
+          ),
+          routerConfig: appRouter,
+        ),
       ),
     );
   }

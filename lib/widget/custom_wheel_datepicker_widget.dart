@@ -6,19 +6,22 @@ import 'dart:developer';
 import 'package:reminder_app/theme/font_theme.dart';
 
 class CustomWheelDatepicker extends StatefulWidget {
-  const CustomWheelDatepicker({super.key});
+  final ValueChanged<DateTime> onTimeChanged;
+  const CustomWheelDatepicker({super.key, required this.onTimeChanged});
 
   @override
   State<CustomWheelDatepicker> createState() => _CustomWheelDatepickerState();
 }
 
 class _CustomWheelDatepickerState extends State<CustomWheelDatepicker> {
+  final FixedExtentScrollController hourController = .new();
+  final FixedExtentScrollController minuteController = .new();
+
   int selectedHour = 0;
   int selectedMinute = 0;
 
-  String selectedTime = '00:00';
-
   void _onSelectedItemChanged({required int index, required bool isHour}) {
+    final now = DateTime.now();
     setState(() {
       if (isHour) {
         selectedHour = index;
@@ -26,9 +29,33 @@ class _CustomWheelDatepickerState extends State<CustomWheelDatepicker> {
         selectedMinute = index;
       }
     });
-    selectedTime =
-        '${selectedHour.toString().padLeft(2, '0')}:${selectedMinute.toString().padLeft(2, '0')}';
-    log('Selected Time: $selectedTime');
+
+    final selectedDateTime = DateTime(
+      now.year,
+      now.month,
+      now.day,
+      selectedHour,
+      selectedMinute,
+    );
+
+    widget.onTimeChanged(selectedDateTime);
+
+    log('Selected Time: $selectedDateTime');
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      final now = DateTime.now();
+      selectedHour = now.hour;
+      selectedMinute = now.minute;
+      widget.onTimeChanged(now);
+
+      hourController.jumpToItem(selectedHour);
+      minuteController.jumpToItem(selectedMinute);
+    });
   }
 
   @override
@@ -40,6 +67,7 @@ class _CustomWheelDatepickerState extends State<CustomWheelDatepicker> {
         children: [
           Flexible(
             child: ListWheelScrollView.useDelegate(
+              controller: hourController,
               childDelegate: ListWheelChildLoopingListDelegate(
                 children: List.generate(24, (index) {
                   final hour = index.toString().padLeft(2, '0');
@@ -67,6 +95,7 @@ class _CustomWheelDatepickerState extends State<CustomWheelDatepicker> {
           VerticalDivider(thickness: 2.w, color: ColorTheme.lightGray),
           Flexible(
             child: ListWheelScrollView.useDelegate(
+              controller: minuteController,
               childDelegate: ListWheelChildLoopingListDelegate(
                 children: List.generate(60, (index) {
                   final minute = index.toString().padLeft(2, '0');

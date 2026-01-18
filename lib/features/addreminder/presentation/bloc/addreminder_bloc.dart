@@ -5,6 +5,7 @@ import 'package:injectable/injectable.dart';
 import 'package:reminder_app/core/services/image_picker_service.dart';
 import 'package:reminder_app/features/addreminder/presentation/widget/reminder_type_enum.dart';
 import 'package:reminder_app/features/reminder/domain/entity/reminder_entity.dart';
+import 'package:reminder_app/features/reminder/domain/usecase/create_reminders_usecase.dart';
 
 part 'addreminder_event.dart';
 part 'addreminder_state.dart';
@@ -13,11 +14,15 @@ part 'addreminder_bloc.freezed.dart';
 @injectable
 class AddReminderBloc extends Bloc<AddReminderEvent, AddReminderState> {
   final ImagePickerService imagePickerService;
-  AddReminderBloc(this.imagePickerService) : super(AddReminderState.initial()) {
+  final CreateRemindersUsecase createRemindersUsecase;
+  AddReminderBloc(this.imagePickerService, this.createRemindersUsecase)
+    : super(AddReminderState.initial()) {
     on<AddReminderEvent>((event, emit) async {
       await event.when(
         started: () {},
         fillForm: (reminder) => fillForm(reminder, emit),
+        dateTimeChanged: (dateTime) =>
+            dateTimeChanged(dateTime, emit), // ignore for now
         titleChanged: (title) => titleChanged(title, emit),
         noteChanged: (note) => noteChanged(note, emit),
         imagePathChanged: (imagePath) => imagePathChanged(imagePath, emit),
@@ -26,6 +31,23 @@ class AddReminderBloc extends Bloc<AddReminderEvent, AddReminderState> {
         reminderTypeChanged: (reminderType) =>
             reminderTypeChanged(reminderType, emit),
         pickImageFromGallery: () => pickImageFromGallery(emit),
+        saveReminder:
+            (
+              title,
+              dateTime,
+              note,
+              imagePath,
+              isRepeatEveryDay,
+              reminderType,
+            ) => saveReminder(
+              emit: emit,
+              title: title,
+              dateTime: dateTime,
+              note: note,
+              imagePath: imagePath,
+              isRepeatEveryDay: isRepeatEveryDay,
+              reminderType: reminderType,
+            ),
       );
     });
   }
@@ -37,6 +59,7 @@ class AddReminderBloc extends Bloc<AddReminderEvent, AddReminderState> {
     if (reminder != null) {
       emit(
         AddReminderState(
+          dateTime: null,
           title: reminder.title,
           note: reminder.note,
           imagePath: reminder.imagePath,
@@ -45,6 +68,13 @@ class AddReminderBloc extends Bloc<AddReminderEvent, AddReminderState> {
         ),
       );
     }
+  }
+
+  Future<void> dateTimeChanged(
+    DateTime dateTime,
+    Emitter<AddReminderState> emit,
+  ) async {
+    emit(state.copyWith(dateTime: dateTime));
   }
 
   Future<void> titleChanged(
@@ -84,5 +114,38 @@ class AddReminderBloc extends Bloc<AddReminderEvent, AddReminderState> {
     if (pickedImage != null) {
       emit(state.copyWith(imagePath: pickedImage.path));
     }
+  }
+
+  Future<void> saveReminder({
+    required Emitter<AddReminderState> emit,
+    required String title,
+    DateTime? dateTime,
+    String? note,
+    String? imagePath,
+    required bool isRepeatEveryDay,
+    required ReminderTypeEnum reminderType,
+  }) async {
+    emit(state.copyWith(isLoading: true));
+
+    final reminder = ReminderEntity(
+      id: 0,
+      title: title,
+      dateTime: dateTime ?? DateTime.now(),
+      note: note,
+      isRepeatEveryDay: isRepeatEveryDay,
+      reminderType: reminderType,
+      imagePath: imagePath,
+    );
+
+    final result = await createRemindersUsecase(reminder).run();
+
+    result.fold(
+      (failure) {
+        emit(state.copyWith(isLoading: false));
+      },
+      (reminderId) {
+        emit(state.copyWith(savedReminderId: reminderId, isLoading: false));
+      },
+    );
   }
 }

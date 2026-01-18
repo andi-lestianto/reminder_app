@@ -7,11 +7,11 @@ import 'package:reminder_app/core/utils/form_validator_utils.dart';
 import 'package:reminder_app/features/addreminder/presentation/bloc/addreminder_bloc.dart';
 import 'package:reminder_app/features/addreminder/presentation/widget/remider_type_widget.dart';
 import 'package:reminder_app/features/reminder/domain/entity/reminder_entity.dart';
+import 'package:reminder_app/features/reminder/presentation/bloc/reminder_bloc.dart';
 import 'package:reminder_app/gen/assets.gen.dart';
 import 'package:reminder_app/theme/color_theme.dart';
 import 'package:reminder_app/theme/font_theme.dart';
 import 'package:reminder_app/widget/custom_button_widget.dart';
-import 'package:reminder_app/widget/custom_checkbox_widget.dart';
 import 'package:reminder_app/widget/custom_textformfield_widget.dart';
 import 'package:reminder_app/widget/custom_wheel_datepicker_widget.dart';
 
@@ -73,10 +73,14 @@ class _AddReminderViewState extends State<AddReminderView> {
   Widget build(BuildContext context) {
     return BlocConsumer<AddReminderBloc, AddReminderState>(
       listenWhen: (previous, current) {
-        return previous.title != current.title ||
+        return previous.dateTime != current.dateTime ||
+            previous.title != current.title ||
             previous.note != current.note ||
             previous.imagePath != current.imagePath ||
-            previous.isRepeatEveryDay != current.isRepeatEveryDay;
+            previous.isRepeatEveryDay != current.isRepeatEveryDay ||
+            previous.reminderType != current.reminderType ||
+            previous.isLoading != current.isLoading ||
+            previous.savedReminderId != current.savedReminderId;
       },
       listener: (context, state) {
         labelTextEditingController.text = state.title;
@@ -85,6 +89,14 @@ class _AddReminderViewState extends State<AddReminderView> {
             .split('/')
             .last;
         isRepeatEveryDay = state.isRepeatEveryDay;
+
+        if (state.savedReminderId != null) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Reminder saved successfully')),
+          );
+
+          context.read<ReminderBloc>().add(const ReminderEvent.fetchAllData());
+        }
       },
       builder: (context, state) {
         return GestureDetector(
@@ -145,17 +157,23 @@ class _AddReminderViewState extends State<AddReminderView> {
                           color: ColorTheme.black,
                         ),
                       ),
-                      CustomWheelDatepicker(),
-                      Center(
-                        child: CustomCheckboxWidget(
-                          onChanged: (val) {
-                            setRepeatEveryDay(val);
-                          },
-                          value: isRepeatEveryDay,
-                          label: 'Repeat Every Day',
-                        ),
+                      CustomWheelDatepicker(
+                        onTimeChanged: (value) {
+                          context.read<AddReminderBloc>().add(
+                            AddReminderEvent.dateTimeChanged(value),
+                          );
+                        },
                       ),
 
+                      // Center(
+                      //   child: CustomCheckboxWidget(
+                      //     onChanged: (val) {
+                      //       setRepeatEveryDay(val);
+                      //     },
+                      //     value: isRepeatEveryDay,
+                      //     label: 'Repeat Every Day',
+                      //   ),
+                      // ),
                       CustomTextFormFieldWidget(
                         textEditingController: labelTextEditingController,
                         labelText: 'Title',
@@ -224,7 +242,19 @@ class _AddReminderViewState extends State<AddReminderView> {
               child: CustomButtonWidget(
                 isEnable: isFormValid,
                 label: 'Save Reminder',
-                onTap: () {},
+                isLoading: state.isLoading,
+                onTap: () {
+                  context.read<AddReminderBloc>().add(
+                    AddReminderEvent.saveReminder(
+                      title: state.title,
+                      dateTime: state.dateTime!,
+                      note: state.note,
+                      imagePath: state.imagePath,
+                      isRepeatEveryDay: state.isRepeatEveryDay,
+                      reminderType: state.reminderType,
+                    ),
+                  );
+                },
               ),
             ),
           ),
