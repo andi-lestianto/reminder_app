@@ -7,7 +7,12 @@ import 'package:reminder_app/theme/font_theme.dart';
 
 class CustomWheelDatepicker extends StatefulWidget {
   final ValueChanged<DateTime> onTimeChanged;
-  const CustomWheelDatepicker({super.key, required this.onTimeChanged});
+  final DateTime initialDateTime;
+  const CustomWheelDatepicker({
+    super.key,
+    required this.onTimeChanged,
+    required this.initialDateTime,
+  });
 
   @override
   State<CustomWheelDatepicker> createState() => _CustomWheelDatepickerState();
@@ -45,13 +50,12 @@ class _CustomWheelDatepickerState extends State<CustomWheelDatepicker> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      final now = DateTime.now();
-      selectedHour = now.hour;
-      selectedMinute = now.minute;
-      widget.onTimeChanged(now);
+      selectedHour = widget.initialDateTime.hour;
+      selectedMinute = widget.initialDateTime.minute;
+
+      widget.onTimeChanged(widget.initialDateTime);
 
       hourController.jumpToItem(selectedHour);
       minuteController.jumpToItem(selectedMinute);
@@ -65,6 +69,7 @@ class _CustomWheelDatepickerState extends State<CustomWheelDatepicker> {
       height: 240.w,
       child: Row(
         children: [
+          Text(widget.initialDateTime.toString()),
           Flexible(
             child: ListWheelScrollView.useDelegate(
               controller: hourController,

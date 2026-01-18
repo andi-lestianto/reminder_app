@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:reminder_app/core/di/injection.dart';
+import 'package:reminder_app/core/presentation/states/action_status.dart';
 import 'package:reminder_app/core/utils/form_validator_utils.dart';
 import 'package:reminder_app/features/addreminder/presentation/bloc/addreminder_bloc.dart';
 import 'package:reminder_app/features/addreminder/presentation/widget/remider_type_widget.dart';
@@ -79,8 +80,7 @@ class _AddReminderViewState extends State<AddReminderView> {
             previous.imagePath != current.imagePath ||
             previous.isRepeatEveryDay != current.isRepeatEveryDay ||
             previous.reminderType != current.reminderType ||
-            previous.isLoading != current.isLoading ||
-            previous.savedReminderId != current.savedReminderId;
+            previous.actionStatus != current.actionStatus;
       },
       listener: (context, state) {
         labelTextEditingController.text = state.title;
@@ -90,13 +90,21 @@ class _AddReminderViewState extends State<AddReminderView> {
             .last;
         isRepeatEveryDay = state.isRepeatEveryDay;
 
-        if (state.savedReminderId != null) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Reminder saved successfully')),
-          );
-
-          context.read<ReminderBloc>().add(const ReminderEvent.fetchAllData());
-        }
+        state.actionStatus.maybeWhen(
+          orElse: () {},
+          failure: (message) {
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(message)));
+          },
+          success: (message) {
+            context.pop();
+            context.read<ReminderBloc>().add(ReminderEvent.fetchReminders());
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(message)));
+          },
+        );
       },
       builder: (context, state) {
         return GestureDetector(
@@ -157,7 +165,9 @@ class _AddReminderViewState extends State<AddReminderView> {
                           color: ColorTheme.black,
                         ),
                       ),
+                      Text(state.dateTime.toString()),
                       CustomWheelDatepicker(
+                        initialDateTime: state.dateTime ?? DateTime.now(),
                         onTimeChanged: (value) {
                           context.read<AddReminderBloc>().add(
                             AddReminderEvent.dateTimeChanged(value),
@@ -165,15 +175,6 @@ class _AddReminderViewState extends State<AddReminderView> {
                         },
                       ),
 
-                      // Center(
-                      //   child: CustomCheckboxWidget(
-                      //     onChanged: (val) {
-                      //       setRepeatEveryDay(val);
-                      //     },
-                      //     value: isRepeatEveryDay,
-                      //     label: 'Repeat Every Day',
-                      //   ),
-                      // ),
                       CustomTextFormFieldWidget(
                         textEditingController: labelTextEditingController,
                         labelText: 'Title',
@@ -242,18 +243,35 @@ class _AddReminderViewState extends State<AddReminderView> {
               child: CustomButtonWidget(
                 isEnable: isFormValid,
                 label: 'Save Reminder',
-                isLoading: state.isLoading,
+                isLoading: state.actionStatus.maybeWhen(
+                  orElse: () => false,
+                  loading: () => true,
+                ),
                 onTap: () {
-                  context.read<AddReminderBloc>().add(
-                    AddReminderEvent.saveReminder(
-                      title: state.title,
-                      dateTime: state.dateTime!,
-                      note: state.note,
-                      imagePath: state.imagePath,
-                      isRepeatEveryDay: state.isRepeatEveryDay,
-                      reminderType: state.reminderType,
-                    ),
-                  );
+                  if (widget.reminder == null) {
+                    context.read<AddReminderBloc>().add(
+                      AddReminderEvent.saveReminder(
+                        title: state.title,
+                        dateTime: state.dateTime!,
+                        note: state.note,
+                        imagePath: state.imagePath,
+                        isRepeatEveryDay: state.isRepeatEveryDay,
+                        reminderType: state.reminderType,
+                      ),
+                    );
+                  } else {
+                    context.read<AddReminderBloc>().add(
+                      AddReminderEvent.updateReminder(
+                        id: widget.reminder!.id,
+                        title: state.title,
+                        dateTime: state.dateTime!,
+                        note: state.note,
+                        imagePath: state.imagePath,
+                        isRepeatEveryDay: state.isRepeatEveryDay,
+                        reminderType: state.reminderType,
+                      ),
+                    );
+                  }
                 },
               ),
             ),

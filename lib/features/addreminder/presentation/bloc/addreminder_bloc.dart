@@ -1,11 +1,15 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
+import 'package:reminder_app/core/presentation/states/action_status.dart';
 import 'package:reminder_app/core/services/image_picker_service.dart';
 import 'package:reminder_app/features/addreminder/presentation/widget/reminder_type_enum.dart';
 import 'package:reminder_app/features/reminder/domain/entity/reminder_entity.dart';
 import 'package:reminder_app/features/reminder/domain/usecase/create_reminders_usecase.dart';
+import 'package:reminder_app/features/reminder/domain/usecase/update_reminders_usecase.dart';
 
 part 'addreminder_event.dart';
 part 'addreminder_state.dart';
@@ -15,8 +19,12 @@ part 'addreminder_bloc.freezed.dart';
 class AddReminderBloc extends Bloc<AddReminderEvent, AddReminderState> {
   final ImagePickerService imagePickerService;
   final CreateRemindersUsecase createRemindersUsecase;
-  AddReminderBloc(this.imagePickerService, this.createRemindersUsecase)
-    : super(AddReminderState.initial()) {
+  final UpdateRemindersUsecase updateRemindersUsecase;
+  AddReminderBloc(
+    this.imagePickerService,
+    this.createRemindersUsecase,
+    this.updateRemindersUsecase,
+  ) : super(AddReminderState.initial()) {
     on<AddReminderEvent>((event, emit) async {
       await event.when(
         started: () {},
@@ -48,6 +56,25 @@ class AddReminderBloc extends Bloc<AddReminderEvent, AddReminderState> {
               isRepeatEveryDay: isRepeatEveryDay,
               reminderType: reminderType,
             ),
+        updateReminder:
+            (
+              id,
+              title,
+              dateTime,
+              note,
+              imagePath,
+              isRepeatEveryDay,
+              reminderType,
+            ) => updateReminder(
+              emit: emit,
+              id: id,
+              title: title,
+              dateTime: dateTime,
+              note: note,
+              imagePath: imagePath,
+              isRepeatEveryDay: isRepeatEveryDay,
+              reminderType: reminderType,
+            ),
       );
     });
   }
@@ -57,9 +84,10 @@ class AddReminderBloc extends Bloc<AddReminderEvent, AddReminderState> {
     Emitter<AddReminderState> emit,
   ) async {
     if (reminder != null) {
+      log('Filling form with reminder: ${reminder.toString()}');
       emit(
         AddReminderState(
-          dateTime: null,
+          dateTime: reminder.dateTime,
           title: reminder.title,
           note: reminder.note,
           imagePath: reminder.imagePath,
@@ -125,7 +153,7 @@ class AddReminderBloc extends Bloc<AddReminderEvent, AddReminderState> {
     required bool isRepeatEveryDay,
     required ReminderTypeEnum reminderType,
   }) async {
-    emit(state.copyWith(isLoading: true));
+    emit(state.copyWith(actionStatus: ActionStatus.idle()));
 
     final reminder = ReminderEntity(
       id: 0,
@@ -141,10 +169,64 @@ class AddReminderBloc extends Bloc<AddReminderEvent, AddReminderState> {
 
     result.fold(
       (failure) {
-        emit(state.copyWith(isLoading: false));
+        emit(
+          state.copyWith(
+            actionStatus: ActionStatus.failure(message: failure.message),
+          ),
+        );
       },
       (reminderId) {
-        emit(state.copyWith(savedReminderId: reminderId, isLoading: false));
+        emit(
+          state.copyWith(
+            actionStatus: ActionStatus.success(
+              message: 'Reminder created successfully',
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Future<void> updateReminder({
+    required Emitter<AddReminderState> emit,
+    required int id,
+    required String title,
+    DateTime? dateTime,
+    String? note,
+    String? imagePath,
+    required bool isRepeatEveryDay,
+    required ReminderTypeEnum reminderType,
+  }) async {
+    emit(state.copyWith(actionStatus: ActionStatus.loading()));
+
+    final reminder = ReminderEntity(
+      id: id,
+      title: title,
+      dateTime: dateTime ?? DateTime.now(),
+      note: note,
+      isRepeatEveryDay: isRepeatEveryDay,
+      reminderType: reminderType,
+      imagePath: imagePath,
+    );
+
+    final result = await updateRemindersUsecase(reminder).run();
+
+    result.fold(
+      (failure) {
+        emit(
+          state.copyWith(
+            actionStatus: ActionStatus.failure(message: failure.message),
+          ),
+        );
+      },
+      (updatedCount) {
+        emit(
+          state.copyWith(
+            actionStatus: ActionStatus.success(
+              message: 'Reminder updated successfully',
+            ),
+          ),
+        );
       },
     );
   }

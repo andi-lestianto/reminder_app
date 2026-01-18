@@ -36,7 +36,7 @@ class DateTimeUtils {
   /// Returns time from given [dateTime] in string format 'hh:mm'
   /// e.g., 08:30, 14:45
   static String getTimeFromDateTime(DateTime dateTime) {
-    final timeFormat = DateFormat('hh:mm');
+    final timeFormat = DateFormat('HH:mm');
     return timeFormat.format(dateTime);
   }
 }

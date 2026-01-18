@@ -34,6 +34,7 @@ class ReminderActionWidget extends StatelessWidget {
               color: Colors.transparent,
               child: InkWell(
                 onTap: () {
+                  context.pop();
                   context.pushNamed(RouteNames.addReminder, extra: reminder);
                 },
                 child: Padding(

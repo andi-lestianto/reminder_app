@@ -8,6 +8,8 @@ import 'package:reminder_app/features/reminder/data/model/reminder_model.dart';
 abstract class ReminderLocalDatasource {
   TaskEither<Exception, int> createReminder(ReminderModel reminder);
   TaskEither<Exception, List<ReminderModel>> getReminders();
+  TaskEither<Exception, int> deleteReminder(int id);
+  TaskEither<Exception, int> updateReminder(ReminderModel reminder);
 }
 
 @LazySingleton(as: ReminderLocalDatasource)
@@ -21,19 +23,21 @@ class ReminderLocalDatasourceImpl implements ReminderLocalDatasource {
       () async {
         final database = await db.database;
 
+        final dataMap = reminder.toJson();
+        dataMap.remove('id');
+
         final id = await database.insert(
           'reminders',
           reminder.toJson(),
           conflictAlgorithm: .replace,
         );
-        if (id > 0) {
-          log('Reminder inserted with id: $id');
-        }
+
+        log('Reminder inserted with id: $id');
         return id;
       },
       (error, stackTrace) {
         log('Error inserting reminder: $error', stackTrace: stackTrace);
-        return Exception('Database Insertion Error: $error');
+        return Exception('Failed to create new reminder');
       },
     );
   }
@@ -52,7 +56,48 @@ class ReminderLocalDatasourceImpl implements ReminderLocalDatasource {
       },
       (error, stackTrace) {
         log('Error fetching reminders: $error', stackTrace: stackTrace);
-        return Exception('Database Fetch Error: $error');
+        return Exception('Failed to fetch reminders');
+      },
+    );
+  }
+
+  @override
+  TaskEither<Exception, int> deleteReminder(int id) {
+    return TaskEither.tryCatch(
+      () async {
+        final database = await db.database;
+        final rowsAffected = await database.delete(
+          'reminders',
+          where: 'id = ?',
+          whereArgs: [id],
+        );
+        log('Deleted $rowsAffected reminder(s) with id: $id');
+        return rowsAffected;
+      },
+      (error, stackTrace) {
+        log('Error deleting reminder: $error', stackTrace: stackTrace);
+        return Exception('Failed to delete reminder');
+      },
+    );
+  }
+
+  @override
+  TaskEither<Exception, int> updateReminder(ReminderModel reminder) {
+    return TaskEither.tryCatch(
+      () async {
+        final database = await db.database;
+        final rowsAffected = await database.update(
+          'reminders',
+          reminder.toJson(),
+          where: 'id = ?',
+          whereArgs: [reminder.id],
+        );
+        log('Updated $rowsAffected reminder(s) with id: ${reminder.id}');
+        return rowsAffected;
+      },
+      (error, stackTrace) {
+        log('Error updating reminder: $error', stackTrace: stackTrace);
+        return Exception('Failed to update reminder');
       },
     );
   }

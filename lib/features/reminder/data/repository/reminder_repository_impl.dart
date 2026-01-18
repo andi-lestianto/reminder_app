@@ -28,4 +28,18 @@ class ReminderRepositoryImpl implements ReminderRepository {
               reminderModels.map((model) => model.toEntity()).toList(),
         );
   }
+
+  @override
+  TaskEither<Failure, int> deleteReminder(int id) {
+    return localDatasource
+        .deleteReminder(id)
+        .mapLeft((exception) => exception.toFailure);
+  }
+
+  @override
+  TaskEither<Failure, int> updateReminder(ReminderEntity reminder) {
+    return localDatasource
+        .updateReminder(reminder.toModel())
+        .mapLeft((exception) => exception.toFailure);
+  }
 }

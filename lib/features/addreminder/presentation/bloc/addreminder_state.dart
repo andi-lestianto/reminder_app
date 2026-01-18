@@ -3,14 +3,14 @@ part of 'addreminder_bloc.dart';
 @freezed
 abstract class AddReminderState with _$AddReminderState {
   const factory AddReminderState({
-    required DateTime? dateTime,
+    DateTime? dateTime,
     required String title,
     String? note,
     String? imagePath,
     @Default(false) bool isRepeatEveryDay,
     required ReminderTypeEnum reminderType,
-    @Default(false) bool isLoading,
-    int? savedReminderId,
+
+    @Default(ActionStatus.idle()) ActionStatus actionStatus,
   }) = _AddReminderState;
 
   factory AddReminderState.initial() => AddReminderState(
@@ -20,7 +20,5 @@ abstract class AddReminderState with _$AddReminderState {
     imagePath: null,
     isRepeatEveryDay: false,
     reminderType: ReminderTypeEnum.notification,
-    isLoading: false,
-    savedReminderId: null,
   );
 }

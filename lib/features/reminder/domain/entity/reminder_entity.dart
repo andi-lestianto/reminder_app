@@ -21,6 +21,7 @@ abstract class ReminderEntity with _$ReminderEntity {
 
   ReminderModel toModel() {
     return ReminderModel(
+      id: id,
       title: title,
       note: note,
       dateTimeEpoch: dateTime.millisecondsSinceEpoch,

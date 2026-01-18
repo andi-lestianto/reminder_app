@@ -26,4 +26,14 @@ class AddReminderEvent with _$AddReminderEvent {
     required bool isRepeatEveryDay,
     required ReminderTypeEnum reminderType,
   }) = _SaveReminder;
+
+  const factory AddReminderEvent.updateReminder({
+    required int id,
+    required String title,
+    required DateTime? dateTime,
+    String? note,
+    String? imagePath,
+    required bool isRepeatEveryDay,
+    required ReminderTypeEnum reminderType,
+  }) = _UpdateReminder;
 }

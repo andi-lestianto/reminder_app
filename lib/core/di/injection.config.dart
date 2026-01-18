@@ -31,6 +31,8 @@ import 'package:reminder_app/features/reminder/domain/usecase/get_upcoming_remin
     as _i547;
 import 'package:reminder_app/features/reminder/domain/usecase/get_week_dates_usecase.dart'
     as _i664;
+import 'package:reminder_app/features/reminder/domain/usecase/update_reminders_usecase.dart'
+    as _i867;
 import 'package:reminder_app/features/reminder/presentation/bloc/reminder_bloc.dart'
     as _i437;
 
@@ -64,6 +66,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i828.GetRemindersUsecase>(
       () => _i828.GetRemindersUsecase(gh<_i418.ReminderRepository>()),
     );
+    gh.lazySingleton<_i867.UpdateRemindersUsecase>(
+      () => _i867.UpdateRemindersUsecase(gh<_i418.ReminderRepository>()),
+    );
     gh.factory<_i437.ReminderBloc>(
       () => _i437.ReminderBloc(
         gh<_i664.GetWeekDatesUsecase>(),
@@ -75,6 +80,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i558.AddReminderBloc(
         gh<_i430.ImagePickerService>(),
         gh<_i655.CreateRemindersUsecase>(),
+        gh<_i867.UpdateRemindersUsecase>(),
       ),
     );
     return this;
