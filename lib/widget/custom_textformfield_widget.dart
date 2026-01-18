@@ -114,21 +114,24 @@ class _CustomTextFormFieldWidgetState extends State<CustomTextFormFieldWidget> {
 
               if (isWithButton) ...[
                 12.horizontalSpace,
-                Container(
-                  width: 70.w,
+                GestureDetector(
+                  onTap: widget.onButtonTap,
+                  child: Container(
+                    width: 70.w,
 
-                  decoration: BoxDecoration(
-                    color: ColorTheme.lightGray,
-                    borderRadius: BorderRadius.circular(16.r),
-                  ),
-                  child: Center(
-                    child: SvgPicture.asset(
-                      widget.buttonIconPath!,
-                      width: 24.w,
-                      height: 24.w,
-                      colorFilter: ColorFilter.mode(
-                        ColorTheme.darkGray,
-                        BlendMode.srcIn,
+                    decoration: BoxDecoration(
+                      color: ColorTheme.lightGray,
+                      borderRadius: BorderRadius.circular(16.r),
+                    ),
+                    child: Center(
+                      child: SvgPicture.asset(
+                        widget.buttonIconPath!,
+                        width: 24.w,
+                        height: 24.w,
+                        colorFilter: ColorFilter.mode(
+                          ColorTheme.darkGray,
+                          BlendMode.srcIn,
+                        ),
                       ),
                     ),
                   ),

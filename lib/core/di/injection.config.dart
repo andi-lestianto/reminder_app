@@ -11,6 +11,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
+import 'package:reminder_app/core/services/image_picker_service.dart' as _i430;
 import 'package:reminder_app/features/addreminder/presentation/bloc/addreminder_bloc.dart'
     as _i558;
 import 'package:reminder_app/features/mainscreen/presentation/cubit/mainscreen_cubit.dart'
@@ -35,8 +36,10 @@ extension GetItInjectableX on _i174.GetIt {
     _i526.EnvironmentFilter? environmentFilter,
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
-    gh.factory<_i558.AddReminderBloc>(() => _i558.AddReminderBloc());
     gh.factory<_i1013.MainScreenCubit>(() => _i1013.MainScreenCubit());
+    gh.lazySingleton<_i430.ImagePickerService>(
+      () => _i430.ImagePickerService(),
+    );
     gh.lazySingleton<_i547.GetUpcomingReminderUsecase>(
       () => _i547.GetUpcomingReminderUsecase(),
     );
@@ -45,6 +48,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i418.ReminderRepository>(
       () => _i470.ReminderRepositoryImpl(),
+    );
+    gh.factory<_i558.AddReminderBloc>(
+      () => _i558.AddReminderBloc(gh<_i430.ImagePickerService>()),
     );
     gh.lazySingleton<_i828.GetRemindersUsecase>(
       () => _i828.GetRemindersUsecase(gh<_i418.ReminderRepository>()),

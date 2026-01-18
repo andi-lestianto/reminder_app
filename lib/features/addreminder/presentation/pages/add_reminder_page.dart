@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:reminder_app/core/di/injection.dart';
 import 'package:reminder_app/core/utils/form_validator_utils.dart';
 import 'package:reminder_app/features/addreminder/presentation/bloc/addreminder_bloc.dart';
+import 'package:reminder_app/features/addreminder/presentation/widget/remider_type_widget.dart';
 import 'package:reminder_app/features/reminder/domain/entity/reminder_entity.dart';
 import 'package:reminder_app/gen/assets.gen.dart';
 import 'package:reminder_app/theme/color_theme.dart';
@@ -25,11 +26,6 @@ class AddReminderPage extends StatelessWidget {
           getIt<AddReminderBloc>()
             ..add(AddReminderEvent.fillForm(reminder: reminder)),
       child: AddReminderView(reminder: reminder),
-      // child: BlocBuilder<AddReminderBloc, AddReminderState>(
-      //   builder: (context, state) {
-      //     return Material(child: Text(state.title));
-      //   },
-      // ),
     );
   }
 }
@@ -85,7 +81,9 @@ class _AddReminderViewState extends State<AddReminderView> {
       listener: (context, state) {
         labelTextEditingController.text = state.title;
         noteTextEditingController.text = state.note ?? '';
-        additionalImageTextEditingController.text = state.imagePath ?? '';
+        additionalImageTextEditingController.text = (state.imagePath ?? '')
+            .split('/')
+            .last;
         isRepeatEveryDay = state.isRepeatEveryDay;
       },
       builder: (context, state) {
@@ -165,6 +163,9 @@ class _AddReminderViewState extends State<AddReminderView> {
                         validator: FormValidatorUtils.required,
                         onChanged: (value) {
                           validateForm();
+                          context.read<AddReminderBloc>().add(
+                            AddReminderEvent.titleChanged(value),
+                          );
                         },
                       ),
                       CustomTextFormFieldWidget(
@@ -173,91 +174,29 @@ class _AddReminderViewState extends State<AddReminderView> {
                         hintText: 'Enter note',
                         maxLines: 3,
                         onChanged: (value) {
-                          validateForm();
+                          context.read<AddReminderBloc>().add(
+                            AddReminderEvent.noteChanged(value),
+                          );
                         },
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text.rich(
-                            TextSpan(
-                              text: 'Type',
-                              style: FontTheme.semiBold20.copyWith(
-                                color: ColorTheme.black,
-                              ),
-                            ),
-                          ),
-                          12.verticalSpace,
-                          Row(
-                            spacing: 24.w,
-                            children: [
-                              Expanded(
-                                child: Container(
-                                  padding: EdgeInsets.symmetric(vertical: 24.w),
-                                  decoration: BoxDecoration(
-                                    color: ColorTheme.blue,
-                                    borderRadius: BorderRadius.circular(16.r),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Assets.icons.bellNotificationSocialMedia
-                                          .svg(
-                                            height: 32.w,
-                                            width: 32.w,
-                                            colorFilter: ColorFilter.mode(
-                                              ColorTheme.white,
-                                              BlendMode.srcIn,
-                                            ),
-                                          ),
-                                      12.verticalSpace,
-                                      Text(
-                                        'Notification Only',
-                                        style: FontTheme.regular16.copyWith(
-                                          color: ColorTheme.white,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                child: Container(
-                                  padding: EdgeInsets.symmetric(vertical: 24.w),
-                                  decoration: BoxDecoration(
-                                    color: ColorTheme.lightGray,
-                                    borderRadius: BorderRadius.circular(16.r),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Assets.icons.alarmClock.svg(
-                                        height: 32.w,
-                                        width: 32.w,
-                                        colorFilter: ColorFilter.mode(
-                                          ColorTheme.darkGray,
-                                          BlendMode.srcIn,
-                                        ),
-                                      ),
-                                      12.verticalSpace,
-                                      Text(
-                                        'Activate Alarm',
-                                        style: FontTheme.regular16.copyWith(
-                                          color: ColorTheme.darkGray,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
+                      ReminderTypeWidget(
+                        onChanged: (value) {
+                          context.read<AddReminderBloc>().add(
+                            AddReminderEvent.reminderTypeChanged(value),
+                          );
+                        },
+                        selectedType: state.reminderType,
                       ),
                       CustomTextFormFieldWidget(
                         textEditingController:
                             additionalImageTextEditingController,
                         labelText: 'Additional Image',
                         hintText: 'Select image',
-                        onButtonTap: () {},
+                        onButtonTap: () {
+                          context.read<AddReminderBloc>().add(
+                            AddReminderEvent.pickImageFromGallery(),
+                          );
+                        },
                         buttonIconPath: Assets.icons.addImage.path,
                         onChanged: (value) {
                           validateForm();

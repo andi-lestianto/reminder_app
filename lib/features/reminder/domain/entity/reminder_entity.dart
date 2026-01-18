@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:reminder_app/core/enum/reminder_type_enum.dart';
+import 'package:reminder_app/features/addreminder/presentation/widget/reminder_type_enum.dart';
 import 'package:reminder_app/gen/assets.gen.dart';
 
 part 'reminder_entity.freezed.dart';
