@@ -165,7 +165,6 @@ class _AddReminderViewState extends State<AddReminderView> {
                           color: ColorTheme.black,
                         ),
                       ),
-                      Text(state.dateTime.toString()),
                       CustomWheelDatepicker(
                         initialDateTime: state.dateTime ?? DateTime.now(),
                         onTimeChanged: (value) {

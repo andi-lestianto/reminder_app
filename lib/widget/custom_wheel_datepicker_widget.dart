@@ -69,7 +69,6 @@ class _CustomWheelDatepickerState extends State<CustomWheelDatepicker> {
       height: 240.w,
       child: Row(
         children: [
-          Text(widget.initialDateTime.toString()),
           Flexible(
             child: ListWheelScrollView.useDelegate(
               controller: hourController,
