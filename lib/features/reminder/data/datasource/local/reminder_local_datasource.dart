@@ -28,7 +28,7 @@ class ReminderLocalDatasourceImpl implements ReminderLocalDatasource {
 
         final id = await database.insert(
           'reminders',
-          reminder.toJson(),
+          dataMap,
           conflictAlgorithm: .replace,
         );
 

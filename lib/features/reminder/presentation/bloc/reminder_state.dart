@@ -6,6 +6,8 @@ abstract class ReminderState with _$ReminderState {
     required SectionState<DateTime> weekDatesState,
     required SectionState<ReminderEntity> remindersState,
     ReminderEntity? upComingReminder,
+
+    @Default(ActionStatus.idle()) ActionStatus actionStatus,
   }) = _ReminderState;
 
   factory ReminderState.initial() => ReminderState(

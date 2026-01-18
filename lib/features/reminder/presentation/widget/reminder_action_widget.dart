@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:reminder_app/features/reminder/domain/entity/reminder_entity.dart';
+import 'package:reminder_app/features/reminder/presentation/bloc/reminder_bloc.dart';
 import 'package:reminder_app/gen/assets.gen.dart';
 import 'package:reminder_app/routes/route_names.dart';
 import 'package:reminder_app/theme/color_theme.dart';
@@ -75,7 +77,12 @@ class ReminderActionWidget extends StatelessWidget {
             child: Material(
               color: Colors.transparent,
               child: InkWell(
-                onTap: () {},
+                onTap: () {
+                  context.read<ReminderBloc>().add(
+                    ReminderEvent.deleteReminder(reminder.id),
+                  );
+                  context.pop();
+                },
                 child: Padding(
                   padding: EdgeInsets.symmetric(vertical: 24.w),
                   child: Row(

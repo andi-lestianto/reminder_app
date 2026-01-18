@@ -141,7 +141,7 @@ class RemindersWidget extends StatelessWidget {
                                 ],
                               ),
                               8.verticalSpace,
-                              if (reminder.note != null)
+                              if (reminder.note != null) ...[
                                 Text(
                                   reminder.note.toString(),
                                   style: FontTheme.medium18.copyWith(
@@ -151,6 +151,19 @@ class RemindersWidget extends StatelessWidget {
                                   ),
                                   textAlign: TextAlign.justify,
                                 ),
+                              ] else ...[
+                                Text(
+                                  'No additional notes',
+                                  style: FontTheme.medium18.copyWith(
+                                    fontStyle: FontStyle.italic,
+                                    color: isUpcoming
+                                        ? ColorTheme.white
+                                        : ColorTheme.gray,
+                                  ),
+                                  textAlign: TextAlign.justify,
+                                ),
+                              ],
+
                               if (reminder.imagePath != null) ...[
                                 12.verticalSpace,
                                 InkWell(

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:image_picker/image_picker.dart';
@@ -84,7 +82,6 @@ class AddReminderBloc extends Bloc<AddReminderEvent, AddReminderState> {
     Emitter<AddReminderState> emit,
   ) async {
     if (reminder != null) {
-      log('Filling form with reminder: ${reminder.toString()}');
       emit(
         state.copyWith(
           dateTime: reminder.dateTime,

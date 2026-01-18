@@ -3,7 +3,7 @@ part of 'addreminder_bloc.dart';
 @freezed
 abstract class AddReminderState with _$AddReminderState {
   const factory AddReminderState({
-    DateTime? dateTime,
+    required DateTime dateTime,
     required String title,
     String? note,
     String? imagePath,
@@ -14,7 +14,7 @@ abstract class AddReminderState with _$AddReminderState {
   }) = _AddReminderState;
 
   factory AddReminderState.initial() => AddReminderState(
-    dateTime: null,
+    dateTime: DateTime.now(),
     title: '',
     note: null,
     imagePath: null,

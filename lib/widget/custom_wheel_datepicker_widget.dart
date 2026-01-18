@@ -18,8 +18,8 @@ class CustomWheelDatepicker extends StatefulWidget {
 }
 
 class _CustomWheelDatepickerState extends State<CustomWheelDatepicker> {
-  final FixedExtentScrollController hourController = .new();
-  final FixedExtentScrollController minuteController = .new();
+  final FixedExtentScrollController hourController = .new(initialItem: 0);
+  final FixedExtentScrollController minuteController = .new(initialItem: 0);
 
   bool isInitialSyncDone = false;
 
@@ -57,25 +57,29 @@ class _CustomWheelDatepickerState extends State<CustomWheelDatepicker> {
     minuteController.jumpToItem(selectedMinute);
   }
 
-  // @override
-  // void initState() {
-  //   super.initState();
-
-  //   WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-  //     _syncFromWidget(widget.initialDateTime);
-  //     isInitialSyncDone = true;
-  //   });
-  // }
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _syncFromWidget(widget.initialDateTime);
+      isInitialSyncDone = true;
+    });
+  }
 
   @override
   void didUpdateWidget(covariant CustomWheelDatepicker oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    if (oldWidget.initialDateTime != widget.initialDateTime) {
+    final newDt = widget.initialDateTime;
+
+    final isSameAsInternal =
+        newDt.hour == selectedHour && newDt.minute == selectedMinute;
+
+    if (!isSameAsInternal) {
       isInitialSyncDone = false;
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (!mounted) return;
-        _syncFromWidget(widget.initialDateTime);
+        _syncFromWidget(newDt);
         isInitialSyncDone = true;
       });
     }

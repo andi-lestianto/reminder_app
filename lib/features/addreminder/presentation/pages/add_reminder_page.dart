@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -45,17 +43,17 @@ class _AddReminderViewState extends State<AddReminderView> {
   final TextEditingController labelTextEditingController = .new();
   final TextEditingController noteTextEditingController = .new();
   final TextEditingController additionalImageTextEditingController = .new();
+
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   bool isRepeatEveryDay = false;
+  bool isFormValid = false;
 
   void setRepeatEveryDay(bool val) {
     setState(() {
       isRepeatEveryDay = val;
     });
   }
-
-  bool isFormValid = false;
 
   void validateForm() {
     final isValid = formKey.currentState?.validate() ?? false;
@@ -75,46 +73,8 @@ class _AddReminderViewState extends State<AddReminderView> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AddReminderBloc, AddReminderState>(
-      listenWhen: (previous, current) {
-        return previous.dateTime != current.dateTime ||
-            previous.title != current.title ||
-            previous.note != current.note ||
-            previous.imagePath != current.imagePath ||
-            previous.isRepeatEveryDay != current.isRepeatEveryDay ||
-            previous.reminderType != current.reminderType ||
-            previous.actionStatus != current.actionStatus;
-      },
-      listener: (context, state) {
-        labelTextEditingController.text = state.title;
-        noteTextEditingController.text = state.note ?? '';
-        additionalImageTextEditingController.text = (state.imagePath ?? '')
-            .split('/')
-            .last;
-        isRepeatEveryDay = state.isRepeatEveryDay;
-
-        log('Reminder type changed to: ${state.reminderType}');
-        log('DateTime changed to: ${state.dateTime}');
-
-        if (widget.reminder != null) {
-          validateForm();
-        }
-
-        state.actionStatus.maybeWhen(
-          orElse: () {},
-          failure: (message) {
-            ScaffoldMessenger.of(
-              context,
-            ).showSnackBar(SnackBar(content: Text(message)));
-          },
-          success: (message) {
-            context.pop();
-            context.read<ReminderBloc>().add(ReminderEvent.fetchReminders());
-            ScaffoldMessenger.of(
-              context,
-            ).showSnackBar(SnackBar(content: Text(message)));
-          },
-        );
-      },
+      listenWhen: listenWhen,
+      listener: listener,
       builder: (context, state) {
         return GestureDetector(
           onTap: () {
@@ -124,9 +84,7 @@ class _AddReminderViewState extends State<AddReminderView> {
             backgroundColor: ColorTheme.white,
             appBar: AppBar(
               toolbarHeight: 102.w,
-              // actionsPadding: EdgeInsets.zero,
               automaticallyImplyLeading: false,
-              // surfaceTintColor: ColorTheme.blue,
               backgroundColor: ColorTheme.white,
               title: Container(
                 clipBehavior: Clip.antiAlias,
@@ -173,9 +131,8 @@ class _AddReminderViewState extends State<AddReminderView> {
                           color: ColorTheme.black,
                         ),
                       ),
-
                       CustomWheelDatepicker(
-                        initialDateTime: state.dateTime ?? DateTime.now(),
+                        initialDateTime: state.dateTime,
                         onTimeChanged: (value) {
                           context.read<AddReminderBloc>().add(
                             AddReminderEvent.dateTimeChanged(value),
@@ -261,7 +218,7 @@ class _AddReminderViewState extends State<AddReminderView> {
                     context.read<AddReminderBloc>().add(
                       AddReminderEvent.saveReminder(
                         title: state.title,
-                        dateTime: state.dateTime!,
+                        dateTime: state.dateTime,
                         note: state.note,
                         imagePath: state.imagePath,
                         isRepeatEveryDay: state.isRepeatEveryDay,
@@ -273,7 +230,7 @@ class _AddReminderViewState extends State<AddReminderView> {
                       AddReminderEvent.updateReminder(
                         id: widget.reminder!.id,
                         title: state.title,
-                        dateTime: state.dateTime!,
+                        dateTime: state.dateTime,
                         note: state.note,
                         imagePath: state.imagePath,
                         isRepeatEveryDay: state.isRepeatEveryDay,
@@ -286,6 +243,45 @@ class _AddReminderViewState extends State<AddReminderView> {
             ),
           ),
         );
+      },
+    );
+  }
+
+  bool listenWhen(AddReminderState previous, AddReminderState current) {
+    return previous.dateTime != current.dateTime ||
+        previous.title != current.title ||
+        previous.note != current.note ||
+        previous.imagePath != current.imagePath ||
+        previous.isRepeatEveryDay != current.isRepeatEveryDay ||
+        previous.reminderType != current.reminderType ||
+        previous.actionStatus != current.actionStatus;
+  }
+
+  void listener(BuildContext context, AddReminderState state) {
+    labelTextEditingController.text = state.title;
+    noteTextEditingController.text = state.note ?? '';
+    additionalImageTextEditingController.text = (state.imagePath ?? '')
+        .split('/')
+        .last;
+    isRepeatEveryDay = state.isRepeatEveryDay;
+
+    if (widget.reminder != null) {
+      validateForm();
+    }
+
+    state.actionStatus.maybeWhen(
+      orElse: () {},
+      failure: (message) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(message)));
+      },
+      success: (message) {
+        context.pop();
+        context.read<ReminderBloc>().add(ReminderEvent.fetchReminders());
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(message)));
       },
     );
   }

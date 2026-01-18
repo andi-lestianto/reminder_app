@@ -25,6 +25,8 @@ import 'package:reminder_app/features/reminder/domain/repository/reminder_reposi
     as _i418;
 import 'package:reminder_app/features/reminder/domain/usecase/create_reminders_usecase.dart'
     as _i655;
+import 'package:reminder_app/features/reminder/domain/usecase/delete_reminders_usecase.dart'
+    as _i429;
 import 'package:reminder_app/features/reminder/domain/usecase/get_reminders_usecase.dart'
     as _i828;
 import 'package:reminder_app/features/reminder/domain/usecase/get_upcoming_reminder_usecase.dart'
@@ -63,24 +65,28 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i655.CreateRemindersUsecase>(
       () => _i655.CreateRemindersUsecase(gh<_i418.ReminderRepository>()),
     );
+    gh.lazySingleton<_i429.DeleteRemindersUsecase>(
+      () => _i429.DeleteRemindersUsecase(gh<_i418.ReminderRepository>()),
+    );
     gh.lazySingleton<_i828.GetRemindersUsecase>(
       () => _i828.GetRemindersUsecase(gh<_i418.ReminderRepository>()),
     );
     gh.lazySingleton<_i867.UpdateRemindersUsecase>(
       () => _i867.UpdateRemindersUsecase(gh<_i418.ReminderRepository>()),
     );
-    gh.factory<_i437.ReminderBloc>(
-      () => _i437.ReminderBloc(
-        gh<_i664.GetWeekDatesUsecase>(),
-        gh<_i828.GetRemindersUsecase>(),
-        gh<_i547.GetUpcomingReminderUsecase>(),
-      ),
-    );
     gh.factory<_i558.AddReminderBloc>(
       () => _i558.AddReminderBloc(
         gh<_i430.ImagePickerService>(),
         gh<_i655.CreateRemindersUsecase>(),
         gh<_i867.UpdateRemindersUsecase>(),
+      ),
+    );
+    gh.factory<_i437.ReminderBloc>(
+      () => _i437.ReminderBloc(
+        gh<_i664.GetWeekDatesUsecase>(),
+        gh<_i828.GetRemindersUsecase>(),
+        gh<_i547.GetUpcomingReminderUsecase>(),
+        gh<_i429.DeleteRemindersUsecase>(),
       ),
     );
     return this;

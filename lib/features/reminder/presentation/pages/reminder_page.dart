@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:reminder_app/core/presentation/states/action_status.dart';
 import 'package:reminder_app/features/reminder/presentation/bloc/reminder_bloc.dart';
 import 'package:reminder_app/features/reminder/presentation/widget/current_date_widget.dart';
 import 'package:reminder_app/features/reminder/presentation/widget/reminders_widget.dart';
@@ -33,7 +34,29 @@ class _ReminderViewState extends State<ReminderView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ReminderBloc, ReminderState>(
+    return BlocConsumer<ReminderBloc, ReminderState>(
+      listenWhen: (previous, current) =>
+          previous.actionStatus != current.actionStatus,
+      listener: (context, state) {
+        state.actionStatus.maybeWhen(
+          success: (message) {
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(message)));
+          },
+          failure: (message) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  message,
+                  style: TextStyle(color: ColorTheme.white),
+                ),
+              ),
+            );
+          },
+          orElse: () {},
+        );
+      },
       builder: (context, state) {
         return Scaffold(
           backgroundColor: ColorTheme.white,
