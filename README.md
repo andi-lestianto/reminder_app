@@ -156,17 +156,28 @@ Example: A user wants a reminder on March 21st, March 25th, and April 2nd. Each 
 
 ### Notes
 
-![MainScreen](screenshots/main_screen.jpg)
-![AddNewForm](screenshots/add_new_form.jpg)
-![CreateReminderSuccess](screenshots/create_reminder_success.jpg)
-![LockscreenNotification](screenshots/lockscreen_notification.jpg)
-![StatusBarNotification](screenshots/statusbar_notification.jpg)
-![FloatingNotification](screenshots/floating_notification.jpg)
-![DeleteConfirmation](screenshots/delete_confirmation.jpg)
-![RemindersAction](screenshots/reminder_action.jpg)
-![EmptyReminders](screenshots/empty_reminders.jpg)
-![ImageDetails](screenshots/image_details.jpg)
-![Reminders](screenshots/reminders.jpg)
+<table>
+  <tr>
+    <td><img src="screenshots/main_screen.jpg" width="300"/></td>
+    <td><img src="screenshots/add_new_form.jpg" width="300"/></td>
+    <td><img src="screenshots/create_reminder_success.jpg" width="300"/></td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/lockscreen_notification.jpg" width="300"/></td>
+    <td><img src="screenshots/statusbar_notification.jpg" width="300"/></td>
+    <td><img src="screenshots/floating_notification.jpg" width="300"/></td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/delete_confirmation.jpg" width="300"/></td>
+    <td><img src="screenshots/reminder_action.jpg" width="300"/></td>
+    <td><img src="screenshots/empty_reminders.jpg" width="300"/></td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/image_details.jpg" width="300"/></td>
+    <td><img src="screenshots/reminders.jpg" width="300"/></td>
+    <td></td>
+  </tr>
+</table>
 
 - Ensure notification permission is granted, especially on Android 13+
 - All alarms are scheduled locally and will trigger even if the app is closed (wakeup = true)
