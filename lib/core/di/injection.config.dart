@@ -12,6 +12,7 @@
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:reminder_app/core/database/app_database.dart' as _i491;
+import 'package:reminder_app/core/services/android_alarm_service.dart' as _i803;
 import 'package:reminder_app/core/services/image_picker_service.dart' as _i430;
 import 'package:reminder_app/features/addreminder/presentation/bloc/addreminder_bloc.dart'
     as _i558;
@@ -47,6 +48,9 @@ extension GetItInjectableX on _i174.GetIt {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     gh.factory<_i1013.MainScreenCubit>(() => _i1013.MainScreenCubit());
     gh.lazySingleton<_i491.AppDatabase>(() => _i491.AppDatabase());
+    gh.lazySingleton<_i803.AndroidAlarmService>(
+      () => const _i803.AndroidAlarmService(),
+    );
     gh.lazySingleton<_i430.ImagePickerService>(
       () => _i430.ImagePickerService(),
     );
@@ -74,19 +78,20 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i867.UpdateRemindersUsecase>(
       () => _i867.UpdateRemindersUsecase(gh<_i418.ReminderRepository>()),
     );
-    gh.factory<_i558.AddReminderBloc>(
-      () => _i558.AddReminderBloc(
-        gh<_i430.ImagePickerService>(),
-        gh<_i655.CreateRemindersUsecase>(),
-        gh<_i867.UpdateRemindersUsecase>(),
-      ),
-    );
     gh.factory<_i437.ReminderBloc>(
       () => _i437.ReminderBloc(
         gh<_i664.GetWeekDatesUsecase>(),
         gh<_i828.GetRemindersUsecase>(),
         gh<_i547.GetUpcomingReminderUsecase>(),
         gh<_i429.DeleteRemindersUsecase>(),
+      ),
+    );
+    gh.factory<_i558.AddReminderBloc>(
+      () => _i558.AddReminderBloc(
+        gh<_i430.ImagePickerService>(),
+        gh<_i655.CreateRemindersUsecase>(),
+        gh<_i867.UpdateRemindersUsecase>(),
+        gh<_i803.AndroidAlarmService>(),
       ),
     );
     return this;

@@ -1,9 +1,13 @@
+import 'package:android_intent_plus/android_intent.dart';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:reminder_app/core/presentation/states/action_status.dart';
+import 'package:reminder_app/core/services/android_alarm_service.dart';
 import 'package:reminder_app/core/services/image_picker_service.dart';
+import 'package:reminder_app/core/utils/alarm_callback.dart';
 import 'package:reminder_app/features/addreminder/presentation/widget/reminder_type_enum.dart';
 import 'package:reminder_app/features/reminder/domain/entity/reminder_entity.dart';
 import 'package:reminder_app/features/reminder/domain/usecase/create_reminders_usecase.dart';
@@ -18,10 +22,12 @@ class AddReminderBloc extends Bloc<AddReminderEvent, AddReminderState> {
   final ImagePickerService imagePickerService;
   final CreateRemindersUsecase createRemindersUsecase;
   final UpdateRemindersUsecase updateRemindersUsecase;
+  final AndroidAlarmService androidAlarmService;
   AddReminderBloc(
     this.imagePickerService,
     this.createRemindersUsecase,
     this.updateRemindersUsecase,
+    this.androidAlarmService,
   ) : super(AddReminderState.initial()) {
     on<AddReminderEvent>((event, emit) async {
       await event.when(
@@ -193,7 +199,7 @@ class AddReminderBloc extends Bloc<AddReminderEvent, AddReminderState> {
           ),
         );
       },
-      (reminderId) {
+      (reminderId) async {
         emit(
           state.copyWith(
             actionStatus: ActionStatus.success(
@@ -201,6 +207,15 @@ class AddReminderBloc extends Bloc<AddReminderEvent, AddReminderState> {
             ),
           ),
         );
+        if (await canScheduleExactAlarm()) {
+          androidAlarmService.createNewAlarm(
+            id: reminderId,
+            time: reminder.dateTime,
+            callback: alarmCallback,
+          );
+        } else {
+          await openExactAlarmSettings();
+        }
       },
     );
   }
@@ -244,7 +259,25 @@ class AddReminderBloc extends Bloc<AddReminderEvent, AddReminderState> {
             ),
           ),
         );
+        androidAlarmService.cancelAlarm(id);
+        androidAlarmService.createNewAlarm(
+          id: id,
+          time: reminder.dateTime,
+          callback: alarmCallback,
+        );
       },
     );
+  }
+
+  Future<bool> canScheduleExactAlarm() async {
+    final status = await Permission.scheduleExactAlarm.status;
+    return status.isGranted;
+  }
+
+  Future<void> openExactAlarmSettings() async {
+    const intent = AndroidIntent(
+      action: 'android.settings.REQUEST_SCHEDULE_EXACT_ALARM',
+    );
+    await intent.launch();
   }
 }

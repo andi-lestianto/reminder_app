@@ -1,0 +1,52 @@
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
+class NotificationService {
+  static final _plugin = FlutterLocalNotificationsPlugin();
+
+  static Future<void> init() async {
+    const android = AndroidInitializationSettings('@mipmap/ic_launcher');
+
+    const initSettings = InitializationSettings(android: android);
+    await _plugin.initialize(initSettings);
+
+    await FlutterLocalNotificationsPlugin()
+        .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin
+        >()
+        ?.requestNotificationsPermission();
+
+    const channel = AndroidNotificationChannel(
+      'reminder_channel',
+      'Reminder Channel',
+      description: 'Channel for alarm',
+      importance: Importance.max,
+      playSound: true,
+      enableVibration: true,
+    );
+
+    await _plugin
+        .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin
+        >()
+        ?.createNotificationChannel(channel);
+  }
+
+  static Future<void> showAlarmNotif({
+    required String title,
+    required String body,
+  }) async {
+    const androidDetails = AndroidNotificationDetails(
+      'reminder_channel',
+      'Reminder Channel',
+      importance: Importance.max,
+      priority: Priority.high,
+      playSound: true,
+      fullScreenIntent: true,
+      enableVibration: true,
+    );
+
+    const notifDetails = NotificationDetails(android: androidDetails);
+
+    await _plugin.show(1, title, body, notifDetails);
+  }
+}
