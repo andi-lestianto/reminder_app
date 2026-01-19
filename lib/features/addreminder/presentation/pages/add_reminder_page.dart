@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:reminder_app/core/di/injection.dart';
 import 'package:reminder_app/core/presentation/states/action_status.dart';
 import 'package:reminder_app/core/utils/form_validator_utils.dart';
+import 'package:reminder_app/core/utils/toast_utils.dart';
 import 'package:reminder_app/features/addreminder/presentation/bloc/addreminder_bloc.dart';
 import 'package:reminder_app/features/reminder/domain/entity/reminder_entity.dart';
 import 'package:reminder_app/features/reminder/presentation/bloc/reminder_bloc.dart';
@@ -138,8 +139,6 @@ class _AddReminderViewState extends State<AddReminderView> {
                           color: ColorTheme.black,
                         ),
                       ),
-
-                      Text(state.selectedDate.toString()),
                       CustomWheelDatepicker(
                         initialDateTime: state.selectedDate,
                         onTimeChanged: (value) {
@@ -266,16 +265,12 @@ class _AddReminderViewState extends State<AddReminderView> {
     state.actionStatus.maybeWhen(
       orElse: () {},
       failure: (message) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text(message)));
+        ToastUtils.showErrorToast(message);
       },
       success: (message) {
         context.pop();
         context.read<ReminderBloc>().add(ReminderEvent.fetchReminders());
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text(message)));
+        ToastUtils.showSuccessToast(message);
       },
     );
   }

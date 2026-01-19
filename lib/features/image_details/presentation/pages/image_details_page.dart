@@ -20,7 +20,6 @@ class ImageDetailsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PhotoView(
-      heroAttributes: const PhotoViewHeroAttributes(tag: 'reminder_image'),
       backgroundDecoration: BoxDecoration(color: Colors.white),
       imageProvider: FileImage(File(imagePath)),
     );

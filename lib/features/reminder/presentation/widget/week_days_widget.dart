@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:reminder_app/core/presentation/states/section_state.dart';
 import 'package:reminder_app/core/utils/datetime_utils.dart';
 import 'package:reminder_app/features/reminder/presentation/bloc/reminder_bloc.dart';
+import 'package:reminder_app/features/reminder/presentation/widget/loading_widget/weekdays_loading.dart';
 import 'package:reminder_app/theme/color_theme.dart';
 import 'package:reminder_app/theme/font_theme.dart';
 
@@ -16,8 +17,7 @@ class WeekDaysWidget extends StatelessWidget {
       builder: (context, state) {
         return state.weekDatesState.when(
           initial: () => const SizedBox(),
-          loading: () =>
-              Center(child: CircularProgressIndicator(color: ColorTheme.blue)),
+          loading: () => WeekdaysLoading(),
           loaded: (weekDates) => Row(
             spacing: 4.w,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

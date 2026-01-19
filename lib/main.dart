@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context) => getIt<ReminderBloc>()),
         ],
         child: MaterialApp.router(
+          debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
           theme: ThemeData(
             colorScheme: .fromSeed(seedColor: Colors.deepPurple),

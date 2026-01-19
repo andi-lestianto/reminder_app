@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:reminder_app/core/presentation/states/action_status.dart';
+import 'package:reminder_app/core/utils/toast_utils.dart';
 import 'package:reminder_app/features/reminder/presentation/bloc/reminder_bloc.dart';
 import 'package:reminder_app/features/reminder/presentation/widget/current_date_widget.dart';
 import 'package:reminder_app/features/reminder/presentation/widget/reminders_widget.dart';
@@ -40,19 +41,10 @@ class _ReminderViewState extends State<ReminderView> {
       listener: (context, state) {
         state.actionStatus.maybeWhen(
           success: (message) {
-            ScaffoldMessenger.of(
-              context,
-            ).showSnackBar(SnackBar(content: Text(message)));
+            ToastUtils.showSuccessToast(message);
           },
           failure: (message) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(
-                  message,
-                  style: TextStyle(color: ColorTheme.white),
-                ),
-              ),
-            );
+            ToastUtils.showErrorToast(message);
           },
           orElse: () {},
         );
@@ -61,15 +53,15 @@ class _ReminderViewState extends State<ReminderView> {
         return Scaffold(
           backgroundColor: ColorTheme.white,
           body: SafeArea(
-            child: SingleChildScrollView(
-              padding: EdgeInsets.all(40.w),
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(40.w, 40.w, 40.w, 0),
               child: Column(
                 spacing: 16.w,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CurrentDateWidget(),
                   WeekDaysWidget(),
-                  RemindersWidget(),
+                  Expanded(child: RemindersWidget()),
                 ],
               ),
             ),

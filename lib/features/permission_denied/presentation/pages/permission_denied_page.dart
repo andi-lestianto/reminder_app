@@ -52,6 +52,7 @@ class PermissionDeniedView extends StatelessWidget {
                 ),
                 Text(
                   'Please enable notification permission\nin your device settings.',
+                  textAlign: TextAlign.center,
                   style: FontTheme.medium20.copyWith(color: ColorTheme.gray),
                 ),
                 Material(

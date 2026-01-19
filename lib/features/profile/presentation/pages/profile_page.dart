@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:reminder_app/theme/color_theme.dart';
+import 'package:reminder_app/widget/custom_error_widget.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -15,7 +17,10 @@ class ProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: const Center(child: Text('This is the Profile Page')),
+      backgroundColor: ColorTheme.white,
+      body: Center(
+        child: CustomErrorWidget(message: 'Profile Page is under development.'),
+      ),
     );
   }
 }
