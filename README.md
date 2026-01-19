@@ -14,22 +14,31 @@
 
 <h2>1. Setup Instructions</h2>
 
-<h3>Flutter Version</h3>
+<h3>Option 1: Run from Flutter Source</h3>
+
+<h4>Flutter Version</h4>
 <p>Make sure you are using <strong>Flutter 3.38.7</strong>:</p>
 <pre><code>flutter --version</code></pre>
 
-<h3>Clone the repository</h3>
+<h4>Clone the repository</h4>
 <pre><code>git clone &lt;repository_url&gt;
 cd &lt;project_directory&gt;</code></pre>
 
-<h3>Install dependencies</h3>
+<h4>Install dependencies</h4>
 <pre><code>flutter pub get</code></pre>
 
-<h3>Generate code for Freezed & Injectable</h3>
+<h4>Generate code for Freezed & Injectable</h4>
 <pre><code>flutter pub run build_runner build --delete-conflicting-outputs</code></pre>
 
-<h3>Run the app</h3>
+<h4>Run the app</h4>
 <pre><code>flutter run</code></pre>
+
+<h3>Option 2: Download APK</h3>
+<p>You can download the APK directly and install it on your Android device:</p>
+
+<a href="https://github.com/&lt;username&gt;/&lt;repo&gt;/releases/download/v1.0/ReminderApp-v1.0.apk">
+  <img src="https://img.shields.io/badge/Download-APK-blue?style=flat-square" alt="Download APK"/>
+</a>
 
 <p>⚠️ On Android 13+, notification permissions are required. The app will prompt the user on first launch.</p>
 
