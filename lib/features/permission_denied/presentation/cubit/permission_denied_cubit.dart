@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -30,8 +28,6 @@ class PermissionDeniedCubit extends Cubit<PermissionDeniedState> {
     final isGranted =
         await Permission.notification.isGranted &&
         await Permission.scheduleExactAlarm.isGranted;
-
-    log('Notification permission status: ${isGranted}');
 
     emit(state.copyWith(permissionGranted: isGranted));
   }
