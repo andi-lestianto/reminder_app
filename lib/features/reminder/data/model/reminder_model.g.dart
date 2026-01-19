@@ -12,7 +12,6 @@ _ReminderModel _$ReminderModelFromJson(Map<String, dynamic> json) =>
       title: json['title'] as String?,
       note: json['note'] as String?,
       dateTimeEpoch: (json['dateTimeEpoch'] as num?)?.toInt(),
-      isRepeatEveryDay: (json['isRepeatEveryDay'] as num?)?.toInt(),
       reminderType: json['reminderType'] as String?,
       imagePath: json['imagePath'] as String?,
     );
@@ -23,7 +22,6 @@ Map<String, dynamic> _$ReminderModelToJson(_ReminderModel instance) =>
       'title': instance.title,
       'note': instance.note,
       'dateTimeEpoch': instance.dateTimeEpoch,
-      'isRepeatEveryDay': instance.isRepeatEveryDay,
       'reminderType': instance.reminderType,
       'imagePath': instance.imagePath,
     };

@@ -90,7 +90,6 @@ class AddReminderBloc extends Bloc<AddReminderEvent, AddReminderState> {
           title: reminder.title,
           note: reminder.note,
           imagePath: reminder.imagePath,
-          isRepeatEveryDay: reminder.isRepeatEveryDay,
           reminderType: reminder.reminderType,
           editedReminder: reminder,
         ),
@@ -180,7 +179,6 @@ class AddReminderBloc extends Bloc<AddReminderEvent, AddReminderState> {
       title: title,
       dateTime: dateTime ?? DateTime.now(),
       note: note,
-      isRepeatEveryDay: isRepeatEveryDay,
       reminderType: reminderType,
       imagePath: imagePath,
     );
@@ -224,7 +222,6 @@ class AddReminderBloc extends Bloc<AddReminderEvent, AddReminderState> {
       title: title,
       dateTime: dateTime ?? DateTime.now(),
       note: note,
-      isRepeatEveryDay: isRepeatEveryDay,
       reminderType: reminderType,
       imagePath: imagePath,
     );

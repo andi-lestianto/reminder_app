@@ -14,7 +14,6 @@ abstract class ReminderModel with _$ReminderModel {
     String? title,
     String? note,
     int? dateTimeEpoch,
-    int? isRepeatEveryDay,
     String? reminderType,
     String? imagePath,
   }) = _ReminderModel;
@@ -28,7 +27,6 @@ abstract class ReminderModel with _$ReminderModel {
       title: title ?? '',
       note: note,
       dateTime: DateTime.fromMillisecondsSinceEpoch(dateTimeEpoch ?? 0),
-      isRepeatEveryDay: (isRepeatEveryDay ?? 0) == 1,
       reminderType: ReminderTypeEnum.values.firstWhere(
         (e) => e.toString() == reminderType,
         orElse: () => ReminderTypeEnum.notification,

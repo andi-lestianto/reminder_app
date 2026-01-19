@@ -20,7 +20,6 @@ class AppDatabase {
             title TEXT NOT NULL,
             note TEXT,
             dateTimeEpoch INTEGER NOT NULL,
-            isRepeatEveryDay INTEGER,
             reminderType TEXT,
             imagePath TEXT NULLABLE
       )''');
