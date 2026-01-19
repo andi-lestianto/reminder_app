@@ -4,4 +4,5 @@ class RouteNames {
   static const String mainScreen = '/mainscreen';
   static const String addReminder = '/addreminder';
   static const String imageDetails = '/imagedetails';
+  static const String permissionDenied = '/permissionDenied';
 }

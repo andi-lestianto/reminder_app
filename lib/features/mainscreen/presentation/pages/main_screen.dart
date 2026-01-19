@@ -29,10 +29,23 @@ class MainView extends StatefulWidget {
 }
 
 class _MainViewState extends State<MainView> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<MainScreenCubit>().checkNotificationPermission();
+  }
+
   final PageController pageController = PageController();
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MainScreenCubit, MainScreenState>(
+    return BlocConsumer<MainScreenCubit, MainScreenState>(
+      listenWhen: (previous, current) =>
+          previous.permissionGranted != current.permissionGranted,
+      listener: (context, state) {
+        if (state.permissionGranted == false) {
+          context.pushNamed(RouteNames.permissionDenied);
+        }
+      },
       builder: (context, state) {
         return Scaffold(
           body: PageView.builder(

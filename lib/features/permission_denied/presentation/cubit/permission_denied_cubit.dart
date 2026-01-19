@@ -1,25 +1,27 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:reminder_app/features/mainscreen/presentation/widget/navigation/main_navigation_enum.dart';
 
-part 'mainscreen_state.dart';
-part 'mainscreen_cubit.freezed.dart';
+part 'permission_denied_state.dart';
+part 'permission_denied_cubit.freezed.dart';
 
 @injectable
-class MainScreenCubit extends Cubit<MainScreenState> {
-  MainScreenCubit() : super(MainScreenState());
-
-  Future<void> selectNavItem(MainNavigationEnum navItem) async {
-    emit(state.copyWith(selectedNavItem: navItem));
-  }
+class PermissionDeniedCubit extends Cubit<PermissionDeniedState> {
+  PermissionDeniedCubit() : super(PermissionDeniedState());
 
   Future<void> checkNotificationPermission() async {
     final notification = await Permission.notification.status;
     if (!notification.isGranted) {
       await Permission.notification.request();
     }
+
+    if (notification.isPermanentlyDenied) {
+      await openAppSettings();
+    }
+
     final scheduleAlarm = await Permission.scheduleExactAlarm.status;
     if (!scheduleAlarm.isGranted) {
       await Permission.scheduleExactAlarm.request();
@@ -28,6 +30,8 @@ class MainScreenCubit extends Cubit<MainScreenState> {
     final isGranted =
         await Permission.notification.isGranted &&
         await Permission.scheduleExactAlarm.isGranted;
+
+    log('Notification permission status: ${isGranted}');
 
     emit(state.copyWith(permissionGranted: isGranted));
   }

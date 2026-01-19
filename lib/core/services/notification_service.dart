@@ -10,11 +10,10 @@ class NotificationService {
     const initSettings = InitializationSettings(android: android);
     await _plugin.initialize(initSettings);
 
-    await FlutterLocalNotificationsPlugin()
-        .resolvePlatformSpecificImplementation<
-          AndroidFlutterLocalNotificationsPlugin
-        >()
-        ?.requestNotificationsPermission();
+    final notification = await Permission.notification.status;
+    if (!notification.isGranted) {
+      await Permission.notification.request();
+    }
 
     const channel = AndroidNotificationChannel(
       'reminder_channel',

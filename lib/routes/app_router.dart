@@ -3,6 +3,7 @@ import 'package:reminder_app/features/addreminder/presentation/pages/add_reminde
 import 'package:reminder_app/features/image_details/presentation/pages/image_details_page.dart';
 import 'package:reminder_app/features/mainscreen/presentation/pages/main_screen.dart';
 import 'package:reminder_app/features/reminder/domain/entity/reminder_entity.dart';
+import 'package:reminder_app/features/permission_denied/presentation/pages/permission_denied_page.dart';
 import 'package:reminder_app/routes/route_names.dart';
 
 final GoRouter appRouter = GoRouter(
@@ -30,6 +31,12 @@ final GoRouter appRouter = GoRouter(
         final imageUrl = state.uri.queryParameters['imagePath'] ?? '';
         return ImageDetailsPage(imagePath: imageUrl);
       },
+    ),
+
+    GoRoute(
+      path: RouteNames.permissionDenied,
+      name: RouteNames.permissionDenied,
+      builder: (context, state) => const PermissionDeniedPage(),
     ),
   ],
 );

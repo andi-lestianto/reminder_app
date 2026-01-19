@@ -18,6 +18,8 @@ import 'package:reminder_app/features/addreminder/presentation/bloc/addreminder_
     as _i558;
 import 'package:reminder_app/features/mainscreen/presentation/cubit/mainscreen_cubit.dart'
     as _i1013;
+import 'package:reminder_app/features/permission_denied/presentation/cubit/permission_denied_cubit.dart'
+    as _i154;
 import 'package:reminder_app/features/reminder/data/datasource/local/reminder_local_datasource.dart'
     as _i480;
 import 'package:reminder_app/features/reminder/data/repository/reminder_repository_impl.dart'
@@ -47,6 +49,9 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     gh.factory<_i1013.MainScreenCubit>(() => _i1013.MainScreenCubit());
+    gh.factory<_i154.PermissionDeniedCubit>(
+      () => _i154.PermissionDeniedCubit(),
+    );
     gh.lazySingleton<_i491.AppDatabase>(() => _i491.AppDatabase());
     gh.lazySingleton<_i803.AndroidAlarmService>(
       () => const _i803.AndroidAlarmService(),

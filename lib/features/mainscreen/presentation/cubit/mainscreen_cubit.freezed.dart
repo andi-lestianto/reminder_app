@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$MainScreenState {
 
- MainNavigationEnum get selectedNavItem;
+ bool get permissionGranted; MainNavigationEnum get selectedNavItem;
 /// Create a copy of MainScreenState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $MainScreenStateCopyWith<MainScreenState> get copyWith => _$MainScreenStateCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MainScreenState&&(identical(other.selectedNavItem, selectedNavItem) || other.selectedNavItem == selectedNavItem));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MainScreenState&&(identical(other.permissionGranted, permissionGranted) || other.permissionGranted == permissionGranted)&&(identical(other.selectedNavItem, selectedNavItem) || other.selectedNavItem == selectedNavItem));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,selectedNavItem);
+int get hashCode => Object.hash(runtimeType,permissionGranted,selectedNavItem);
 
 @override
 String toString() {
-  return 'MainScreenState(selectedNavItem: $selectedNavItem)';
+  return 'MainScreenState(permissionGranted: $permissionGranted, selectedNavItem: $selectedNavItem)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $MainScreenStateCopyWith<$Res>  {
   factory $MainScreenStateCopyWith(MainScreenState value, $Res Function(MainScreenState) _then) = _$MainScreenStateCopyWithImpl;
 @useResult
 $Res call({
- MainNavigationEnum selectedNavItem
+ bool permissionGranted, MainNavigationEnum selectedNavItem
 });
 
 
@@ -62,9 +62,10 @@ class _$MainScreenStateCopyWithImpl<$Res>
 
 /// Create a copy of MainScreenState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? selectedNavItem = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? permissionGranted = null,Object? selectedNavItem = null,}) {
   return _then(_self.copyWith(
-selectedNavItem: null == selectedNavItem ? _self.selectedNavItem : selectedNavItem // ignore: cast_nullable_to_non_nullable
+permissionGranted: null == permissionGranted ? _self.permissionGranted : permissionGranted // ignore: cast_nullable_to_non_nullable
+as bool,selectedNavItem: null == selectedNavItem ? _self.selectedNavItem : selectedNavItem // ignore: cast_nullable_to_non_nullable
 as MainNavigationEnum,
   ));
 }
@@ -150,10 +151,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( MainNavigationEnum selectedNavItem)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool permissionGranted,  MainNavigationEnum selectedNavItem)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _MainScreenState() when $default != null:
-return $default(_that.selectedNavItem);case _:
+return $default(_that.permissionGranted,_that.selectedNavItem);case _:
   return orElse();
 
 }
@@ -171,10 +172,10 @@ return $default(_that.selectedNavItem);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( MainNavigationEnum selectedNavItem)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool permissionGranted,  MainNavigationEnum selectedNavItem)  $default,) {final _that = this;
 switch (_that) {
 case _MainScreenState():
-return $default(_that.selectedNavItem);case _:
+return $default(_that.permissionGranted,_that.selectedNavItem);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -191,10 +192,10 @@ return $default(_that.selectedNavItem);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( MainNavigationEnum selectedNavItem)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool permissionGranted,  MainNavigationEnum selectedNavItem)?  $default,) {final _that = this;
 switch (_that) {
 case _MainScreenState() when $default != null:
-return $default(_that.selectedNavItem);case _:
+return $default(_that.permissionGranted,_that.selectedNavItem);case _:
   return null;
 
 }
@@ -206,9 +207,10 @@ return $default(_that.selectedNavItem);case _:
 
 
 class _MainScreenState implements MainScreenState {
-  const _MainScreenState({this.selectedNavItem = MainNavigationEnum.reminder});
+  const _MainScreenState({this.permissionGranted = true, this.selectedNavItem = MainNavigationEnum.reminder});
   
 
+@override@JsonKey() final  bool permissionGranted;
 @override@JsonKey() final  MainNavigationEnum selectedNavItem;
 
 /// Create a copy of MainScreenState
@@ -221,16 +223,16 @@ _$MainScreenStateCopyWith<_MainScreenState> get copyWith => __$MainScreenStateCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MainScreenState&&(identical(other.selectedNavItem, selectedNavItem) || other.selectedNavItem == selectedNavItem));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MainScreenState&&(identical(other.permissionGranted, permissionGranted) || other.permissionGranted == permissionGranted)&&(identical(other.selectedNavItem, selectedNavItem) || other.selectedNavItem == selectedNavItem));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,selectedNavItem);
+int get hashCode => Object.hash(runtimeType,permissionGranted,selectedNavItem);
 
 @override
 String toString() {
-  return 'MainScreenState(selectedNavItem: $selectedNavItem)';
+  return 'MainScreenState(permissionGranted: $permissionGranted, selectedNavItem: $selectedNavItem)';
 }
 
 
@@ -241,7 +243,7 @@ abstract mixin class _$MainScreenStateCopyWith<$Res> implements $MainScreenState
   factory _$MainScreenStateCopyWith(_MainScreenState value, $Res Function(_MainScreenState) _then) = __$MainScreenStateCopyWithImpl;
 @override @useResult
 $Res call({
- MainNavigationEnum selectedNavItem
+ bool permissionGranted, MainNavigationEnum selectedNavItem
 });
 
 
@@ -258,9 +260,10 @@ class __$MainScreenStateCopyWithImpl<$Res>
 
 /// Create a copy of MainScreenState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? selectedNavItem = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? permissionGranted = null,Object? selectedNavItem = null,}) {
   return _then(_MainScreenState(
-selectedNavItem: null == selectedNavItem ? _self.selectedNavItem : selectedNavItem // ignore: cast_nullable_to_non_nullable
+permissionGranted: null == permissionGranted ? _self.permissionGranted : permissionGranted // ignore: cast_nullable_to_non_nullable
+as bool,selectedNavItem: null == selectedNavItem ? _self.selectedNavItem : selectedNavItem // ignore: cast_nullable_to_non_nullable
 as MainNavigationEnum,
   ));
 }
