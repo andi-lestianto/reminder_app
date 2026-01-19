@@ -1,160 +1,125 @@
-# Reminder App (Flutter + BLoC + Clean Architecture + SQLite + Alarm)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Reminder App README</title>
+</head>
+<body>
 
-A Flutter application for managing reminders, with offline support using SQLite, scheduling alarms using android_alarm_manager_plus, and notifications using flutter_local_notifications. The app follows a BLoC + Clean Architecture pattern for maintainable and scalable code.
+<h1>📝 Reminder App (Flutter + BLoC + Clean Architecture + SQLite + Alarm)</h1>
 
-## 1. Setup Instructions
+<p>A Flutter application for managing reminders, with offline support using SQLite, scheduling alarms using <code>android_alarm_manager_plus</code>, and notifications using <code>flutter_local_notifications</code>. The app follows a <strong>BLoC + Clean Architecture</strong> pattern for maintainable and scalable code.</p>
 
-### Flutter Version
+<hr/>
 
-Make sure you are using Flutter 3.38.7:
+<h2>1. Setup Instructions</h2>
 
-flutter --version
+<h3>Flutter Version</h3>
+<p>Make sure you are using <strong>Flutter 3.38.7</strong>:</p>
+<pre><code>flutter --version</code></pre>
 
-### Clone the repository
+<h3>Clone the repository</h3>
+<pre><code>git clone &lt;repository_url&gt;
+cd &lt;project_directory&gt;</code></pre>
 
-git clone <repository_url>
-cd <project_directory>
+<h3>Install dependencies</h3>
+<pre><code>flutter pub get</code></pre>
 
-### Install dependencies
+<h3>Generate code for Freezed & Injectable</h3>
+<pre><code>flutter pub run build_runner build --delete-conflicting-outputs</code></pre>
 
-flutter pub get
+<h3>Run the app</h3>
+<pre><code>flutter run</code></pre>
 
-### Generate code for Freezed & Injectable
+<p>⚠️ On Android 13+, notification permissions are required. The app will prompt the user on first launch.</p>
 
-flutter pub run build_runner build --delete-conflicting-outputs
+<hr/>
 
-### Run the app
+<h2>2. Dependencies Used</h2>
 
-flutter run
+<h3>State Management & Architecture</h3>
+<ul>
+  <li><code>bloc</code> & <code>flutter_bloc</code> – BLoC pattern for state management</li>
+  <li><code>fpdart</code> – Functional programming helpers (TaskEither, Either)</li>
+  <li><code>freezed</code> & <code>freezed_annotation</code> – Immutable data classes</li>
+  <li><code>get_it</code> & <code>injectable</code> – Dependency injection</li>
+</ul>
 
-⚠️ On Android 13+, notification permissions are required. The app will prompt the user on first launch.
+<h3>Navigation & Routing</h3>
+<ul>
+  <li><code>go_router</code> – Declarative routing</li>
+</ul>
 
-## 2. Dependencies Used
+<h3>UI & Helpers</h3>
+<ul>
+  <li><code>flutter_screenutil</code> – Responsive sizing</li>
+  <li><code>flutter_svg</code> – SVG assets</li>
+  <li><code>fluttertoast</code> – Toast messages</li>
+  <li><code>lottie</code> – Animations</li>
+  <li><code>photo_view</code> – Zoomable images</li>
+  <li><code>scroll_snap_list</code> – Scrollable lists</li>
+  <li><code>shimmer</code> – Loading placeholder effects</li>
+</ul>
 
-### State Management & Architecture
+<h3>Data & Persistence</h3>
+<ul>
+  <li><code>sqflite</code> – Local SQLite database</li>
+  <li><code>path</code> – Path helpers</li>
+  <li><code>json_annotation</code> & <code>json_serializable</code> – JSON serialization</li>
+</ul>
 
-bloc
-& flutter_bloc
-– BLoC pattern for state management
+<h3>Device & Platform Features</h3>
+<ul>
+  <li><code>android_alarm_manager_plus</code> – Scheduling alarms</li>
+  <li><code>flutter_local_notifications</code> – Showing notifications</li>
+  <li><code>permission_handler</code> – Handling runtime permissions</li>
+  <li><code>android_intent_plus</code> – Android intents</li>
+  <li><code>image_picker</code> – Picking images from gallery/camera</li>
+</ul>
 
-fpdart
-– Functional programming helpers (TaskEither, Either)
+<hr/>
 
-freezed
-& freezed_annotation
-– Immutable data classes
+<h2>3. BLoC Structure</h2>
 
-get_it
+<p>The app follows <strong>Clean Architecture</strong> with separate layers for each feature.</p>
 
-- injectable
-  – Dependency injection
+<img src="screenshots/project_structure.png" width="600"/>
 
-### Navigation & Routing
+<h3>Each feature has:</h3>
+<ul>
+  <li>Data layer → handles SQLite / API / local storage</li>
+  <li>Domain layer → entities, repository interface, usecases</li>
+  <li>Presentation layer → UI, Bloc, and state handling</li>
+</ul>
 
-go_router
-– Declarative routing
+<h3>ReminderBloc:</h3>
+<ul>
+  <li>Handles fetch, delete, and updating reminders</li>
+  <li>Works with <code>ReminderUsecase</code> which interacts with repository → datasource</li>
+  <li>UI listens to Bloc states (<code>loading</code>, <code>loaded</code>, <code>error</code>) via <code>BlocBuilder</code></li>
+</ul>
 
-### UI & Helpers
+<hr/>
 
-flutter_screenutil
-– Responsive sizing
+<h2>4. Bonus Feature: Create Reminder for Specific Dates</h2>
 
-flutter_svg
-– SVG assets
+<ul>
+  <li>Users can select one or more specific dates for a reminder instead of repeating weekly.</li>
+  <li>Flow:
+    <ol>
+      <li>User selects date(s) when creating a reminder</li>
+      <li>Save reminder to SQLite with the selected date(s)</li>
+      <li>Schedule an alarm via <code>android_alarm_manager_plus</code> for each chosen date</li>
+      <li>When the alarm triggers, a notification is shown using <code>flutter_local_notifications</code></li>
+    </ol>
+  </li>
+</ul>
 
-fluttertoast
-– Toast messages
+<p><strong>Example:</strong> A user wants a reminder on March 21st, March 25th, and April 2nd. Each date triggers its own notification at the set time.</p>
 
-lottie
-– Animations
+<hr/>
 
-photo_view
-– Zoomable images
-
-scroll_snap_list
-– Scrollable lists
-
-shimmer
-– Loading placeholder effects
-
-### Data & Persistence
-
-sqflite
-– Local SQLite database
-
-path
-– Path helpers
-
-json_annotation
-& json_serializable
-– JSON serialization
-
-### Device & Platform Features
-
-android_alarm_manager_plus
-– Scheduling alarms
-
-flutter_local_notifications
-– Showing notifications
-
-permission_handler
-– Handling runtime permissions
-
-android_intent_plus
-– Android intents
-
-image_picker
-– Picking images from gallery/camera
-
-## 3. BLoC Structure
-
-The app follows Clean Architecture with separate layers for each feature.
-
-lib/
-├── core/
-│ └── ... (services, utils, notifications)
-├── features/
-│ └── reminder/
-│ ├── data/
-│ │ ├── datasource/ (SQLite)
-│ │ ├── models/
-│ │ └── repository_impl/
-│ ├── domain/
-│ │ ├── entities/
-│ │ ├── repository/
-│ │ └── usecases/
-│ └── presentation/
-│ ├── bloc/ (ReminderBloc)
-│ └── pages/ (ReminderPage, AddReminderPage)
-└── main.dart
-
-### Each feature has:
-
-Data layer → handles SQLite / API / local storage
-Domain layer → entities, repository interface, usecases
-Presentation layer → UI, Bloc, and state handling
-ReminderBloc:
-
-- Handles fetch, delete, and updating reminders
-- Works with ReminderUsecase which interacts with repository → datasource
-- UI listens to Bloc states (loading, loaded, error) via BlocBuilder
-
-## 4Bonus Feature: Create Reminder for Specific Dates
-
-Users can select one or more specific dates for a reminder instead of repeating weekly.
-
-Flow:
-
-- User selects date(s) when creating a reminder
-- Save reminder to SQLite with the selected date(s)
-- Schedule an alarm via android_alarm_manager_plus for each chosen date
-- When the alarm triggers, a notification is shown using flutter_local_notifications
-
-Example: A user wants a reminder on March 21st, March 25th, and April 2nd. Each date triggers its own notification at the set time.
-
-## Screenshots
-
-### Notes
+<h2>5. Screenshots</h2>
 
 <table>
   <tr>
@@ -179,6 +144,15 @@ Example: A user wants a reminder on March 21st, March 25th, and April 2nd. Each 
   </tr>
 </table>
 
-- Ensure notification permission is granted, especially on Android 13+
-- All alarms are scheduled locally and will trigger even if the app is closed (wakeup = true)
-- The app demonstrates a full offline reminder system using Clean Architecture and BLoC pattern
+<hr/>
+
+<h2>Notes</h2>
+
+<ul>
+  <li>Ensure notification permission is granted, especially on Android 13+</li>
+  <li>All alarms are scheduled locally and will trigger even if the app is closed (<code>wakeup = true</code>)</li>
+  <li>The app demonstrates a full offline reminder system using Clean Architecture and BLoC pattern</li>
+</ul>
+
+</body>
+</html>
