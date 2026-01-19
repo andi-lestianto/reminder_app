@@ -1,9 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Reminder App README</title>
-</head>
 <body>
 
 <h1>📝 Reminder App (Flutter + BLoC + Clean Architecture + SQLite + Alarm)</h1>
