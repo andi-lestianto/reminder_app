@@ -156,6 +156,18 @@ Example: A user wants a reminder on March 21st, March 25th, and April 2nd. Each 
 
 ### Notes
 
+![MainScreen](screenshots/main_screen.jpg)
+![AddNewForm](screenshots/add_new_form.jpg)
+![CreateReminderSuccess](screenshots/create_reminder_success.jpg)
+![LockscreenNotification](screenshots/lockscreen_notification.jpg)
+![StatusBarNotification](screenshots/statusbar_notification.jpg)
+![FloatingNotification](screenshots/floating_notification.jpg)
+![DeleteConfirmation](screenshots/delete_confirmation.jpg)
+![RemindersAction](screenshots/reminder_action.jpg)
+![EmptyReminders](screenshots/empty_reminders.jpg)
+![ImageDetails](screenshots/image_details.jpg)
+![Reminders](screenshots/reminders.jpg)
+
 - Ensure notification permission is granted, especially on Android 13+
 - All alarms are scheduled locally and will trigger even if the app is closed (wakeup = true)
 - The app demonstrates a full offline reminder system using Clean Architecture and BLoC pattern
