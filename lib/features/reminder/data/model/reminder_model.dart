@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:reminder_app/features/addreminder/presentation/widget/reminder_type_enum.dart';
 import 'package:reminder_app/features/reminder/domain/entity/reminder_entity.dart';
 
 part 'reminder_model.freezed.dart';
@@ -14,7 +13,6 @@ abstract class ReminderModel with _$ReminderModel {
     String? title,
     String? note,
     int? dateTimeEpoch,
-    String? reminderType,
     String? imagePath,
   }) = _ReminderModel;
 
@@ -27,10 +25,6 @@ abstract class ReminderModel with _$ReminderModel {
       title: title ?? '',
       note: note,
       dateTime: DateTime.fromMillisecondsSinceEpoch(dateTimeEpoch ?? 0),
-      reminderType: ReminderTypeEnum.values.firstWhere(
-        (e) => e.toString() == reminderType,
-        orElse: () => ReminderTypeEnum.notification,
-      ),
       imagePath: imagePath,
     );
   }

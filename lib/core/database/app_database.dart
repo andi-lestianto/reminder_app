@@ -20,8 +20,7 @@ class AppDatabase {
             title TEXT NOT NULL,
             note TEXT,
             dateTimeEpoch INTEGER NOT NULL,
-            reminderType TEXT,
-            imagePath TEXT NULLABLE
+            imagePath TEXT
       )''');
   }
 }

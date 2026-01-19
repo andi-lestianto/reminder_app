@@ -8,7 +8,6 @@ import 'package:reminder_app/core/presentation/states/action_status.dart';
 import 'package:reminder_app/core/services/android_alarm_service.dart';
 import 'package:reminder_app/core/services/image_picker_service.dart';
 import 'package:reminder_app/core/utils/alarm_callback.dart';
-import 'package:reminder_app/features/addreminder/presentation/widget/reminder_type_enum.dart';
 import 'package:reminder_app/features/reminder/domain/entity/reminder_entity.dart';
 import 'package:reminder_app/features/reminder/domain/usecase/create_reminders_usecase.dart';
 import 'package:reminder_app/features/reminder/domain/usecase/update_reminders_usecase.dart';
@@ -39,46 +38,24 @@ class AddReminderBloc extends Bloc<AddReminderEvent, AddReminderState> {
         titleChanged: (title) => titleChanged(title, emit),
         noteChanged: (note) => noteChanged(note, emit),
         imagePathChanged: (imagePath) => imagePathChanged(imagePath, emit),
-        isRepeatEveryDayChanged: (isRepeatEveryDay) =>
-            isRepeatEveryDayChanged(isRepeatEveryDay, emit),
-        reminderTypeChanged: (reminderType) =>
-            reminderTypeChanged(reminderType, emit),
+
         pickImageFromGallery: () => pickImageFromGallery(emit),
-        saveReminder:
-            (
-              title,
-              selectedDateTime,
-              note,
-              imagePath,
-              isRepeatEveryDay,
-              reminderType,
-            ) => saveReminder(
+        saveReminder: (title, selectedDateTime, note, imagePath) =>
+            saveReminder(
               emit: emit,
               title: title,
               dateTime: selectedDateTime,
               note: note,
               imagePath: imagePath,
-              isRepeatEveryDay: isRepeatEveryDay,
-              reminderType: reminderType,
             ),
-        updateReminder:
-            (
-              id,
-              title,
-              dateTime,
-              note,
-              imagePath,
-              isRepeatEveryDay,
-              reminderType,
-            ) => updateReminder(
+        updateReminder: (id, title, selectedDateTime, note, imagePath) =>
+            updateReminder(
               emit: emit,
               id: id,
               title: title,
-              dateTime: dateTime,
+              dateTime: selectedDateTime,
               note: note,
               imagePath: imagePath,
-              isRepeatEveryDay: isRepeatEveryDay,
-              reminderType: reminderType,
             ),
       );
     });
@@ -96,7 +73,6 @@ class AddReminderBloc extends Bloc<AddReminderEvent, AddReminderState> {
           title: reminder.title,
           note: reminder.note,
           imagePath: reminder.imagePath,
-          reminderType: reminder.reminderType,
           editedReminder: reminder,
         ),
       );
@@ -148,20 +124,6 @@ class AddReminderBloc extends Bloc<AddReminderEvent, AddReminderState> {
     emit(state.copyWith(imagePath: imagePath));
   }
 
-  Future<void> isRepeatEveryDayChanged(
-    bool isRepeatEveryDay,
-    Emitter<AddReminderState> emit,
-  ) async {
-    emit(state.copyWith(isRepeatEveryDay: isRepeatEveryDay));
-  }
-
-  Future<void> reminderTypeChanged(
-    ReminderTypeEnum reminderType,
-    Emitter<AddReminderState> emit,
-  ) async {
-    emit(state.copyWith(reminderType: reminderType));
-  }
-
   Future<void> pickImageFromGallery(Emitter<AddReminderState> emit) async {
     final XFile? pickedImage = await imagePickerService.pickFromGallery();
     if (pickedImage != null) {
@@ -175,8 +137,6 @@ class AddReminderBloc extends Bloc<AddReminderEvent, AddReminderState> {
     DateTime? dateTime,
     String? note,
     String? imagePath,
-    required bool isRepeatEveryDay,
-    required ReminderTypeEnum reminderType,
   }) async {
     emit(state.copyWith(actionStatus: ActionStatus.idle()));
 
@@ -185,7 +145,6 @@ class AddReminderBloc extends Bloc<AddReminderEvent, AddReminderState> {
       title: title,
       dateTime: dateTime ?? DateTime.now(),
       note: note,
-      reminderType: reminderType,
       imagePath: imagePath,
     );
 
@@ -207,15 +166,12 @@ class AddReminderBloc extends Bloc<AddReminderEvent, AddReminderState> {
             ),
           ),
         );
-        if (await canScheduleExactAlarm()) {
-          androidAlarmService.createNewAlarm(
-            id: reminderId,
-            time: reminder.dateTime,
-            callback: alarmCallback,
-          );
-        } else {
-          await openExactAlarmSettings();
-        }
+
+        androidAlarmService.createNewAlarm(
+          id: reminderId,
+          time: reminder.dateTime,
+          callback: alarmCallback,
+        );
       },
     );
   }
@@ -227,8 +183,6 @@ class AddReminderBloc extends Bloc<AddReminderEvent, AddReminderState> {
     DateTime? dateTime,
     String? note,
     String? imagePath,
-    required bool isRepeatEveryDay,
-    required ReminderTypeEnum reminderType,
   }) async {
     emit(state.copyWith(actionStatus: ActionStatus.loading()));
 
@@ -237,7 +191,6 @@ class AddReminderBloc extends Bloc<AddReminderEvent, AddReminderState> {
       title: title,
       dateTime: dateTime ?? DateTime.now(),
       note: note,
-      reminderType: reminderType,
       imagePath: imagePath,
     );
 
@@ -267,17 +220,5 @@ class AddReminderBloc extends Bloc<AddReminderEvent, AddReminderState> {
         );
       },
     );
-  }
-
-  Future<bool> canScheduleExactAlarm() async {
-    final status = await Permission.scheduleExactAlarm.status;
-    return status.isGranted;
-  }
-
-  Future<void> openExactAlarmSettings() async {
-    const intent = AndroidIntent(
-      action: 'android.settings.REQUEST_SCHEDULE_EXACT_ALARM',
-    );
-    await intent.launch();
   }
 }

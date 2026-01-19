@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:reminder_app/features/addreminder/presentation/widget/reminder_type_enum.dart';
 import 'package:reminder_app/features/reminder/data/model/reminder_model.dart';
 
 part 'reminder_entity.freezed.dart';
@@ -13,7 +12,6 @@ abstract class ReminderEntity with _$ReminderEntity {
     required String title,
     String? note,
     required DateTime dateTime,
-    required ReminderTypeEnum reminderType,
     String? imagePath,
   }) = _ReminderEntity;
 
@@ -23,7 +21,6 @@ abstract class ReminderEntity with _$ReminderEntity {
       title: title,
       note: note,
       dateTimeEpoch: dateTime.millisecondsSinceEpoch,
-      reminderType: reminderType.toString(),
       imagePath: imagePath,
     );
   }

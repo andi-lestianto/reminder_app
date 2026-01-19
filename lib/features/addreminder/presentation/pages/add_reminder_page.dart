@@ -8,7 +8,6 @@ import 'package:reminder_app/core/di/injection.dart';
 import 'package:reminder_app/core/presentation/states/action_status.dart';
 import 'package:reminder_app/core/utils/form_validator_utils.dart';
 import 'package:reminder_app/features/addreminder/presentation/bloc/addreminder_bloc.dart';
-import 'package:reminder_app/features/addreminder/presentation/widget/remider_type_widget.dart';
 import 'package:reminder_app/features/reminder/domain/entity/reminder_entity.dart';
 import 'package:reminder_app/features/reminder/presentation/bloc/reminder_bloc.dart';
 import 'package:reminder_app/gen/assets.gen.dart';
@@ -174,14 +173,6 @@ class _AddReminderViewState extends State<AddReminderView> {
                         },
                       ),
 
-                      ReminderTypeWidget(
-                        onChanged: (value) {
-                          context.read<AddReminderBloc>().add(
-                            AddReminderEvent.reminderTypeChanged(value),
-                          );
-                        },
-                        selectedType: state.reminderType,
-                      ),
                       CustomTextFormFieldWidget(
                         textEditingController:
                             additionalImageTextEditingController,
@@ -231,8 +222,6 @@ class _AddReminderViewState extends State<AddReminderView> {
                         dateTime: state.selectedDate,
                         note: state.note,
                         imagePath: state.imagePath,
-                        isRepeatEveryDay: state.isRepeatEveryDay,
-                        reminderType: state.reminderType,
                       ),
                     );
                   } else {
@@ -243,8 +232,6 @@ class _AddReminderViewState extends State<AddReminderView> {
                         dateTime: state.selectedDate,
                         note: state.note,
                         imagePath: state.imagePath,
-                        isRepeatEveryDay: state.isRepeatEveryDay,
-                        reminderType: state.reminderType,
                       ),
                     );
                   }
@@ -262,8 +249,6 @@ class _AddReminderViewState extends State<AddReminderView> {
         previous.title != current.title ||
         previous.note != current.note ||
         previous.imagePath != current.imagePath ||
-        previous.isRepeatEveryDay != current.isRepeatEveryDay ||
-        previous.reminderType != current.reminderType ||
         previous.actionStatus != current.actionStatus;
   }
 
@@ -273,7 +258,6 @@ class _AddReminderViewState extends State<AddReminderView> {
     additionalImageTextEditingController.text = (state.imagePath ?? '')
         .split('/')
         .last;
-    isRepeatEveryDay = state.isRepeatEveryDay;
 
     if (widget.reminder != null) {
       validateForm();

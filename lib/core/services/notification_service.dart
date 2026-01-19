@@ -1,4 +1,6 @@
+import 'package:android_intent_plus/android_intent.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class NotificationService {
   static final _plugin = FlutterLocalNotificationsPlugin();
@@ -29,6 +31,11 @@ class NotificationService {
           AndroidFlutterLocalNotificationsPlugin
         >()
         ?.createNotificationChannel(channel);
+
+    final status = await Permission.scheduleExactAlarm.status;
+    if (!status.isGranted) {
+      await Permission.scheduleExactAlarm.request();
+    }
   }
 
   static Future<void> showAlarmNotif({

@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ReminderModel {
 
- int? get id; String? get title; String? get note; int? get dateTimeEpoch; String? get reminderType; String? get imagePath;
+ int? get id; String? get title; String? get note; int? get dateTimeEpoch; String? get imagePath;
 /// Create a copy of ReminderModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $ReminderModelCopyWith<ReminderModel> get copyWith => _$ReminderModelCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ReminderModel&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.note, note) || other.note == note)&&(identical(other.dateTimeEpoch, dateTimeEpoch) || other.dateTimeEpoch == dateTimeEpoch)&&(identical(other.reminderType, reminderType) || other.reminderType == reminderType)&&(identical(other.imagePath, imagePath) || other.imagePath == imagePath));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ReminderModel&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.note, note) || other.note == note)&&(identical(other.dateTimeEpoch, dateTimeEpoch) || other.dateTimeEpoch == dateTimeEpoch)&&(identical(other.imagePath, imagePath) || other.imagePath == imagePath));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,title,note,dateTimeEpoch,reminderType,imagePath);
+int get hashCode => Object.hash(runtimeType,id,title,note,dateTimeEpoch,imagePath);
 
 @override
 String toString() {
-  return 'ReminderModel(id: $id, title: $title, note: $note, dateTimeEpoch: $dateTimeEpoch, reminderType: $reminderType, imagePath: $imagePath)';
+  return 'ReminderModel(id: $id, title: $title, note: $note, dateTimeEpoch: $dateTimeEpoch, imagePath: $imagePath)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $ReminderModelCopyWith<$Res>  {
   factory $ReminderModelCopyWith(ReminderModel value, $Res Function(ReminderModel) _then) = _$ReminderModelCopyWithImpl;
 @useResult
 $Res call({
- int? id, String? title, String? note, int? dateTimeEpoch, String? reminderType, String? imagePath
+ int? id, String? title, String? note, int? dateTimeEpoch, String? imagePath
 });
 
 
@@ -65,14 +65,13 @@ class _$ReminderModelCopyWithImpl<$Res>
 
 /// Create a copy of ReminderModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? title = freezed,Object? note = freezed,Object? dateTimeEpoch = freezed,Object? reminderType = freezed,Object? imagePath = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? title = freezed,Object? note = freezed,Object? dateTimeEpoch = freezed,Object? imagePath = freezed,}) {
   return _then(_self.copyWith(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,title: freezed == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String?,note: freezed == note ? _self.note : note // ignore: cast_nullable_to_non_nullable
 as String?,dateTimeEpoch: freezed == dateTimeEpoch ? _self.dateTimeEpoch : dateTimeEpoch // ignore: cast_nullable_to_non_nullable
-as int?,reminderType: freezed == reminderType ? _self.reminderType : reminderType // ignore: cast_nullable_to_non_nullable
-as String?,imagePath: freezed == imagePath ? _self.imagePath : imagePath // ignore: cast_nullable_to_non_nullable
+as int?,imagePath: freezed == imagePath ? _self.imagePath : imagePath // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -158,10 +157,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? id,  String? title,  String? note,  int? dateTimeEpoch,  String? reminderType,  String? imagePath)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? id,  String? title,  String? note,  int? dateTimeEpoch,  String? imagePath)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ReminderModel() when $default != null:
-return $default(_that.id,_that.title,_that.note,_that.dateTimeEpoch,_that.reminderType,_that.imagePath);case _:
+return $default(_that.id,_that.title,_that.note,_that.dateTimeEpoch,_that.imagePath);case _:
   return orElse();
 
 }
@@ -179,10 +178,10 @@ return $default(_that.id,_that.title,_that.note,_that.dateTimeEpoch,_that.remind
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? id,  String? title,  String? note,  int? dateTimeEpoch,  String? reminderType,  String? imagePath)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? id,  String? title,  String? note,  int? dateTimeEpoch,  String? imagePath)  $default,) {final _that = this;
 switch (_that) {
 case _ReminderModel():
-return $default(_that.id,_that.title,_that.note,_that.dateTimeEpoch,_that.reminderType,_that.imagePath);case _:
+return $default(_that.id,_that.title,_that.note,_that.dateTimeEpoch,_that.imagePath);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -199,10 +198,10 @@ return $default(_that.id,_that.title,_that.note,_that.dateTimeEpoch,_that.remind
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? id,  String? title,  String? note,  int? dateTimeEpoch,  String? reminderType,  String? imagePath)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? id,  String? title,  String? note,  int? dateTimeEpoch,  String? imagePath)?  $default,) {final _that = this;
 switch (_that) {
 case _ReminderModel() when $default != null:
-return $default(_that.id,_that.title,_that.note,_that.dateTimeEpoch,_that.reminderType,_that.imagePath);case _:
+return $default(_that.id,_that.title,_that.note,_that.dateTimeEpoch,_that.imagePath);case _:
   return null;
 
 }
@@ -214,14 +213,13 @@ return $default(_that.id,_that.title,_that.note,_that.dateTimeEpoch,_that.remind
 @JsonSerializable()
 
 class _ReminderModel extends ReminderModel {
-  const _ReminderModel({this.id, this.title, this.note, this.dateTimeEpoch, this.reminderType, this.imagePath}): super._();
+  const _ReminderModel({this.id, this.title, this.note, this.dateTimeEpoch, this.imagePath}): super._();
   factory _ReminderModel.fromJson(Map<String, dynamic> json) => _$ReminderModelFromJson(json);
 
 @override final  int? id;
 @override final  String? title;
 @override final  String? note;
 @override final  int? dateTimeEpoch;
-@override final  String? reminderType;
 @override final  String? imagePath;
 
 /// Create a copy of ReminderModel
@@ -237,16 +235,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ReminderModel&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.note, note) || other.note == note)&&(identical(other.dateTimeEpoch, dateTimeEpoch) || other.dateTimeEpoch == dateTimeEpoch)&&(identical(other.reminderType, reminderType) || other.reminderType == reminderType)&&(identical(other.imagePath, imagePath) || other.imagePath == imagePath));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ReminderModel&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.note, note) || other.note == note)&&(identical(other.dateTimeEpoch, dateTimeEpoch) || other.dateTimeEpoch == dateTimeEpoch)&&(identical(other.imagePath, imagePath) || other.imagePath == imagePath));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,title,note,dateTimeEpoch,reminderType,imagePath);
+int get hashCode => Object.hash(runtimeType,id,title,note,dateTimeEpoch,imagePath);
 
 @override
 String toString() {
-  return 'ReminderModel(id: $id, title: $title, note: $note, dateTimeEpoch: $dateTimeEpoch, reminderType: $reminderType, imagePath: $imagePath)';
+  return 'ReminderModel(id: $id, title: $title, note: $note, dateTimeEpoch: $dateTimeEpoch, imagePath: $imagePath)';
 }
 
 
@@ -257,7 +255,7 @@ abstract mixin class _$ReminderModelCopyWith<$Res> implements $ReminderModelCopy
   factory _$ReminderModelCopyWith(_ReminderModel value, $Res Function(_ReminderModel) _then) = __$ReminderModelCopyWithImpl;
 @override @useResult
 $Res call({
- int? id, String? title, String? note, int? dateTimeEpoch, String? reminderType, String? imagePath
+ int? id, String? title, String? note, int? dateTimeEpoch, String? imagePath
 });
 
 
@@ -274,14 +272,13 @@ class __$ReminderModelCopyWithImpl<$Res>
 
 /// Create a copy of ReminderModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? title = freezed,Object? note = freezed,Object? dateTimeEpoch = freezed,Object? reminderType = freezed,Object? imagePath = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? title = freezed,Object? note = freezed,Object? dateTimeEpoch = freezed,Object? imagePath = freezed,}) {
   return _then(_ReminderModel(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,title: freezed == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String?,note: freezed == note ? _self.note : note // ignore: cast_nullable_to_non_nullable
 as String?,dateTimeEpoch: freezed == dateTimeEpoch ? _self.dateTimeEpoch : dateTimeEpoch // ignore: cast_nullable_to_non_nullable
-as int?,reminderType: freezed == reminderType ? _self.reminderType : reminderType // ignore: cast_nullable_to_non_nullable
-as String?,imagePath: freezed == imagePath ? _self.imagePath : imagePath // ignore: cast_nullable_to_non_nullable
+as int?,imagePath: freezed == imagePath ? _self.imagePath : imagePath // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }

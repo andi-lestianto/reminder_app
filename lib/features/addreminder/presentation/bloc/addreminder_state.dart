@@ -7,8 +7,6 @@ abstract class AddReminderState with _$AddReminderState {
     required String title,
     String? note,
     String? imagePath,
-    @Default(false) bool isRepeatEveryDay,
-    required ReminderTypeEnum reminderType,
 
     ReminderEntity? editedReminder,
     @Default(ActionStatus.idle()) ActionStatus actionStatus,
@@ -19,7 +17,5 @@ abstract class AddReminderState with _$AddReminderState {
     title: '',
     note: null,
     imagePath: null,
-    isRepeatEveryDay: false,
-    reminderType: ReminderTypeEnum.notification,
   );
 }

@@ -55,7 +55,7 @@ extension AddReminderEventPatterns on AddReminderEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Started value)?  started,TResult Function( _InitAddReminder value)?  initAddReminder,TResult Function( _SelectedDateTimeChanged value)?  selectedDateTimeChanged,TResult Function( _TitleChanged value)?  titleChanged,TResult Function( _NoteChanged value)?  noteChanged,TResult Function( _ImagePathChanged value)?  imagePathChanged,TResult Function( _IsRepeatEveryDayChanged value)?  isRepeatEveryDayChanged,TResult Function( _ReminderTypeChanged value)?  reminderTypeChanged,TResult Function( _PickImageFromGallery value)?  pickImageFromGallery,TResult Function( _SaveReminder value)?  saveReminder,TResult Function( _UpdateReminder value)?  updateReminder,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Started value)?  started,TResult Function( _InitAddReminder value)?  initAddReminder,TResult Function( _SelectedDateTimeChanged value)?  selectedDateTimeChanged,TResult Function( _TitleChanged value)?  titleChanged,TResult Function( _NoteChanged value)?  noteChanged,TResult Function( _ImagePathChanged value)?  imagePathChanged,TResult Function( _PickImageFromGallery value)?  pickImageFromGallery,TResult Function( _SaveReminder value)?  saveReminder,TResult Function( _UpdateReminder value)?  updateReminder,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Started() when started != null:
@@ -64,9 +64,7 @@ return initAddReminder(_that);case _SelectedDateTimeChanged() when selectedDateT
 return selectedDateTimeChanged(_that);case _TitleChanged() when titleChanged != null:
 return titleChanged(_that);case _NoteChanged() when noteChanged != null:
 return noteChanged(_that);case _ImagePathChanged() when imagePathChanged != null:
-return imagePathChanged(_that);case _IsRepeatEveryDayChanged() when isRepeatEveryDayChanged != null:
-return isRepeatEveryDayChanged(_that);case _ReminderTypeChanged() when reminderTypeChanged != null:
-return reminderTypeChanged(_that);case _PickImageFromGallery() when pickImageFromGallery != null:
+return imagePathChanged(_that);case _PickImageFromGallery() when pickImageFromGallery != null:
 return pickImageFromGallery(_that);case _SaveReminder() when saveReminder != null:
 return saveReminder(_that);case _UpdateReminder() when updateReminder != null:
 return updateReminder(_that);case _:
@@ -87,7 +85,7 @@ return updateReminder(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Started value)  started,required TResult Function( _InitAddReminder value)  initAddReminder,required TResult Function( _SelectedDateTimeChanged value)  selectedDateTimeChanged,required TResult Function( _TitleChanged value)  titleChanged,required TResult Function( _NoteChanged value)  noteChanged,required TResult Function( _ImagePathChanged value)  imagePathChanged,required TResult Function( _IsRepeatEveryDayChanged value)  isRepeatEveryDayChanged,required TResult Function( _ReminderTypeChanged value)  reminderTypeChanged,required TResult Function( _PickImageFromGallery value)  pickImageFromGallery,required TResult Function( _SaveReminder value)  saveReminder,required TResult Function( _UpdateReminder value)  updateReminder,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Started value)  started,required TResult Function( _InitAddReminder value)  initAddReminder,required TResult Function( _SelectedDateTimeChanged value)  selectedDateTimeChanged,required TResult Function( _TitleChanged value)  titleChanged,required TResult Function( _NoteChanged value)  noteChanged,required TResult Function( _ImagePathChanged value)  imagePathChanged,required TResult Function( _PickImageFromGallery value)  pickImageFromGallery,required TResult Function( _SaveReminder value)  saveReminder,required TResult Function( _UpdateReminder value)  updateReminder,}){
 final _that = this;
 switch (_that) {
 case _Started():
@@ -96,9 +94,7 @@ return initAddReminder(_that);case _SelectedDateTimeChanged():
 return selectedDateTimeChanged(_that);case _TitleChanged():
 return titleChanged(_that);case _NoteChanged():
 return noteChanged(_that);case _ImagePathChanged():
-return imagePathChanged(_that);case _IsRepeatEveryDayChanged():
-return isRepeatEveryDayChanged(_that);case _ReminderTypeChanged():
-return reminderTypeChanged(_that);case _PickImageFromGallery():
+return imagePathChanged(_that);case _PickImageFromGallery():
 return pickImageFromGallery(_that);case _SaveReminder():
 return saveReminder(_that);case _UpdateReminder():
 return updateReminder(_that);case _:
@@ -118,7 +114,7 @@ return updateReminder(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Started value)?  started,TResult? Function( _InitAddReminder value)?  initAddReminder,TResult? Function( _SelectedDateTimeChanged value)?  selectedDateTimeChanged,TResult? Function( _TitleChanged value)?  titleChanged,TResult? Function( _NoteChanged value)?  noteChanged,TResult? Function( _ImagePathChanged value)?  imagePathChanged,TResult? Function( _IsRepeatEveryDayChanged value)?  isRepeatEveryDayChanged,TResult? Function( _ReminderTypeChanged value)?  reminderTypeChanged,TResult? Function( _PickImageFromGallery value)?  pickImageFromGallery,TResult? Function( _SaveReminder value)?  saveReminder,TResult? Function( _UpdateReminder value)?  updateReminder,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Started value)?  started,TResult? Function( _InitAddReminder value)?  initAddReminder,TResult? Function( _SelectedDateTimeChanged value)?  selectedDateTimeChanged,TResult? Function( _TitleChanged value)?  titleChanged,TResult? Function( _NoteChanged value)?  noteChanged,TResult? Function( _ImagePathChanged value)?  imagePathChanged,TResult? Function( _PickImageFromGallery value)?  pickImageFromGallery,TResult? Function( _SaveReminder value)?  saveReminder,TResult? Function( _UpdateReminder value)?  updateReminder,}){
 final _that = this;
 switch (_that) {
 case _Started() when started != null:
@@ -127,9 +123,7 @@ return initAddReminder(_that);case _SelectedDateTimeChanged() when selectedDateT
 return selectedDateTimeChanged(_that);case _TitleChanged() when titleChanged != null:
 return titleChanged(_that);case _NoteChanged() when noteChanged != null:
 return noteChanged(_that);case _ImagePathChanged() when imagePathChanged != null:
-return imagePathChanged(_that);case _IsRepeatEveryDayChanged() when isRepeatEveryDayChanged != null:
-return isRepeatEveryDayChanged(_that);case _ReminderTypeChanged() when reminderTypeChanged != null:
-return reminderTypeChanged(_that);case _PickImageFromGallery() when pickImageFromGallery != null:
+return imagePathChanged(_that);case _PickImageFromGallery() when pickImageFromGallery != null:
 return pickImageFromGallery(_that);case _SaveReminder() when saveReminder != null:
 return saveReminder(_that);case _UpdateReminder() when updateReminder != null:
 return updateReminder(_that);case _:
@@ -149,7 +143,7 @@ return updateReminder(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  started,TResult Function( ReminderEntity? reminder,  DateTime selectedDate)?  initAddReminder,TResult Function( DateTime dateTime)?  selectedDateTimeChanged,TResult Function( String title)?  titleChanged,TResult Function( String? note)?  noteChanged,TResult Function( String? imagePath)?  imagePathChanged,TResult Function( bool isRepeatEveryDay)?  isRepeatEveryDayChanged,TResult Function( ReminderTypeEnum reminderType)?  reminderTypeChanged,TResult Function()?  pickImageFromGallery,TResult Function( String title,  DateTime? dateTime,  String? note,  String? imagePath,  bool isRepeatEveryDay,  ReminderTypeEnum reminderType)?  saveReminder,TResult Function( int id,  String title,  DateTime? dateTime,  String? note,  String? imagePath,  bool isRepeatEveryDay,  ReminderTypeEnum reminderType)?  updateReminder,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  started,TResult Function( ReminderEntity? reminder,  DateTime selectedDate)?  initAddReminder,TResult Function( DateTime dateTime)?  selectedDateTimeChanged,TResult Function( String title)?  titleChanged,TResult Function( String? note)?  noteChanged,TResult Function( String? imagePath)?  imagePathChanged,TResult Function()?  pickImageFromGallery,TResult Function( String title,  DateTime? dateTime,  String? note,  String? imagePath)?  saveReminder,TResult Function( int id,  String title,  DateTime? dateTime,  String? note,  String? imagePath)?  updateReminder,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Started() when started != null:
 return started();case _InitAddReminder() when initAddReminder != null:
@@ -157,12 +151,10 @@ return initAddReminder(_that.reminder,_that.selectedDate);case _SelectedDateTime
 return selectedDateTimeChanged(_that.dateTime);case _TitleChanged() when titleChanged != null:
 return titleChanged(_that.title);case _NoteChanged() when noteChanged != null:
 return noteChanged(_that.note);case _ImagePathChanged() when imagePathChanged != null:
-return imagePathChanged(_that.imagePath);case _IsRepeatEveryDayChanged() when isRepeatEveryDayChanged != null:
-return isRepeatEveryDayChanged(_that.isRepeatEveryDay);case _ReminderTypeChanged() when reminderTypeChanged != null:
-return reminderTypeChanged(_that.reminderType);case _PickImageFromGallery() when pickImageFromGallery != null:
+return imagePathChanged(_that.imagePath);case _PickImageFromGallery() when pickImageFromGallery != null:
 return pickImageFromGallery();case _SaveReminder() when saveReminder != null:
-return saveReminder(_that.title,_that.dateTime,_that.note,_that.imagePath,_that.isRepeatEveryDay,_that.reminderType);case _UpdateReminder() when updateReminder != null:
-return updateReminder(_that.id,_that.title,_that.dateTime,_that.note,_that.imagePath,_that.isRepeatEveryDay,_that.reminderType);case _:
+return saveReminder(_that.title,_that.dateTime,_that.note,_that.imagePath);case _UpdateReminder() when updateReminder != null:
+return updateReminder(_that.id,_that.title,_that.dateTime,_that.note,_that.imagePath);case _:
   return orElse();
 
 }
@@ -180,7 +172,7 @@ return updateReminder(_that.id,_that.title,_that.dateTime,_that.note,_that.image
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  started,required TResult Function( ReminderEntity? reminder,  DateTime selectedDate)  initAddReminder,required TResult Function( DateTime dateTime)  selectedDateTimeChanged,required TResult Function( String title)  titleChanged,required TResult Function( String? note)  noteChanged,required TResult Function( String? imagePath)  imagePathChanged,required TResult Function( bool isRepeatEveryDay)  isRepeatEveryDayChanged,required TResult Function( ReminderTypeEnum reminderType)  reminderTypeChanged,required TResult Function()  pickImageFromGallery,required TResult Function( String title,  DateTime? dateTime,  String? note,  String? imagePath,  bool isRepeatEveryDay,  ReminderTypeEnum reminderType)  saveReminder,required TResult Function( int id,  String title,  DateTime? dateTime,  String? note,  String? imagePath,  bool isRepeatEveryDay,  ReminderTypeEnum reminderType)  updateReminder,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  started,required TResult Function( ReminderEntity? reminder,  DateTime selectedDate)  initAddReminder,required TResult Function( DateTime dateTime)  selectedDateTimeChanged,required TResult Function( String title)  titleChanged,required TResult Function( String? note)  noteChanged,required TResult Function( String? imagePath)  imagePathChanged,required TResult Function()  pickImageFromGallery,required TResult Function( String title,  DateTime? dateTime,  String? note,  String? imagePath)  saveReminder,required TResult Function( int id,  String title,  DateTime? dateTime,  String? note,  String? imagePath)  updateReminder,}) {final _that = this;
 switch (_that) {
 case _Started():
 return started();case _InitAddReminder():
@@ -188,12 +180,10 @@ return initAddReminder(_that.reminder,_that.selectedDate);case _SelectedDateTime
 return selectedDateTimeChanged(_that.dateTime);case _TitleChanged():
 return titleChanged(_that.title);case _NoteChanged():
 return noteChanged(_that.note);case _ImagePathChanged():
-return imagePathChanged(_that.imagePath);case _IsRepeatEveryDayChanged():
-return isRepeatEveryDayChanged(_that.isRepeatEveryDay);case _ReminderTypeChanged():
-return reminderTypeChanged(_that.reminderType);case _PickImageFromGallery():
+return imagePathChanged(_that.imagePath);case _PickImageFromGallery():
 return pickImageFromGallery();case _SaveReminder():
-return saveReminder(_that.title,_that.dateTime,_that.note,_that.imagePath,_that.isRepeatEveryDay,_that.reminderType);case _UpdateReminder():
-return updateReminder(_that.id,_that.title,_that.dateTime,_that.note,_that.imagePath,_that.isRepeatEveryDay,_that.reminderType);case _:
+return saveReminder(_that.title,_that.dateTime,_that.note,_that.imagePath);case _UpdateReminder():
+return updateReminder(_that.id,_that.title,_that.dateTime,_that.note,_that.imagePath);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -210,7 +200,7 @@ return updateReminder(_that.id,_that.title,_that.dateTime,_that.note,_that.image
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  started,TResult? Function( ReminderEntity? reminder,  DateTime selectedDate)?  initAddReminder,TResult? Function( DateTime dateTime)?  selectedDateTimeChanged,TResult? Function( String title)?  titleChanged,TResult? Function( String? note)?  noteChanged,TResult? Function( String? imagePath)?  imagePathChanged,TResult? Function( bool isRepeatEveryDay)?  isRepeatEveryDayChanged,TResult? Function( ReminderTypeEnum reminderType)?  reminderTypeChanged,TResult? Function()?  pickImageFromGallery,TResult? Function( String title,  DateTime? dateTime,  String? note,  String? imagePath,  bool isRepeatEveryDay,  ReminderTypeEnum reminderType)?  saveReminder,TResult? Function( int id,  String title,  DateTime? dateTime,  String? note,  String? imagePath,  bool isRepeatEveryDay,  ReminderTypeEnum reminderType)?  updateReminder,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  started,TResult? Function( ReminderEntity? reminder,  DateTime selectedDate)?  initAddReminder,TResult? Function( DateTime dateTime)?  selectedDateTimeChanged,TResult? Function( String title)?  titleChanged,TResult? Function( String? note)?  noteChanged,TResult? Function( String? imagePath)?  imagePathChanged,TResult? Function()?  pickImageFromGallery,TResult? Function( String title,  DateTime? dateTime,  String? note,  String? imagePath)?  saveReminder,TResult? Function( int id,  String title,  DateTime? dateTime,  String? note,  String? imagePath)?  updateReminder,}) {final _that = this;
 switch (_that) {
 case _Started() when started != null:
 return started();case _InitAddReminder() when initAddReminder != null:
@@ -218,12 +208,10 @@ return initAddReminder(_that.reminder,_that.selectedDate);case _SelectedDateTime
 return selectedDateTimeChanged(_that.dateTime);case _TitleChanged() when titleChanged != null:
 return titleChanged(_that.title);case _NoteChanged() when noteChanged != null:
 return noteChanged(_that.note);case _ImagePathChanged() when imagePathChanged != null:
-return imagePathChanged(_that.imagePath);case _IsRepeatEveryDayChanged() when isRepeatEveryDayChanged != null:
-return isRepeatEveryDayChanged(_that.isRepeatEveryDay);case _ReminderTypeChanged() when reminderTypeChanged != null:
-return reminderTypeChanged(_that.reminderType);case _PickImageFromGallery() when pickImageFromGallery != null:
+return imagePathChanged(_that.imagePath);case _PickImageFromGallery() when pickImageFromGallery != null:
 return pickImageFromGallery();case _SaveReminder() when saveReminder != null:
-return saveReminder(_that.title,_that.dateTime,_that.note,_that.imagePath,_that.isRepeatEveryDay,_that.reminderType);case _UpdateReminder() when updateReminder != null:
-return updateReminder(_that.id,_that.title,_that.dateTime,_that.note,_that.imagePath,_that.isRepeatEveryDay,_that.reminderType);case _:
+return saveReminder(_that.title,_that.dateTime,_that.note,_that.imagePath);case _UpdateReminder() when updateReminder != null:
+return updateReminder(_that.id,_that.title,_that.dateTime,_that.note,_that.imagePath);case _:
   return null;
 
 }
@@ -610,138 +598,6 @@ as String?,
 /// @nodoc
 
 
-class _IsRepeatEveryDayChanged implements AddReminderEvent {
-  const _IsRepeatEveryDayChanged(this.isRepeatEveryDay);
-  
-
- final  bool isRepeatEveryDay;
-
-/// Create a copy of AddReminderEvent
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-_$IsRepeatEveryDayChangedCopyWith<_IsRepeatEveryDayChanged> get copyWith => __$IsRepeatEveryDayChangedCopyWithImpl<_IsRepeatEveryDayChanged>(this, _$identity);
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _IsRepeatEveryDayChanged&&(identical(other.isRepeatEveryDay, isRepeatEveryDay) || other.isRepeatEveryDay == isRepeatEveryDay));
-}
-
-
-@override
-int get hashCode => Object.hash(runtimeType,isRepeatEveryDay);
-
-@override
-String toString() {
-  return 'AddReminderEvent.isRepeatEveryDayChanged(isRepeatEveryDay: $isRepeatEveryDay)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class _$IsRepeatEveryDayChangedCopyWith<$Res> implements $AddReminderEventCopyWith<$Res> {
-  factory _$IsRepeatEveryDayChangedCopyWith(_IsRepeatEveryDayChanged value, $Res Function(_IsRepeatEveryDayChanged) _then) = __$IsRepeatEveryDayChangedCopyWithImpl;
-@useResult
-$Res call({
- bool isRepeatEveryDay
-});
-
-
-
-
-}
-/// @nodoc
-class __$IsRepeatEveryDayChangedCopyWithImpl<$Res>
-    implements _$IsRepeatEveryDayChangedCopyWith<$Res> {
-  __$IsRepeatEveryDayChangedCopyWithImpl(this._self, this._then);
-
-  final _IsRepeatEveryDayChanged _self;
-  final $Res Function(_IsRepeatEveryDayChanged) _then;
-
-/// Create a copy of AddReminderEvent
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? isRepeatEveryDay = null,}) {
-  return _then(_IsRepeatEveryDayChanged(
-null == isRepeatEveryDay ? _self.isRepeatEveryDay : isRepeatEveryDay // ignore: cast_nullable_to_non_nullable
-as bool,
-  ));
-}
-
-
-}
-
-/// @nodoc
-
-
-class _ReminderTypeChanged implements AddReminderEvent {
-  const _ReminderTypeChanged(this.reminderType);
-  
-
- final  ReminderTypeEnum reminderType;
-
-/// Create a copy of AddReminderEvent
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-_$ReminderTypeChangedCopyWith<_ReminderTypeChanged> get copyWith => __$ReminderTypeChangedCopyWithImpl<_ReminderTypeChanged>(this, _$identity);
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ReminderTypeChanged&&(identical(other.reminderType, reminderType) || other.reminderType == reminderType));
-}
-
-
-@override
-int get hashCode => Object.hash(runtimeType,reminderType);
-
-@override
-String toString() {
-  return 'AddReminderEvent.reminderTypeChanged(reminderType: $reminderType)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class _$ReminderTypeChangedCopyWith<$Res> implements $AddReminderEventCopyWith<$Res> {
-  factory _$ReminderTypeChangedCopyWith(_ReminderTypeChanged value, $Res Function(_ReminderTypeChanged) _then) = __$ReminderTypeChangedCopyWithImpl;
-@useResult
-$Res call({
- ReminderTypeEnum reminderType
-});
-
-
-
-
-}
-/// @nodoc
-class __$ReminderTypeChangedCopyWithImpl<$Res>
-    implements _$ReminderTypeChangedCopyWith<$Res> {
-  __$ReminderTypeChangedCopyWithImpl(this._self, this._then);
-
-  final _ReminderTypeChanged _self;
-  final $Res Function(_ReminderTypeChanged) _then;
-
-/// Create a copy of AddReminderEvent
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? reminderType = null,}) {
-  return _then(_ReminderTypeChanged(
-null == reminderType ? _self.reminderType : reminderType // ignore: cast_nullable_to_non_nullable
-as ReminderTypeEnum,
-  ));
-}
-
-
-}
-
-/// @nodoc
-
-
 class _PickImageFromGallery implements AddReminderEvent {
   const _PickImageFromGallery();
   
@@ -775,15 +631,13 @@ String toString() {
 
 
 class _SaveReminder implements AddReminderEvent {
-  const _SaveReminder({required this.title, required this.dateTime, this.note, this.imagePath, required this.isRepeatEveryDay, required this.reminderType});
+  const _SaveReminder({required this.title, required this.dateTime, this.note, this.imagePath});
   
 
  final  String title;
  final  DateTime? dateTime;
  final  String? note;
  final  String? imagePath;
- final  bool isRepeatEveryDay;
- final  ReminderTypeEnum reminderType;
 
 /// Create a copy of AddReminderEvent
 /// with the given fields replaced by the non-null parameter values.
@@ -795,16 +649,16 @@ _$SaveReminderCopyWith<_SaveReminder> get copyWith => __$SaveReminderCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SaveReminder&&(identical(other.title, title) || other.title == title)&&(identical(other.dateTime, dateTime) || other.dateTime == dateTime)&&(identical(other.note, note) || other.note == note)&&(identical(other.imagePath, imagePath) || other.imagePath == imagePath)&&(identical(other.isRepeatEveryDay, isRepeatEveryDay) || other.isRepeatEveryDay == isRepeatEveryDay)&&(identical(other.reminderType, reminderType) || other.reminderType == reminderType));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SaveReminder&&(identical(other.title, title) || other.title == title)&&(identical(other.dateTime, dateTime) || other.dateTime == dateTime)&&(identical(other.note, note) || other.note == note)&&(identical(other.imagePath, imagePath) || other.imagePath == imagePath));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,title,dateTime,note,imagePath,isRepeatEveryDay,reminderType);
+int get hashCode => Object.hash(runtimeType,title,dateTime,note,imagePath);
 
 @override
 String toString() {
-  return 'AddReminderEvent.saveReminder(title: $title, dateTime: $dateTime, note: $note, imagePath: $imagePath, isRepeatEveryDay: $isRepeatEveryDay, reminderType: $reminderType)';
+  return 'AddReminderEvent.saveReminder(title: $title, dateTime: $dateTime, note: $note, imagePath: $imagePath)';
 }
 
 
@@ -815,7 +669,7 @@ abstract mixin class _$SaveReminderCopyWith<$Res> implements $AddReminderEventCo
   factory _$SaveReminderCopyWith(_SaveReminder value, $Res Function(_SaveReminder) _then) = __$SaveReminderCopyWithImpl;
 @useResult
 $Res call({
- String title, DateTime? dateTime, String? note, String? imagePath, bool isRepeatEveryDay, ReminderTypeEnum reminderType
+ String title, DateTime? dateTime, String? note, String? imagePath
 });
 
 
@@ -832,15 +686,13 @@ class __$SaveReminderCopyWithImpl<$Res>
 
 /// Create a copy of AddReminderEvent
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? title = null,Object? dateTime = freezed,Object? note = freezed,Object? imagePath = freezed,Object? isRepeatEveryDay = null,Object? reminderType = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? title = null,Object? dateTime = freezed,Object? note = freezed,Object? imagePath = freezed,}) {
   return _then(_SaveReminder(
 title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String,dateTime: freezed == dateTime ? _self.dateTime : dateTime // ignore: cast_nullable_to_non_nullable
 as DateTime?,note: freezed == note ? _self.note : note // ignore: cast_nullable_to_non_nullable
 as String?,imagePath: freezed == imagePath ? _self.imagePath : imagePath // ignore: cast_nullable_to_non_nullable
-as String?,isRepeatEveryDay: null == isRepeatEveryDay ? _self.isRepeatEveryDay : isRepeatEveryDay // ignore: cast_nullable_to_non_nullable
-as bool,reminderType: null == reminderType ? _self.reminderType : reminderType // ignore: cast_nullable_to_non_nullable
-as ReminderTypeEnum,
+as String?,
   ));
 }
 
@@ -851,7 +703,7 @@ as ReminderTypeEnum,
 
 
 class _UpdateReminder implements AddReminderEvent {
-  const _UpdateReminder({required this.id, required this.title, required this.dateTime, this.note, this.imagePath, required this.isRepeatEveryDay, required this.reminderType});
+  const _UpdateReminder({required this.id, required this.title, required this.dateTime, this.note, this.imagePath});
   
 
  final  int id;
@@ -859,8 +711,6 @@ class _UpdateReminder implements AddReminderEvent {
  final  DateTime? dateTime;
  final  String? note;
  final  String? imagePath;
- final  bool isRepeatEveryDay;
- final  ReminderTypeEnum reminderType;
 
 /// Create a copy of AddReminderEvent
 /// with the given fields replaced by the non-null parameter values.
@@ -872,16 +722,16 @@ _$UpdateReminderCopyWith<_UpdateReminder> get copyWith => __$UpdateReminderCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UpdateReminder&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.dateTime, dateTime) || other.dateTime == dateTime)&&(identical(other.note, note) || other.note == note)&&(identical(other.imagePath, imagePath) || other.imagePath == imagePath)&&(identical(other.isRepeatEveryDay, isRepeatEveryDay) || other.isRepeatEveryDay == isRepeatEveryDay)&&(identical(other.reminderType, reminderType) || other.reminderType == reminderType));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UpdateReminder&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.dateTime, dateTime) || other.dateTime == dateTime)&&(identical(other.note, note) || other.note == note)&&(identical(other.imagePath, imagePath) || other.imagePath == imagePath));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,id,title,dateTime,note,imagePath,isRepeatEveryDay,reminderType);
+int get hashCode => Object.hash(runtimeType,id,title,dateTime,note,imagePath);
 
 @override
 String toString() {
-  return 'AddReminderEvent.updateReminder(id: $id, title: $title, dateTime: $dateTime, note: $note, imagePath: $imagePath, isRepeatEveryDay: $isRepeatEveryDay, reminderType: $reminderType)';
+  return 'AddReminderEvent.updateReminder(id: $id, title: $title, dateTime: $dateTime, note: $note, imagePath: $imagePath)';
 }
 
 
@@ -892,7 +742,7 @@ abstract mixin class _$UpdateReminderCopyWith<$Res> implements $AddReminderEvent
   factory _$UpdateReminderCopyWith(_UpdateReminder value, $Res Function(_UpdateReminder) _then) = __$UpdateReminderCopyWithImpl;
 @useResult
 $Res call({
- int id, String title, DateTime? dateTime, String? note, String? imagePath, bool isRepeatEveryDay, ReminderTypeEnum reminderType
+ int id, String title, DateTime? dateTime, String? note, String? imagePath
 });
 
 
@@ -909,16 +759,14 @@ class __$UpdateReminderCopyWithImpl<$Res>
 
 /// Create a copy of AddReminderEvent
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? id = null,Object? title = null,Object? dateTime = freezed,Object? note = freezed,Object? imagePath = freezed,Object? isRepeatEveryDay = null,Object? reminderType = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? id = null,Object? title = null,Object? dateTime = freezed,Object? note = freezed,Object? imagePath = freezed,}) {
   return _then(_UpdateReminder(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String,dateTime: freezed == dateTime ? _self.dateTime : dateTime // ignore: cast_nullable_to_non_nullable
 as DateTime?,note: freezed == note ? _self.note : note // ignore: cast_nullable_to_non_nullable
 as String?,imagePath: freezed == imagePath ? _self.imagePath : imagePath // ignore: cast_nullable_to_non_nullable
-as String?,isRepeatEveryDay: null == isRepeatEveryDay ? _self.isRepeatEveryDay : isRepeatEveryDay // ignore: cast_nullable_to_non_nullable
-as bool,reminderType: null == reminderType ? _self.reminderType : reminderType // ignore: cast_nullable_to_non_nullable
-as ReminderTypeEnum,
+as String?,
   ));
 }
 
@@ -928,7 +776,7 @@ as ReminderTypeEnum,
 /// @nodoc
 mixin _$AddReminderState {
 
- DateTime get selectedDate; String get title; String? get note; String? get imagePath; bool get isRepeatEveryDay; ReminderTypeEnum get reminderType; ReminderEntity? get editedReminder; ActionStatus get actionStatus;
+ DateTime get selectedDate; String get title; String? get note; String? get imagePath; ReminderEntity? get editedReminder; ActionStatus get actionStatus;
 /// Create a copy of AddReminderState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -939,16 +787,16 @@ $AddReminderStateCopyWith<AddReminderState> get copyWith => _$AddReminderStateCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AddReminderState&&(identical(other.selectedDate, selectedDate) || other.selectedDate == selectedDate)&&(identical(other.title, title) || other.title == title)&&(identical(other.note, note) || other.note == note)&&(identical(other.imagePath, imagePath) || other.imagePath == imagePath)&&(identical(other.isRepeatEveryDay, isRepeatEveryDay) || other.isRepeatEveryDay == isRepeatEveryDay)&&(identical(other.reminderType, reminderType) || other.reminderType == reminderType)&&(identical(other.editedReminder, editedReminder) || other.editedReminder == editedReminder)&&(identical(other.actionStatus, actionStatus) || other.actionStatus == actionStatus));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AddReminderState&&(identical(other.selectedDate, selectedDate) || other.selectedDate == selectedDate)&&(identical(other.title, title) || other.title == title)&&(identical(other.note, note) || other.note == note)&&(identical(other.imagePath, imagePath) || other.imagePath == imagePath)&&(identical(other.editedReminder, editedReminder) || other.editedReminder == editedReminder)&&(identical(other.actionStatus, actionStatus) || other.actionStatus == actionStatus));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,selectedDate,title,note,imagePath,isRepeatEveryDay,reminderType,editedReminder,actionStatus);
+int get hashCode => Object.hash(runtimeType,selectedDate,title,note,imagePath,editedReminder,actionStatus);
 
 @override
 String toString() {
-  return 'AddReminderState(selectedDate: $selectedDate, title: $title, note: $note, imagePath: $imagePath, isRepeatEveryDay: $isRepeatEveryDay, reminderType: $reminderType, editedReminder: $editedReminder, actionStatus: $actionStatus)';
+  return 'AddReminderState(selectedDate: $selectedDate, title: $title, note: $note, imagePath: $imagePath, editedReminder: $editedReminder, actionStatus: $actionStatus)';
 }
 
 
@@ -959,7 +807,7 @@ abstract mixin class $AddReminderStateCopyWith<$Res>  {
   factory $AddReminderStateCopyWith(AddReminderState value, $Res Function(AddReminderState) _then) = _$AddReminderStateCopyWithImpl;
 @useResult
 $Res call({
- DateTime selectedDate, String title, String? note, String? imagePath, bool isRepeatEveryDay, ReminderTypeEnum reminderType, ReminderEntity? editedReminder, ActionStatus actionStatus
+ DateTime selectedDate, String title, String? note, String? imagePath, ReminderEntity? editedReminder, ActionStatus actionStatus
 });
 
 
@@ -976,15 +824,13 @@ class _$AddReminderStateCopyWithImpl<$Res>
 
 /// Create a copy of AddReminderState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? selectedDate = null,Object? title = null,Object? note = freezed,Object? imagePath = freezed,Object? isRepeatEveryDay = null,Object? reminderType = null,Object? editedReminder = freezed,Object? actionStatus = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? selectedDate = null,Object? title = null,Object? note = freezed,Object? imagePath = freezed,Object? editedReminder = freezed,Object? actionStatus = null,}) {
   return _then(_self.copyWith(
 selectedDate: null == selectedDate ? _self.selectedDate : selectedDate // ignore: cast_nullable_to_non_nullable
 as DateTime,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String,note: freezed == note ? _self.note : note // ignore: cast_nullable_to_non_nullable
 as String?,imagePath: freezed == imagePath ? _self.imagePath : imagePath // ignore: cast_nullable_to_non_nullable
-as String?,isRepeatEveryDay: null == isRepeatEveryDay ? _self.isRepeatEveryDay : isRepeatEveryDay // ignore: cast_nullable_to_non_nullable
-as bool,reminderType: null == reminderType ? _self.reminderType : reminderType // ignore: cast_nullable_to_non_nullable
-as ReminderTypeEnum,editedReminder: freezed == editedReminder ? _self.editedReminder : editedReminder // ignore: cast_nullable_to_non_nullable
+as String?,editedReminder: freezed == editedReminder ? _self.editedReminder : editedReminder // ignore: cast_nullable_to_non_nullable
 as ReminderEntity?,actionStatus: null == actionStatus ? _self.actionStatus : actionStatus // ignore: cast_nullable_to_non_nullable
 as ActionStatus,
   ));
@@ -1092,10 +938,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( DateTime selectedDate,  String title,  String? note,  String? imagePath,  bool isRepeatEveryDay,  ReminderTypeEnum reminderType,  ReminderEntity? editedReminder,  ActionStatus actionStatus)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( DateTime selectedDate,  String title,  String? note,  String? imagePath,  ReminderEntity? editedReminder,  ActionStatus actionStatus)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AddReminderState() when $default != null:
-return $default(_that.selectedDate,_that.title,_that.note,_that.imagePath,_that.isRepeatEveryDay,_that.reminderType,_that.editedReminder,_that.actionStatus);case _:
+return $default(_that.selectedDate,_that.title,_that.note,_that.imagePath,_that.editedReminder,_that.actionStatus);case _:
   return orElse();
 
 }
@@ -1113,10 +959,10 @@ return $default(_that.selectedDate,_that.title,_that.note,_that.imagePath,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( DateTime selectedDate,  String title,  String? note,  String? imagePath,  bool isRepeatEveryDay,  ReminderTypeEnum reminderType,  ReminderEntity? editedReminder,  ActionStatus actionStatus)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( DateTime selectedDate,  String title,  String? note,  String? imagePath,  ReminderEntity? editedReminder,  ActionStatus actionStatus)  $default,) {final _that = this;
 switch (_that) {
 case _AddReminderState():
-return $default(_that.selectedDate,_that.title,_that.note,_that.imagePath,_that.isRepeatEveryDay,_that.reminderType,_that.editedReminder,_that.actionStatus);case _:
+return $default(_that.selectedDate,_that.title,_that.note,_that.imagePath,_that.editedReminder,_that.actionStatus);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -1133,10 +979,10 @@ return $default(_that.selectedDate,_that.title,_that.note,_that.imagePath,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( DateTime selectedDate,  String title,  String? note,  String? imagePath,  bool isRepeatEveryDay,  ReminderTypeEnum reminderType,  ReminderEntity? editedReminder,  ActionStatus actionStatus)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( DateTime selectedDate,  String title,  String? note,  String? imagePath,  ReminderEntity? editedReminder,  ActionStatus actionStatus)?  $default,) {final _that = this;
 switch (_that) {
 case _AddReminderState() when $default != null:
-return $default(_that.selectedDate,_that.title,_that.note,_that.imagePath,_that.isRepeatEveryDay,_that.reminderType,_that.editedReminder,_that.actionStatus);case _:
+return $default(_that.selectedDate,_that.title,_that.note,_that.imagePath,_that.editedReminder,_that.actionStatus);case _:
   return null;
 
 }
@@ -1148,15 +994,13 @@ return $default(_that.selectedDate,_that.title,_that.note,_that.imagePath,_that.
 
 
 class _AddReminderState implements AddReminderState {
-  const _AddReminderState({required this.selectedDate, required this.title, this.note, this.imagePath, this.isRepeatEveryDay = false, required this.reminderType, this.editedReminder, this.actionStatus = const ActionStatus.idle()});
+  const _AddReminderState({required this.selectedDate, required this.title, this.note, this.imagePath, this.editedReminder, this.actionStatus = const ActionStatus.idle()});
   
 
 @override final  DateTime selectedDate;
 @override final  String title;
 @override final  String? note;
 @override final  String? imagePath;
-@override@JsonKey() final  bool isRepeatEveryDay;
-@override final  ReminderTypeEnum reminderType;
 @override final  ReminderEntity? editedReminder;
 @override@JsonKey() final  ActionStatus actionStatus;
 
@@ -1170,16 +1014,16 @@ _$AddReminderStateCopyWith<_AddReminderState> get copyWith => __$AddReminderStat
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AddReminderState&&(identical(other.selectedDate, selectedDate) || other.selectedDate == selectedDate)&&(identical(other.title, title) || other.title == title)&&(identical(other.note, note) || other.note == note)&&(identical(other.imagePath, imagePath) || other.imagePath == imagePath)&&(identical(other.isRepeatEveryDay, isRepeatEveryDay) || other.isRepeatEveryDay == isRepeatEveryDay)&&(identical(other.reminderType, reminderType) || other.reminderType == reminderType)&&(identical(other.editedReminder, editedReminder) || other.editedReminder == editedReminder)&&(identical(other.actionStatus, actionStatus) || other.actionStatus == actionStatus));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AddReminderState&&(identical(other.selectedDate, selectedDate) || other.selectedDate == selectedDate)&&(identical(other.title, title) || other.title == title)&&(identical(other.note, note) || other.note == note)&&(identical(other.imagePath, imagePath) || other.imagePath == imagePath)&&(identical(other.editedReminder, editedReminder) || other.editedReminder == editedReminder)&&(identical(other.actionStatus, actionStatus) || other.actionStatus == actionStatus));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,selectedDate,title,note,imagePath,isRepeatEveryDay,reminderType,editedReminder,actionStatus);
+int get hashCode => Object.hash(runtimeType,selectedDate,title,note,imagePath,editedReminder,actionStatus);
 
 @override
 String toString() {
-  return 'AddReminderState(selectedDate: $selectedDate, title: $title, note: $note, imagePath: $imagePath, isRepeatEveryDay: $isRepeatEveryDay, reminderType: $reminderType, editedReminder: $editedReminder, actionStatus: $actionStatus)';
+  return 'AddReminderState(selectedDate: $selectedDate, title: $title, note: $note, imagePath: $imagePath, editedReminder: $editedReminder, actionStatus: $actionStatus)';
 }
 
 
@@ -1190,7 +1034,7 @@ abstract mixin class _$AddReminderStateCopyWith<$Res> implements $AddReminderSta
   factory _$AddReminderStateCopyWith(_AddReminderState value, $Res Function(_AddReminderState) _then) = __$AddReminderStateCopyWithImpl;
 @override @useResult
 $Res call({
- DateTime selectedDate, String title, String? note, String? imagePath, bool isRepeatEveryDay, ReminderTypeEnum reminderType, ReminderEntity? editedReminder, ActionStatus actionStatus
+ DateTime selectedDate, String title, String? note, String? imagePath, ReminderEntity? editedReminder, ActionStatus actionStatus
 });
 
 
@@ -1207,15 +1051,13 @@ class __$AddReminderStateCopyWithImpl<$Res>
 
 /// Create a copy of AddReminderState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? selectedDate = null,Object? title = null,Object? note = freezed,Object? imagePath = freezed,Object? isRepeatEveryDay = null,Object? reminderType = null,Object? editedReminder = freezed,Object? actionStatus = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? selectedDate = null,Object? title = null,Object? note = freezed,Object? imagePath = freezed,Object? editedReminder = freezed,Object? actionStatus = null,}) {
   return _then(_AddReminderState(
 selectedDate: null == selectedDate ? _self.selectedDate : selectedDate // ignore: cast_nullable_to_non_nullable
 as DateTime,title: null == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String,note: freezed == note ? _self.note : note // ignore: cast_nullable_to_non_nullable
 as String?,imagePath: freezed == imagePath ? _self.imagePath : imagePath // ignore: cast_nullable_to_non_nullable
-as String?,isRepeatEveryDay: null == isRepeatEveryDay ? _self.isRepeatEveryDay : isRepeatEveryDay // ignore: cast_nullable_to_non_nullable
-as bool,reminderType: null == reminderType ? _self.reminderType : reminderType // ignore: cast_nullable_to_non_nullable
-as ReminderTypeEnum,editedReminder: freezed == editedReminder ? _self.editedReminder : editedReminder // ignore: cast_nullable_to_non_nullable
+as String?,editedReminder: freezed == editedReminder ? _self.editedReminder : editedReminder // ignore: cast_nullable_to_non_nullable
 as ReminderEntity?,actionStatus: null == actionStatus ? _self.actionStatus : actionStatus // ignore: cast_nullable_to_non_nullable
 as ActionStatus,
   ));
