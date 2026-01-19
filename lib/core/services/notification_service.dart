@@ -5,7 +5,9 @@ class NotificationService {
   static final _plugin = FlutterLocalNotificationsPlugin();
 
   static Future<void> init() async {
-    const android = AndroidInitializationSettings('@mipmap/ic_launcher');
+    const android = AndroidInitializationSettings(
+      '@drawable/launch_background',
+    );
 
     const initSettings = InitializationSettings(android: android);
     await _plugin.initialize(initSettings);
