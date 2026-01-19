@@ -1,9 +1,7 @@
-import 'package:android_intent_plus/android_intent.dart';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:reminder_app/core/presentation/states/action_status.dart';
 import 'package:reminder_app/core/services/android_alarm_service.dart';
 import 'package:reminder_app/core/services/image_picker_service.dart';
