@@ -4,10 +4,6 @@
 
 <h1>📝 Reminder App (Flutter + BLoC + Clean Architecture + SQLite + Alarm)</h1>
 
-<a href="https://github.com/andi-lestianto/reminder_app/releases/download/preview/app-release.apk">
-  <img src="https://img.shields.io/badge/Download-APK-blue?style=flat-square" alt="Download APK"/>
-</a>
-
 <p>A Flutter application for managing reminders, with offline support using SQLite, scheduling alarms using <code>android_alarm_manager_plus</code>, and notifications using <code>flutter_local_notifications</code>. The app follows a <strong>BLoC + Clean Architecture</strong> pattern for maintainable and scalable code.</p>
 
 <hr/>
