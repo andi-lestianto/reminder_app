@@ -32,7 +32,7 @@ cd &lt;project_directory&gt;</code></pre>
 <h3>Option 2: Download APK</h3>
 <p>You can download the APK directly and install it on your Android device:</p>
 
-<a href="https://github.com/&lt;username&gt;/&lt;repo&gt;/releases/download/v1.0/ReminderApp-v1.0.apk">
+<a href="https://github.com/andi-lestianto/reminder_app/releases/download/preview/app-release.apk">
   <img src="https://img.shields.io/badge/Download-APK-blue?style=flat-square" alt="Download APK"/>
 </a>
 
