@@ -55,14 +55,15 @@ extension ReminderEventPatterns on ReminderEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _FetchAllData value)?  fetchAllData,TResult Function( _FetchWeekDates value)?  fetchWeekDates,TResult Function( _FetchReminders value)?  fetchReminders,TResult Function( _DeleteReminder value)?  deleteReminder,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _FetchAllData value)?  fetchAllData,TResult Function( _FetchWeekDates value)?  fetchWeekDates,TResult Function( _FetchReminders value)?  fetchReminders,TResult Function( _DeleteReminder value)?  deleteReminder,TResult Function( _SetSelectedDate value)?  setSelectedDate,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _FetchAllData() when fetchAllData != null:
 return fetchAllData(_that);case _FetchWeekDates() when fetchWeekDates != null:
 return fetchWeekDates(_that);case _FetchReminders() when fetchReminders != null:
 return fetchReminders(_that);case _DeleteReminder() when deleteReminder != null:
-return deleteReminder(_that);case _:
+return deleteReminder(_that);case _SetSelectedDate() when setSelectedDate != null:
+return setSelectedDate(_that);case _:
   return orElse();
 
 }
@@ -80,14 +81,15 @@ return deleteReminder(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _FetchAllData value)  fetchAllData,required TResult Function( _FetchWeekDates value)  fetchWeekDates,required TResult Function( _FetchReminders value)  fetchReminders,required TResult Function( _DeleteReminder value)  deleteReminder,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _FetchAllData value)  fetchAllData,required TResult Function( _FetchWeekDates value)  fetchWeekDates,required TResult Function( _FetchReminders value)  fetchReminders,required TResult Function( _DeleteReminder value)  deleteReminder,required TResult Function( _SetSelectedDate value)  setSelectedDate,}){
 final _that = this;
 switch (_that) {
 case _FetchAllData():
 return fetchAllData(_that);case _FetchWeekDates():
 return fetchWeekDates(_that);case _FetchReminders():
 return fetchReminders(_that);case _DeleteReminder():
-return deleteReminder(_that);case _:
+return deleteReminder(_that);case _SetSelectedDate():
+return setSelectedDate(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -104,14 +106,15 @@ return deleteReminder(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _FetchAllData value)?  fetchAllData,TResult? Function( _FetchWeekDates value)?  fetchWeekDates,TResult? Function( _FetchReminders value)?  fetchReminders,TResult? Function( _DeleteReminder value)?  deleteReminder,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _FetchAllData value)?  fetchAllData,TResult? Function( _FetchWeekDates value)?  fetchWeekDates,TResult? Function( _FetchReminders value)?  fetchReminders,TResult? Function( _DeleteReminder value)?  deleteReminder,TResult? Function( _SetSelectedDate value)?  setSelectedDate,}){
 final _that = this;
 switch (_that) {
 case _FetchAllData() when fetchAllData != null:
 return fetchAllData(_that);case _FetchWeekDates() when fetchWeekDates != null:
 return fetchWeekDates(_that);case _FetchReminders() when fetchReminders != null:
 return fetchReminders(_that);case _DeleteReminder() when deleteReminder != null:
-return deleteReminder(_that);case _:
+return deleteReminder(_that);case _SetSelectedDate() when setSelectedDate != null:
+return setSelectedDate(_that);case _:
   return null;
 
 }
@@ -128,13 +131,14 @@ return deleteReminder(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  fetchAllData,TResult Function()?  fetchWeekDates,TResult Function()?  fetchReminders,TResult Function( int id)?  deleteReminder,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  fetchAllData,TResult Function()?  fetchWeekDates,TResult Function()?  fetchReminders,TResult Function( int id)?  deleteReminder,TResult Function( DateTime selectedDate)?  setSelectedDate,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _FetchAllData() when fetchAllData != null:
 return fetchAllData();case _FetchWeekDates() when fetchWeekDates != null:
 return fetchWeekDates();case _FetchReminders() when fetchReminders != null:
 return fetchReminders();case _DeleteReminder() when deleteReminder != null:
-return deleteReminder(_that.id);case _:
+return deleteReminder(_that.id);case _SetSelectedDate() when setSelectedDate != null:
+return setSelectedDate(_that.selectedDate);case _:
   return orElse();
 
 }
@@ -152,13 +156,14 @@ return deleteReminder(_that.id);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  fetchAllData,required TResult Function()  fetchWeekDates,required TResult Function()  fetchReminders,required TResult Function( int id)  deleteReminder,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  fetchAllData,required TResult Function()  fetchWeekDates,required TResult Function()  fetchReminders,required TResult Function( int id)  deleteReminder,required TResult Function( DateTime selectedDate)  setSelectedDate,}) {final _that = this;
 switch (_that) {
 case _FetchAllData():
 return fetchAllData();case _FetchWeekDates():
 return fetchWeekDates();case _FetchReminders():
 return fetchReminders();case _DeleteReminder():
-return deleteReminder(_that.id);case _:
+return deleteReminder(_that.id);case _SetSelectedDate():
+return setSelectedDate(_that.selectedDate);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -175,13 +180,14 @@ return deleteReminder(_that.id);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  fetchAllData,TResult? Function()?  fetchWeekDates,TResult? Function()?  fetchReminders,TResult? Function( int id)?  deleteReminder,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  fetchAllData,TResult? Function()?  fetchWeekDates,TResult? Function()?  fetchReminders,TResult? Function( int id)?  deleteReminder,TResult? Function( DateTime selectedDate)?  setSelectedDate,}) {final _that = this;
 switch (_that) {
 case _FetchAllData() when fetchAllData != null:
 return fetchAllData();case _FetchWeekDates() when fetchWeekDates != null:
 return fetchWeekDates();case _FetchReminders() when fetchReminders != null:
 return fetchReminders();case _DeleteReminder() when deleteReminder != null:
-return deleteReminder(_that.id);case _:
+return deleteReminder(_that.id);case _SetSelectedDate() when setSelectedDate != null:
+return setSelectedDate(_that.selectedDate);case _:
   return null;
 
 }
@@ -352,9 +358,75 @@ as int,
 }
 
 /// @nodoc
+
+
+class _SetSelectedDate implements ReminderEvent {
+  const _SetSelectedDate(this.selectedDate);
+  
+
+ final  DateTime selectedDate;
+
+/// Create a copy of ReminderEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$SetSelectedDateCopyWith<_SetSelectedDate> get copyWith => __$SetSelectedDateCopyWithImpl<_SetSelectedDate>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SetSelectedDate&&(identical(other.selectedDate, selectedDate) || other.selectedDate == selectedDate));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,selectedDate);
+
+@override
+String toString() {
+  return 'ReminderEvent.setSelectedDate(selectedDate: $selectedDate)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$SetSelectedDateCopyWith<$Res> implements $ReminderEventCopyWith<$Res> {
+  factory _$SetSelectedDateCopyWith(_SetSelectedDate value, $Res Function(_SetSelectedDate) _then) = __$SetSelectedDateCopyWithImpl;
+@useResult
+$Res call({
+ DateTime selectedDate
+});
+
+
+
+
+}
+/// @nodoc
+class __$SetSelectedDateCopyWithImpl<$Res>
+    implements _$SetSelectedDateCopyWith<$Res> {
+  __$SetSelectedDateCopyWithImpl(this._self, this._then);
+
+  final _SetSelectedDate _self;
+  final $Res Function(_SetSelectedDate) _then;
+
+/// Create a copy of ReminderEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? selectedDate = null,}) {
+  return _then(_SetSelectedDate(
+null == selectedDate ? _self.selectedDate : selectedDate // ignore: cast_nullable_to_non_nullable
+as DateTime,
+  ));
+}
+
+
+}
+
+/// @nodoc
 mixin _$ReminderState {
 
- SectionState<DateTime> get weekDatesState; SectionState<ReminderEntity> get remindersState; ReminderEntity? get upComingReminder; ActionStatus get actionStatus;
+ SectionState<DateTime> get weekDatesState; SectionState<ReminderEntity> get remindersState; ReminderEntity? get upComingReminder; DateTime? get selectedDate; ActionStatus get actionStatus;
 /// Create a copy of ReminderState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -365,16 +437,16 @@ $ReminderStateCopyWith<ReminderState> get copyWith => _$ReminderStateCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ReminderState&&(identical(other.weekDatesState, weekDatesState) || other.weekDatesState == weekDatesState)&&(identical(other.remindersState, remindersState) || other.remindersState == remindersState)&&(identical(other.upComingReminder, upComingReminder) || other.upComingReminder == upComingReminder)&&(identical(other.actionStatus, actionStatus) || other.actionStatus == actionStatus));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ReminderState&&(identical(other.weekDatesState, weekDatesState) || other.weekDatesState == weekDatesState)&&(identical(other.remindersState, remindersState) || other.remindersState == remindersState)&&(identical(other.upComingReminder, upComingReminder) || other.upComingReminder == upComingReminder)&&(identical(other.selectedDate, selectedDate) || other.selectedDate == selectedDate)&&(identical(other.actionStatus, actionStatus) || other.actionStatus == actionStatus));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,weekDatesState,remindersState,upComingReminder,actionStatus);
+int get hashCode => Object.hash(runtimeType,weekDatesState,remindersState,upComingReminder,selectedDate,actionStatus);
 
 @override
 String toString() {
-  return 'ReminderState(weekDatesState: $weekDatesState, remindersState: $remindersState, upComingReminder: $upComingReminder, actionStatus: $actionStatus)';
+  return 'ReminderState(weekDatesState: $weekDatesState, remindersState: $remindersState, upComingReminder: $upComingReminder, selectedDate: $selectedDate, actionStatus: $actionStatus)';
 }
 
 
@@ -385,7 +457,7 @@ abstract mixin class $ReminderStateCopyWith<$Res>  {
   factory $ReminderStateCopyWith(ReminderState value, $Res Function(ReminderState) _then) = _$ReminderStateCopyWithImpl;
 @useResult
 $Res call({
- SectionState<DateTime> weekDatesState, SectionState<ReminderEntity> remindersState, ReminderEntity? upComingReminder, ActionStatus actionStatus
+ SectionState<DateTime> weekDatesState, SectionState<ReminderEntity> remindersState, ReminderEntity? upComingReminder, DateTime? selectedDate, ActionStatus actionStatus
 });
 
 
@@ -402,12 +474,13 @@ class _$ReminderStateCopyWithImpl<$Res>
 
 /// Create a copy of ReminderState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? weekDatesState = null,Object? remindersState = null,Object? upComingReminder = freezed,Object? actionStatus = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? weekDatesState = null,Object? remindersState = null,Object? upComingReminder = freezed,Object? selectedDate = freezed,Object? actionStatus = null,}) {
   return _then(_self.copyWith(
 weekDatesState: null == weekDatesState ? _self.weekDatesState : weekDatesState // ignore: cast_nullable_to_non_nullable
 as SectionState<DateTime>,remindersState: null == remindersState ? _self.remindersState : remindersState // ignore: cast_nullable_to_non_nullable
 as SectionState<ReminderEntity>,upComingReminder: freezed == upComingReminder ? _self.upComingReminder : upComingReminder // ignore: cast_nullable_to_non_nullable
-as ReminderEntity?,actionStatus: null == actionStatus ? _self.actionStatus : actionStatus // ignore: cast_nullable_to_non_nullable
+as ReminderEntity?,selectedDate: freezed == selectedDate ? _self.selectedDate : selectedDate // ignore: cast_nullable_to_non_nullable
+as DateTime?,actionStatus: null == actionStatus ? _self.actionStatus : actionStatus // ignore: cast_nullable_to_non_nullable
 as ActionStatus,
   ));
 }
@@ -532,10 +605,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( SectionState<DateTime> weekDatesState,  SectionState<ReminderEntity> remindersState,  ReminderEntity? upComingReminder,  ActionStatus actionStatus)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( SectionState<DateTime> weekDatesState,  SectionState<ReminderEntity> remindersState,  ReminderEntity? upComingReminder,  DateTime? selectedDate,  ActionStatus actionStatus)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ReminderState() when $default != null:
-return $default(_that.weekDatesState,_that.remindersState,_that.upComingReminder,_that.actionStatus);case _:
+return $default(_that.weekDatesState,_that.remindersState,_that.upComingReminder,_that.selectedDate,_that.actionStatus);case _:
   return orElse();
 
 }
@@ -553,10 +626,10 @@ return $default(_that.weekDatesState,_that.remindersState,_that.upComingReminder
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( SectionState<DateTime> weekDatesState,  SectionState<ReminderEntity> remindersState,  ReminderEntity? upComingReminder,  ActionStatus actionStatus)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( SectionState<DateTime> weekDatesState,  SectionState<ReminderEntity> remindersState,  ReminderEntity? upComingReminder,  DateTime? selectedDate,  ActionStatus actionStatus)  $default,) {final _that = this;
 switch (_that) {
 case _ReminderState():
-return $default(_that.weekDatesState,_that.remindersState,_that.upComingReminder,_that.actionStatus);case _:
+return $default(_that.weekDatesState,_that.remindersState,_that.upComingReminder,_that.selectedDate,_that.actionStatus);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -573,10 +646,10 @@ return $default(_that.weekDatesState,_that.remindersState,_that.upComingReminder
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( SectionState<DateTime> weekDatesState,  SectionState<ReminderEntity> remindersState,  ReminderEntity? upComingReminder,  ActionStatus actionStatus)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( SectionState<DateTime> weekDatesState,  SectionState<ReminderEntity> remindersState,  ReminderEntity? upComingReminder,  DateTime? selectedDate,  ActionStatus actionStatus)?  $default,) {final _that = this;
 switch (_that) {
 case _ReminderState() when $default != null:
-return $default(_that.weekDatesState,_that.remindersState,_that.upComingReminder,_that.actionStatus);case _:
+return $default(_that.weekDatesState,_that.remindersState,_that.upComingReminder,_that.selectedDate,_that.actionStatus);case _:
   return null;
 
 }
@@ -588,12 +661,13 @@ return $default(_that.weekDatesState,_that.remindersState,_that.upComingReminder
 
 
 class _ReminderState implements ReminderState {
-  const _ReminderState({required this.weekDatesState, required this.remindersState, this.upComingReminder, this.actionStatus = const ActionStatus.idle()});
+  const _ReminderState({required this.weekDatesState, required this.remindersState, this.upComingReminder, this.selectedDate, this.actionStatus = const ActionStatus.idle()});
   
 
 @override final  SectionState<DateTime> weekDatesState;
 @override final  SectionState<ReminderEntity> remindersState;
 @override final  ReminderEntity? upComingReminder;
+@override final  DateTime? selectedDate;
 @override@JsonKey() final  ActionStatus actionStatus;
 
 /// Create a copy of ReminderState
@@ -606,16 +680,16 @@ _$ReminderStateCopyWith<_ReminderState> get copyWith => __$ReminderStateCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ReminderState&&(identical(other.weekDatesState, weekDatesState) || other.weekDatesState == weekDatesState)&&(identical(other.remindersState, remindersState) || other.remindersState == remindersState)&&(identical(other.upComingReminder, upComingReminder) || other.upComingReminder == upComingReminder)&&(identical(other.actionStatus, actionStatus) || other.actionStatus == actionStatus));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ReminderState&&(identical(other.weekDatesState, weekDatesState) || other.weekDatesState == weekDatesState)&&(identical(other.remindersState, remindersState) || other.remindersState == remindersState)&&(identical(other.upComingReminder, upComingReminder) || other.upComingReminder == upComingReminder)&&(identical(other.selectedDate, selectedDate) || other.selectedDate == selectedDate)&&(identical(other.actionStatus, actionStatus) || other.actionStatus == actionStatus));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,weekDatesState,remindersState,upComingReminder,actionStatus);
+int get hashCode => Object.hash(runtimeType,weekDatesState,remindersState,upComingReminder,selectedDate,actionStatus);
 
 @override
 String toString() {
-  return 'ReminderState(weekDatesState: $weekDatesState, remindersState: $remindersState, upComingReminder: $upComingReminder, actionStatus: $actionStatus)';
+  return 'ReminderState(weekDatesState: $weekDatesState, remindersState: $remindersState, upComingReminder: $upComingReminder, selectedDate: $selectedDate, actionStatus: $actionStatus)';
 }
 
 
@@ -626,7 +700,7 @@ abstract mixin class _$ReminderStateCopyWith<$Res> implements $ReminderStateCopy
   factory _$ReminderStateCopyWith(_ReminderState value, $Res Function(_ReminderState) _then) = __$ReminderStateCopyWithImpl;
 @override @useResult
 $Res call({
- SectionState<DateTime> weekDatesState, SectionState<ReminderEntity> remindersState, ReminderEntity? upComingReminder, ActionStatus actionStatus
+ SectionState<DateTime> weekDatesState, SectionState<ReminderEntity> remindersState, ReminderEntity? upComingReminder, DateTime? selectedDate, ActionStatus actionStatus
 });
 
 
@@ -643,12 +717,13 @@ class __$ReminderStateCopyWithImpl<$Res>
 
 /// Create a copy of ReminderState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? weekDatesState = null,Object? remindersState = null,Object? upComingReminder = freezed,Object? actionStatus = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? weekDatesState = null,Object? remindersState = null,Object? upComingReminder = freezed,Object? selectedDate = freezed,Object? actionStatus = null,}) {
   return _then(_ReminderState(
 weekDatesState: null == weekDatesState ? _self.weekDatesState : weekDatesState // ignore: cast_nullable_to_non_nullable
 as SectionState<DateTime>,remindersState: null == remindersState ? _self.remindersState : remindersState // ignore: cast_nullable_to_non_nullable
 as SectionState<ReminderEntity>,upComingReminder: freezed == upComingReminder ? _self.upComingReminder : upComingReminder // ignore: cast_nullable_to_non_nullable
-as ReminderEntity?,actionStatus: null == actionStatus ? _self.actionStatus : actionStatus // ignore: cast_nullable_to_non_nullable
+as ReminderEntity?,selectedDate: freezed == selectedDate ? _self.selectedDate : selectedDate // ignore: cast_nullable_to_non_nullable
+as DateTime?,actionStatus: null == actionStatus ? _self.actionStatus : actionStatus // ignore: cast_nullable_to_non_nullable
 as ActionStatus,
   ));
 }

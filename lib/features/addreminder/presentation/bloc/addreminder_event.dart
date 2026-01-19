@@ -3,10 +3,12 @@ part of 'addreminder_bloc.dart';
 @freezed
 class AddReminderEvent with _$AddReminderEvent {
   const factory AddReminderEvent.started() = _Started;
-  const factory AddReminderEvent.fillForm({required ReminderEntity? reminder}) =
-      _FillForm;
-  const factory AddReminderEvent.dateTimeChanged(DateTime dateTime) =
-      _DateTimeChanged;
+  const factory AddReminderEvent.initAddReminder({
+    required ReminderEntity? reminder,
+    required DateTime selectedDate,
+  }) = _InitAddReminder;
+  const factory AddReminderEvent.selectedDateTimeChanged(DateTime dateTime) =
+      _SelectedDateTimeChanged;
   const factory AddReminderEvent.titleChanged(String title) = _TitleChanged;
   const factory AddReminderEvent.noteChanged(String? note) = _NoteChanged;
   const factory AddReminderEvent.imagePathChanged(String? imagePath) =

@@ -19,35 +19,75 @@ class WeekDaysWidget extends StatelessWidget {
           loading: () =>
               Center(child: CircularProgressIndicator(color: ColorTheme.blue)),
           loaded: (weekDates) => Row(
+            spacing: 4.w,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: weekDates.map((date) {
-              bool isToday = DateTimeUtils.isSameWithNow(date);
-              return Column(
-                spacing: 4.w,
-                children: [
-                  Text(
-                    DateTimeUtils.getDayAbbrFromDateTime(date),
-                    style: isToday
-                        ? FontTheme.semiBold20.copyWith(color: ColorTheme.blue)
-                        : FontTheme.medium20.copyWith(
-                            color: ColorTheme.darkGray,
-                          ),
+              DateTime selectedDate = state.selectedDate!;
+
+              bool isSameDate = DateTimeUtils.isSameDate(date, selectedDate);
+              return Expanded(
+                child: Container(
+                  clipBehavior: Clip.antiAlias,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12.r),
                   ),
-                  Text(
-                    DateTimeUtils.getDayFromDateTime(date),
-                    style: isToday
-                        ? FontTheme.semiBold20.copyWith(color: ColorTheme.blue)
-                        : FontTheme.medium20.copyWith(color: ColorTheme.black),
-                  ),
-                  Container(
-                    width: 4.w,
-                    height: 4.w,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: isToday ? ColorTheme.blue : Colors.transparent,
+                  child: Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      onTap: () {
+                        final selectedDateTime = DateTime(
+                          date.year,
+                          date.month,
+                          date.day,
+                          DateTime.now().hour,
+                          DateTime.now().minute,
+                        );
+
+                        context.read<ReminderBloc>().add(
+                          ReminderEvent.setSelectedDate(selectedDateTime),
+                        );
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(vertical: 8.w),
+                        child: Column(
+                          spacing: 4.w,
+                          children: [
+                            Text(
+                              DateTimeUtils.getDayAbbrFromDateTime(date),
+                              style: isSameDate
+                                  ? FontTheme.semiBold20.copyWith(
+                                      color: ColorTheme.blue,
+                                    )
+                                  : FontTheme.medium20.copyWith(
+                                      color: ColorTheme.darkGray,
+                                    ),
+                            ),
+                            Text(
+                              DateTimeUtils.getDayFromDateTime(date),
+                              style: isSameDate
+                                  ? FontTheme.semiBold20.copyWith(
+                                      color: ColorTheme.blue,
+                                    )
+                                  : FontTheme.medium20.copyWith(
+                                      color: ColorTheme.black,
+                                    ),
+                            ),
+                            Container(
+                              width: 4.w,
+                              height: 4.w,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: isSameDate
+                                    ? ColorTheme.blue
+                                    : Colors.transparent,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
-                ],
+                ),
               );
             }).toList(),
           ),

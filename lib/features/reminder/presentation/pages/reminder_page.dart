@@ -64,7 +64,7 @@ class _ReminderViewState extends State<ReminderView> {
             child: SingleChildScrollView(
               padding: EdgeInsets.all(40.w),
               child: Column(
-                spacing: 32.w,
+                spacing: 16.w,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CurrentDateWidget(),

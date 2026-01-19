@@ -10,7 +10,7 @@ class GetRemindersUsecase {
 
   GetRemindersUsecase(this.repository);
 
-  TaskEither<Failure, List<ReminderEntity>> call() {
-    return repository.getReminders();
+  TaskEither<Failure, List<ReminderEntity>> call(DateTime date) {
+    return repository.getReminders(date);
   }
 }

@@ -33,6 +33,12 @@ class DateTimeUtils {
         dateTime.day == now.day;
   }
 
+  static bool isSameDate(DateTime dateTime1, DateTime dateTime2) {
+    return dateTime1.year == dateTime2.year &&
+        dateTime1.month == dateTime2.month &&
+        dateTime1.day == dateTime2.day;
+  }
+
   /// Returns time from given [dateTime] in string format 'hh:mm'
   /// e.g., 08:30, 14:45
   static String getTimeFromDateTime(DateTime dateTime) {

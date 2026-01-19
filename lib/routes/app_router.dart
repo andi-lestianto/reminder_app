@@ -17,8 +17,10 @@ final GoRouter appRouter = GoRouter(
       name: RouteNames.addReminder,
       path: RouteNames.addReminder,
       builder: (context, state) {
-        final reminder = state.extra as ReminderEntity?;
-        return AddReminderPage(reminder: reminder);
+        final data = state.extra as Map<String, dynamic>;
+        final date = data['date'] as DateTime;
+        final reminder = data['reminder'] as ReminderEntity?;
+        return AddReminderPage(reminder: reminder, selectedDate: date);
       },
     ),
     GoRoute(

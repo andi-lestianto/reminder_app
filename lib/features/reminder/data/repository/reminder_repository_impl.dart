@@ -19,9 +19,9 @@ class ReminderRepositoryImpl implements ReminderRepository {
   }
 
   @override
-  TaskEither<Failure, List<ReminderEntity>> getReminders() {
+  TaskEither<Failure, List<ReminderEntity>> getReminders(DateTime date) {
     return localDatasource
-        .getReminders()
+        .getReminders(date)
         .mapLeft((exception) => exception.toFailure)
         .map(
           (reminderModels) =>

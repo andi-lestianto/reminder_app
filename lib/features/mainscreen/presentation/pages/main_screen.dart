@@ -8,6 +8,7 @@ import 'package:reminder_app/features/mainscreen/presentation/widget/navigation/
 import 'package:reminder_app/features/mainscreen/presentation/widget/navigation/main_navigation_enum.dart';
 import 'package:reminder_app/features/mainscreen/presentation/widget/navigation/main_navigation_extension.dart';
 import 'package:reminder_app/features/mainscreen/presentation/widget/navigation/main_navigation_item.dart';
+import 'package:reminder_app/features/reminder/presentation/bloc/reminder_bloc.dart';
 import 'package:reminder_app/routes/route_names.dart';
 import 'package:reminder_app/theme/color_theme.dart';
 
@@ -59,39 +60,46 @@ class _MainViewState extends State<MainView> {
           ),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
-          floatingActionButton: AnimatedContainer(
-            duration: Duration(milliseconds: 500),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30.r),
-              color: ColorTheme.blue,
-            ),
-            constraints: BoxConstraints(
-              minHeight: 88.w,
-              maxHeight: 88.w,
-              minWidth: 88.w,
-              maxWidth: 88.w,
-            ),
-            child: FloatingActionButton(
-              disabledElevation: 0,
-              highlightElevation: 0,
-              focusElevation: 0,
-              hoverElevation: 0,
-              elevation: 0,
-              backgroundColor: Colors.transparent,
-              clipBehavior: Clip.antiAlias,
-              onPressed: () async {
-                context.push(RouteNames.addReminder);
-              },
-              child: SvgPicture.asset(
-                MainNavigationEnum.addreminder.icon,
-                width: 32.w,
-                height: 32.w,
-                colorFilter: ColorFilter.mode(
-                  ColorTheme.white,
-                  BlendMode.srcIn,
+          floatingActionButton: BlocBuilder<ReminderBloc, ReminderState>(
+            builder: (reminderContext, reminderState) {
+              return AnimatedContainer(
+                duration: Duration(milliseconds: 500),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30.r),
+                  color: ColorTheme.blue,
                 ),
-              ),
-            ),
+                constraints: BoxConstraints(
+                  minHeight: 88.w,
+                  maxHeight: 88.w,
+                  minWidth: 88.w,
+                  maxWidth: 88.w,
+                ),
+                child: FloatingActionButton(
+                  disabledElevation: 0,
+                  highlightElevation: 0,
+                  focusElevation: 0,
+                  hoverElevation: 0,
+                  elevation: 0,
+                  backgroundColor: Colors.transparent,
+                  clipBehavior: Clip.antiAlias,
+                  onPressed: () async {
+                    context.pushNamed(
+                      RouteNames.addReminder,
+                      extra: {'date': reminderState.selectedDate},
+                    );
+                  },
+                  child: SvgPicture.asset(
+                    MainNavigationEnum.addreminder.icon,
+                    width: 32.w,
+                    height: 32.w,
+                    colorFilter: ColorFilter.mode(
+                      ColorTheme.white,
+                      BlendMode.srcIn,
+                    ),
+                  ),
+                ),
+              );
+            },
           ),
         );
       },

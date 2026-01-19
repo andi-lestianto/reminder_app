@@ -7,7 +7,7 @@ import 'package:reminder_app/features/reminder/data/model/reminder_model.dart';
 
 abstract class ReminderLocalDatasource {
   TaskEither<Exception, int> createReminder(ReminderModel reminder);
-  TaskEither<Exception, List<ReminderModel>> getReminders();
+  TaskEither<Exception, List<ReminderModel>> getReminders(DateTime date);
   TaskEither<Exception, int> deleteReminder(int id);
   TaskEither<Exception, int> updateReminder(ReminderModel reminder);
 }
@@ -43,12 +43,19 @@ class ReminderLocalDatasourceImpl implements ReminderLocalDatasource {
   }
 
   @override
-  TaskEither<Exception, List<ReminderModel>> getReminders() {
+  TaskEither<Exception, List<ReminderModel>> getReminders(DateTime date) {
     return TaskEither.tryCatch(
       () async {
+        final startOfDay = DateTime(date.year, date.month, date.day);
+        final endOfDay = DateTime(date.year, date.month, date.day, 23, 59, 59);
         final database = await db.database;
         final List<Map<String, dynamic>> maps = await database.query(
           'reminders',
+          where: 'dateTimeEpoch >= ? AND dateTimeEpoch <= ?',
+          whereArgs: [
+            startOfDay.millisecondsSinceEpoch,
+            endOfDay.millisecondsSinceEpoch,
+          ],
           orderBy: 'dateTimeEpoch ASC',
         );
 

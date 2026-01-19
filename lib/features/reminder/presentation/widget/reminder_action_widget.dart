@@ -46,7 +46,10 @@ class ReminderActionWidget extends StatelessWidget {
                       context.pop();
                       context.pushNamed(
                         RouteNames.addReminder,
-                        extra: reminder,
+                        extra: {
+                          'date': state.selectedDate,
+                          'reminder': reminder,
+                        },
                       );
                     },
                     child: Padding(

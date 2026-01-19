@@ -26,9 +26,10 @@ class AddReminderBloc extends Bloc<AddReminderEvent, AddReminderState> {
     on<AddReminderEvent>((event, emit) async {
       await event.when(
         started: () {},
-        fillForm: (reminder) => fillForm(reminder, emit),
-        dateTimeChanged: (dateTime) =>
-            dateTimeChanged(dateTime, emit), // ignore for now
+        initAddReminder: (reminder, selectedDate) =>
+            initAddReminder(reminder, selectedDate, emit),
+        selectedDateTimeChanged: (selectedDate) =>
+            selectedDateTimeChanged(selectedDate, emit),
         titleChanged: (title) => titleChanged(title, emit),
         noteChanged: (note) => noteChanged(note, emit),
         imagePathChanged: (imagePath) => imagePathChanged(imagePath, emit),
@@ -40,7 +41,7 @@ class AddReminderBloc extends Bloc<AddReminderEvent, AddReminderState> {
         saveReminder:
             (
               title,
-              dateTime,
+              selectedDateTime,
               note,
               imagePath,
               isRepeatEveryDay,
@@ -48,7 +49,7 @@ class AddReminderBloc extends Bloc<AddReminderEvent, AddReminderState> {
             ) => saveReminder(
               emit: emit,
               title: title,
-              dateTime: dateTime,
+              dateTime: selectedDateTime,
               note: note,
               imagePath: imagePath,
               isRepeatEveryDay: isRepeatEveryDay,
@@ -77,29 +78,51 @@ class AddReminderBloc extends Bloc<AddReminderEvent, AddReminderState> {
     });
   }
 
-  Future<void> fillForm(
+  Future<void> initAddReminder(
     ReminderEntity? reminder,
+    DateTime selectedDate,
     Emitter<AddReminderState> emit,
   ) async {
     if (reminder != null) {
       emit(
         state.copyWith(
-          dateTime: reminder.dateTime,
+          selectedDate: reminder.dateTime,
           title: reminder.title,
           note: reminder.note,
           imagePath: reminder.imagePath,
           isRepeatEveryDay: reminder.isRepeatEveryDay,
           reminderType: reminder.reminderType,
+          editedReminder: reminder,
         ),
       );
+    } else {
+      final DateTime now = DateTime.now();
+      final DateTime currentDate = DateTime(
+        selectedDate.year,
+        selectedDate.month,
+        selectedDate.day,
+        now.hour,
+        now.minute,
+      );
+      emit(state.copyWith(selectedDate: currentDate));
     }
   }
 
-  Future<void> dateTimeChanged(
+  Future<void> selectedDateTimeChanged(
     DateTime dateTime,
     Emitter<AddReminderState> emit,
   ) async {
-    emit(state.copyWith(dateTime: dateTime));
+    final prevDate = state.selectedDate;
+    // final now = DateTime(n)
+    final updatedDateTime = DateTime(
+      prevDate.year,
+      prevDate.month,
+      prevDate.day,
+      dateTime.hour,
+      dateTime.minute,
+    );
+
+    emit(state.copyWith(selectedDate: updatedDateTime));
   }
 
   Future<void> titleChanged(

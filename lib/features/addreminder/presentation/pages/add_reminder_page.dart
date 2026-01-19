@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,14 +20,20 @@ import 'package:reminder_app/widget/custom_wheel_datepicker_widget.dart';
 
 class AddReminderPage extends StatelessWidget {
   final ReminderEntity? reminder;
-  const AddReminderPage({super.key, this.reminder});
+  final DateTime selectedDate;
+  const AddReminderPage({super.key, this.reminder, required this.selectedDate});
 
   @override
   Widget build(BuildContext context) {
+    log('reminderDate in AddReminderPage: $selectedDate');
     return BlocProvider(
-      create: (context) =>
-          getIt<AddReminderBloc>()
-            ..add(AddReminderEvent.fillForm(reminder: reminder)),
+      create: (context) => getIt<AddReminderBloc>()
+        ..add(
+          AddReminderEvent.initAddReminder(
+            reminder: reminder,
+            selectedDate: selectedDate,
+          ),
+        ),
       child: AddReminderView(reminder: reminder),
     );
   }
@@ -131,11 +139,13 @@ class _AddReminderViewState extends State<AddReminderView> {
                           color: ColorTheme.black,
                         ),
                       ),
+
+                      Text(state.selectedDate.toString()),
                       CustomWheelDatepicker(
-                        initialDateTime: state.dateTime,
+                        initialDateTime: state.selectedDate,
                         onTimeChanged: (value) {
                           context.read<AddReminderBloc>().add(
-                            AddReminderEvent.dateTimeChanged(value),
+                            AddReminderEvent.selectedDateTimeChanged(value),
                           );
                         },
                       ),
@@ -218,7 +228,7 @@ class _AddReminderViewState extends State<AddReminderView> {
                     context.read<AddReminderBloc>().add(
                       AddReminderEvent.saveReminder(
                         title: state.title,
-                        dateTime: state.dateTime,
+                        dateTime: state.selectedDate,
                         note: state.note,
                         imagePath: state.imagePath,
                         isRepeatEveryDay: state.isRepeatEveryDay,
@@ -230,7 +240,7 @@ class _AddReminderViewState extends State<AddReminderView> {
                       AddReminderEvent.updateReminder(
                         id: widget.reminder!.id,
                         title: state.title,
-                        dateTime: state.dateTime,
+                        dateTime: state.selectedDate,
                         note: state.note,
                         imagePath: state.imagePath,
                         isRepeatEveryDay: state.isRepeatEveryDay,
@@ -248,7 +258,7 @@ class _AddReminderViewState extends State<AddReminderView> {
   }
 
   bool listenWhen(AddReminderState previous, AddReminderState current) {
-    return previous.dateTime != current.dateTime ||
+    return previous.selectedDate != current.selectedDate ||
         previous.title != current.title ||
         previous.note != current.note ||
         previous.imagePath != current.imagePath ||

@@ -6,4 +6,6 @@ class ReminderEvent with _$ReminderEvent {
   const factory ReminderEvent.fetchWeekDates() = _FetchWeekDates;
   const factory ReminderEvent.fetchReminders() = _FetchReminders;
   const factory ReminderEvent.deleteReminder(int id) = _DeleteReminder;
+  const factory ReminderEvent.setSelectedDate(DateTime selectedDate) =
+      _SetSelectedDate;
 }

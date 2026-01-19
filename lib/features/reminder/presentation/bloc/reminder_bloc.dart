@@ -31,12 +31,22 @@ class ReminderBloc extends Bloc<ReminderEvent, ReminderState> {
         fetchReminders: () => fetchReminders(emit: emit),
         fetchWeekDates: () => fetchWeekDates(emit: emit),
         deleteReminder: (id) => deleteReminder(emit: emit, id: id),
+        setSelectedDate: (selectedDate) =>
+            setSelectedDate(emit: emit, selectedDate: selectedDate),
       );
     });
   }
 
   Future<void> fetchAllData() async {
     add(ReminderEvent.fetchWeekDates());
+    add(ReminderEvent.fetchReminders());
+  }
+
+  Future<void> setSelectedDate({
+    required Emitter<ReminderState> emit,
+    required DateTime selectedDate,
+  }) async {
+    emit(state.copyWith(selectedDate: selectedDate));
     add(ReminderEvent.fetchReminders());
   }
 
@@ -65,7 +75,13 @@ class ReminderBloc extends Bloc<ReminderEvent, ReminderState> {
   Future<void> fetchReminders({required Emitter<ReminderState> emit}) async {
     emit(state.copyWith(remindersState: const SectionState.loading()));
 
-    final remindersResult = await getRemindersUsecase.call().run();
+    final selectedDate = DateTime(
+      state.selectedDate!.year,
+      state.selectedDate!.month,
+      state.selectedDate!.day,
+    );
+
+    final remindersResult = await getRemindersUsecase.call(selectedDate).run();
 
     remindersResult.fold(
       (failure) {
